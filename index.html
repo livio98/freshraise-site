@@ -62,9 +62,10 @@
         Reach them inside the 48-hour window that converts up to <strong class="text-white">4× better</strong>.
       </p>
 
-      <!-- Email capture (mailto fallback — works with no backend on GitHub Pages) -->
-      <form action="mailto:livioivandro@gmail.com" method="POST" enctype="text/plain"
+      <!-- Email capture (Formspree — stores submissions + emails the founder) -->
+      <form action="https://formspree.io/f/mwvdbzly" method="POST"
             class="mt-9 max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+        <input type="hidden" name="_subject" value="New FreshRaise signup 🎉" />
         <input required type="email" name="email" placeholder="you@company.com"
                class="flex-1 px-4 py-3 rounded-xl text-ink placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent" />
         <button type="submit" class="bg-accent hover:bg-accent2 text-ink font-bold px-6 py-3 rounded-xl whitespace-nowrap">
@@ -265,8 +266,9 @@
     <div class="max-w-3xl mx-auto px-5 py-20 text-center">
       <h2 class="text-3xl md:text-4xl font-extrabold">Get this week's freshly-funded list — free.</h2>
       <p class="mt-4 text-lg text-slate-600">See exactly who just raised in your space, scored and ready to act on. Upgrade only if it earns it.</p>
-      <form action="mailto:livioivandro@gmail.com" method="POST" enctype="text/plain"
+      <form action="https://formspree.io/f/mwvdbzly" method="POST"
             class="mt-8 max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+        <input type="hidden" name="_subject" value="New FreshRaise signup 🎉" />
         <input required type="email" name="email" placeholder="you@company.com"
                class="flex-1 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-accent" />
         <button type="submit" class="bg-ink hover:bg-ink2 text-white font-bold px-6 py-3 rounded-xl whitespace-nowrap">Subscribe for the weekly list →</button>
