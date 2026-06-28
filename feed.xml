@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>FreshRaise — Weekly funded-startup signals</title>
+  <link>https://livio98.github.io/freshraise-site/</link>
+  <atom:link href="https://livio98.github.io/freshraise-site/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Each week: freshly-funded startups, the role to contact, and a ready-to-send angle.</description>
+  <language>en</language>
+  <lastBuildDate>Sun, 28 Jun 2026 17:50:00 +0000</lastBuildDate>
+  <item>
+    <title>FreshRaise 2026-W26: 12 freshly-funded accounts to sell to this week</title>
+    <link>https://livio98.github.io/freshraise-site/sample.html</link>
+    <guid isPermaLink="false">freshraise-2026-W26</guid>
+    <pubDate>Fri, 26 Jun 2026 12:00:00 +0000</pubDate>
+    <description><![CDATA[<!doctype html><html><head><meta charset="utf-8">
+<meta name="robots" content="noindex"><title>FreshRaise — 2026-W26</title></head>
+<body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+<div style="max-width:720px;margin:0 auto;padding:28px 18px">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+    <span style="font-weight:800;font-size:22px;color:#0B1F3A">Fresh<span style="color:#1FB6A6">Raise</span></span>
+    <span style="margin-left:auto;color:#64748b;font-size:13px">Issue 2026-W26</span>
+  </div>
+  <p style="color:#475569;font-size:14px;margin:0 0 4px">Freshly-funded B2B SaaS &amp; tech startups (pre-seed -&gt; Series B)</p>
+  <p style="color:#94a3b8;font-size:13px;margin:0 0 18px">12 trigger-ready accounts, scored and contextualized. </p>
+  
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Almetra (ex-Deltia)</h3>
+            <span style="font-weight:700;color:#16a34a;font-size:14px">heat 90</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €16.3M Series A led by blisce/ — 25 Jun 2026 [EU-Startups + Tech.eu, 2 sources]</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Berlin manufacturing-intelligence platform raising to build product AND expand into the US — Series A money almost always converts into GTM, marketing and US-launch hiring within 60 days.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> VP Marketing / Head of Growth (US launch owner)</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congrats on the €16M + US push — most Series A teams hit a US go-to-market wall right after the round. Here&#x27;s a 2-line launch plan that worked for similar industrial-AI teams.</p>
+          <a href="https://tech.eu/2026/06/25/almetra-secures-eur163m-series-a-to-drive-smarter-manufacturing/" style="font-size:12px;color:#64748b">source ↗</a>
+        </div>
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">HR Duo</h3>
+            <span style="font-weight:700;color:#16a34a;font-size:14px">heat 88</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €1.6M led by Puma Growth Partners — 25 Jun 2026 [EU-Startups]</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> They explicitly said the round funds a NEW UK sales team — a rare, stated hiring signal. Immediate demand for SDR recruiting, sales tooling and onboarding/enablement.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Head of Sales / Talent Lead</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Saw the raise is funding your UK sales hires — want a vetted SDR shortlist (or an enablement playbook) ready before the team ramps?</p>
+          <a href="https://www.eu-startups.com/2026/06/amid-a-e500-700-million-sme-hrtech-opportunity-irelands-hr-duo-secures-e1-6-million-for-growth/" style="font-size:12px;color:#64748b">source ↗</a>
+        </div>
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">XCures</h3>
+            <span style="font-weight:700;color:#16a34a;font-size:14px">heat 82</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $46M Series B led by Innovius Capital — 24 Jun 2026 [Crunchbase News]</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> US AI-for-medical-records company; Series B = aggressive scaling of sales, RevOps, recruiting and infra. Big budget, US-based, buying mode.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> VP Sales / Head of RevOps</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congrats on the $46M B — Series B scaling usually breaks RevOps first. Here&#x27;s a 1-pager on what to fix before you 3× the team.</p>
+          <a href="https://news.crunchbase.com/venture/xcures-lands-seriesb-medical-records-ai/" style="font-size:12px;color:#64748b">source ↗</a>
+        </div>
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Compri</h3>
+            <span style="font-weight:700;color:#16a34a;font-size:14px">heat 80</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €3.2M seed led by Picus Capital — 24 Jun 2026 [Tech.eu]</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Milan AI-procurement startup; seed just closed → first GTM + engineering hires within 60 days and needs brand, content and outbound built from zero.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congrats on the Picus seed — the first 90 days post-seed make or break GTM. Here&#x27;s how comparable AI-procurement teams landed their first 10 customers.</p>
+          <a href="https://tech.eu/2026/06/24/compri-secures-eur32m-to-build-ai-powered-procurement-teams/" style="font-size:12px;color:#64748b">source ↗</a>
+        </div>
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Kalipso</h3>
+            <span style="font-weight:700;color:#ca8a04;font-size:14px">heat 76</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $3.2M seed — 25 Jun 2026 [Tech.eu]</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Barcelona regtech/compliance platform. Regtech sells on trust → expect a first marketing hire plus heavy demand for content/SEO and category education.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Co-founder / Head of Marketing</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congrats on the raise — regtech buyers convert on trust + content. Here&#x27;s a content angle that&#x27;s worked for similar compliance tools.</p>
+          <a href="https://tech.eu/2026/06/25/kalipso-raises-32m-to-scale-regulatory-compliance-platform/" style="font-size:12px;color:#64748b">source ↗</a>
+        </div>
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Serpier</h3>
+            <span style="font-weight:700;color:#ca8a04;font-size:14px">heat 74</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €1.4M from True Collective + EIFO — 25 Jun 2026 [Tech.eu]</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Danish AI martech for e-commerce; funded to expand the platform → hiring growth roles and actively needs agencies/partners for distribution.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> CEO / Head of Growth</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Fellow martech — congrats on the EIFO round. If you&#x27;re scaling distribution, happy to compare notes on an agency/partner motion.</p>
+          <a href="https://tech.eu/2026/06/25/serpier-raises-eur14m-to-help-online-retailers-improve-digital-visibility/" style="font-size:12px;color:#64748b">source ↗</a>
+        </div>
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">SE3 Labs</h3>
+            <span style="font-weight:700;color:#ca8a04;font-size:14px">heat 70</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> Out of stealth, backed by Lakestar, Seedcamp &amp; EWOR — 26 Jun 2026 [Tech.eu]</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Spatial-AI for autonomous systems just emerged from stealth — the post-stealth window is when they build the first commercial team and lock positioning from zero.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / Head of BD</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Saw SE3 just came out of stealth — the first 30 days post-stealth are the best time to nail positioning. Happy to share a quick teardown.</p>
+          <a href="https://tech.eu/2026/06/26/backed-by-lakestar-seedcamp-and-ewor-se3-unveils-spatial-ai-platform-for-autonomous-systems/" style="font-size:12px;color:#64748b">source ↗</a>
+        </div>
+  <p style="color:#94a3b8;font-size:12px;margin-top:24px">© FreshRaise. For subscriber use only. Signals sourced from public news; verify before outreach.</p>
+</div></body></html>]]></description>
+  </item>
+</channel>
+</rss>
