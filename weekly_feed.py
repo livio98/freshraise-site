@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""FreshRaise â€” self-contained weekly builder for GitHub Actions.
+"""FreshRaise — self-contained weekly builder for GitHub Actions.
 
 One file, no local package: the GitHub Actions cron runs this weekly, it builds
 the issue (live funding feeds -> Claude -> scored accounts) and writes
@@ -30,10 +30,10 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-# â”€â”€ Config â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── Config ───────────────────────────────────────────────────────────────────
 MODEL = os.getenv("CLAUDE_MODEL", "claude-opus-4-8")
-SITE_BASE_URL = os.getenv("SITE_BASE_URL", "https://livio98.github.io/freshraise-site").rstrip("/")
-USER_AGENT = "FreshRaise/1.0 (signals@freshraise.com)"
+SITE_BASE_URL = os.getenv("SITE_BASE_URL", "https://getfreshraise.com").rstrip("/")
+USER_AGENT = "FreshRaise/1.0 (signals@getfreshraise.com)"
 INK, ACCENT = "#0B1F3A", "#1FB6A6"
 
 DEFAULT_FEEDS = [
@@ -91,7 +91,7 @@ class ScoredAccount:
     source_url: str
 
 
-# â”€â”€ 1) Ingest â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── 1) Ingest ────────────────────────────────────────────────────────────────
 def fetch_signals(extra_queries=None, max_age_days=9, per_feed_limit=40):
     feeds = list(DEFAULT_FEEDS) + [
         {"source": f"Google News: {q}", "signal": "funding",
@@ -121,7 +121,7 @@ def fetch_signals(extra_queries=None, max_age_days=9, per_feed_limit=40):
     return out
 
 
-# â”€â”€ 2) Claude: extract / dedupe / score â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── 2) Claude: extract / dedupe / score ──────────────────────────────────────
 @retry(stop=stop_after_attempt(4), wait=wait_exponential(multiplier=2, min=2, max=30))
 def _claude_json(system: str, user: str, max_tokens: int = 16000) -> dict:
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
@@ -179,15 +179,31 @@ def _issue_label():
     return f"{y}-W{w:02d}"
 
 
-# â”€â”€ 3) Render: archive HTML, CSV, RSS feed â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# ── 3) Render: archive HTML, CSV, RSS feed ──────────────────────────────────
 def _heat(score):
-    return "#16a34a" if score >= 80 else "#ca8a04" if score >= 60 else "#64748b"
+    # contrast-safe text colors (WCAG AA on white)
+    return "#15803d" if score >= 80 else "#b45309" if score >= 60 else "#64748b"
 
 
-def render_archive_html(accounts, vertical_name, issue_label, gated_note=""):
+def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
+                        gated=False, public=False, free_n=5):
+    """Render the issue. gated=True locks all but the top `free_n` (public teaser);
+    public=True makes it indexable + adds a signup CTA. The subscriber/RSS copy
+    is always ungated (gated=False)."""
     rows = []
-    for a in accounts:
-        rows.append(f"""
+    for i, a in enumerate(accounts):
+        if gated and i >= free_n:
+            rows.append(f"""
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h3 style="margin:0;font-size:18px;color:{INK}">{html.escape(a.company)}</h3>
+            <span style="font-weight:700;color:{_heat(a.score)};font-size:14px">heat {a.score}</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> {html.escape(a.trigger)}</p>
+          <p style="margin:10px 0 0;color:#475569;font-size:14px">&#128274; Why now &middot; Who to contact &middot; Angle &mdash; subscribers only</p>
+        </div>""")
+        else:
+            rows.append(f"""
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
             <h3 style="margin:0;font-size:18px;color:{INK}">{html.escape(a.company)}</h3>
@@ -199,27 +215,50 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note=""):
           <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> {html.escape(a.outreach_angle)}</p>
           <a href="{html.escape(a.source_url)}" style="font-size:12px;color:#64748b">source</a>
         </div>""")
-    return f"""<!doctype html><html><head><meta charset="utf-8">
-<meta name="robots" content="noindex"><title>FreshRaise - {issue_label}</title></head>
+    robots = "" if public else '<meta name="robots" content="noindex">'
+    locked_note = (
+        f'<p style="color:#475569;font-size:13px;margin:0 0 18px">Free preview &mdash; full details on the top {free_n}. '
+        f'<a href="{SITE_BASE_URL}/#pricing" style="color:#0f766e;font-weight:600">Unlock all {len(accounts)} accounts &rarr;</a></p>'
+        if gated else ""
+    )
+    cta = (
+        f'<div style="text-align:center;margin:30px 0 6px">'
+        f'<a href="{SITE_BASE_URL}/#cta" style="display:inline-block;background:{ACCENT};color:{INK};'
+        f'font-weight:700;padding:13px 24px;border-radius:12px;text-decoration:none">'
+        f'Get this list every Monday &mdash; free &rarr;</a></div>'
+        if (public or gated) else ""
+    )
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{robots}<title>FreshRaise {issue_label} &mdash; freshly-funded startups worth selling to</title>
+<meta name="description" content="{html.escape(vertical_name)} &mdash; {len(accounts)} freshly-funded accounts, scored, with the role to contact. Week {issue_label}."></head>
 <body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
 <div style="max-width:720px;margin:0 auto;padding:28px 18px">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-    <span style="font-weight:800;font-size:22px;color:{INK}">Fresh<span style="color:{ACCENT}">Raise</span></span>
+    <a href="{SITE_BASE_URL}/" style="font-weight:800;font-size:22px;color:{INK};text-decoration:none">Fresh<span style="color:{ACCENT}">Raise</span></a>
     <span style="margin-left:auto;color:#64748b;font-size:13px">Issue {issue_label}</span>
   </div>
   <p style="color:#475569;font-size:14px;margin:0 0 4px">{html.escape(vertical_name)}</p>
-  <p style="color:#94a3b8;font-size:13px;margin:0 0 18px">{len(accounts)} trigger-ready accounts, scored and contextualized. {gated_note}</p>
+  <p style="color:#64748b;font-size:13px;margin:0 0 14px">{len(accounts)} trigger-ready accounts, scored and contextualized. {gated_note}</p>
+  {locked_note}
   {''.join(rows)}
-  <p style="color:#94a3b8;font-size:12px;margin-top:24px">(c) FreshRaise. For subscriber use only. Signals sourced from public news; verify before outreach.</p>
+  {cta}
+  <p style="color:#64748b;font-size:12px;margin-top:24px">&copy; FreshRaise. Signals sourced from public news; verify before outreach.</p>
 </div></body></html>"""
 
 
-def digest_to_csv(accounts):
+def digest_to_csv(accounts, public=False):
     buf = io.StringIO()
     w = csv.writer(buf)
-    w.writerow(["company", "trigger", "why_now", "role_to_contact", "outreach_angle", "score", "source_url"])
-    for a in accounts:
-        w.writerow([a.company, a.trigger, a.why_now, a.role_to_contact, a.outreach_angle, a.score, a.source_url])
+    if public:
+        # public teaser: no paid why-now/contact/angle columns
+        w.writerow(["company", "trigger", "score"])
+        for a in accounts:
+            w.writerow([a.company, a.trigger, a.score])
+    else:
+        w.writerow(["company", "trigger", "why_now", "role_to_contact", "outreach_angle", "score", "source_url"])
+        for a in accounts:
+            w.writerow([a.company, a.trigger, a.why_now, a.role_to_contact, a.outreach_angle, a.score, a.source_url])
     return buf.getvalue()
 
 
@@ -228,11 +267,13 @@ def build_rss(accounts, issue_label, pubdate):
     title = f"FreshRaise {issue_label}: {len(accounts)} freshly-funded accounts to sell to this week"
     link = f"{SITE_BASE_URL}/sample.html"
     built = format_datetime(_dt.datetime.now(_dt.timezone.utc))
+    # guid stable per (issue, build-date) so a same-week corrective re-run IS re-sent.
+    guid = f"freshraise-{issue_label}-{pubdate:%Y%m%d}"
     item = (
         "  <item>\n"
         f"    <title>{html.escape(title)}</title>\n"
         f"    <link>{html.escape(link)}</link>\n"
-        f'    <guid isPermaLink="false">freshraise-{html.escape(issue_label)}</guid>\n'
+        f'    <guid isPermaLink="false">{html.escape(guid)}</guid>\n'
         f"    <pubDate>{format_datetime(pubdate)}</pubDate>\n"
         f"    <description><![CDATA[{content}]]></description>\n"
         "  </item>"
@@ -260,12 +301,15 @@ def main():
     now = _dt.datetime.now(_dt.timezone.utc)
     with open("feed.xml", "w", encoding="utf-8") as f:
         f.write(build_rss(accounts, label, now))
+    # PUBLIC sample = indexable, GATED teaser (full details only on the top 5).
     with open("sample.html", "w", encoding="utf-8") as f:
         f.write(render_archive_html(accounts, LAUNCH_VERTICAL["name"], label,
-                                    gated_note="Generated live from public funding sources."))
+                                    gated_note="Generated live from public funding sources.",
+                                    gated=True, public=True))
+    # PUBLIC csv = teaser columns only (paid columns withheld).
     with open("sample.csv", "w", encoding="utf-8") as f:
-        f.write(digest_to_csv(accounts))
-    print(f"OK: {len(accounts)} accounts, issue {label} -> feed.xml + sample.html + sample.csv")
+        f.write(digest_to_csv(accounts, public=True))
+    print(f"OK: {len(accounts)} accounts, issue {label} -> feed.xml + sample.html (gated) + sample.csv (teaser)")
 
 
 if __name__ == "__main__":
