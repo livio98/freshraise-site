@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FreshRaise — The freshly-funded startups worth selling to, every Monday</title>
+  <meta name="description" content="FreshRaise emails B2B sellers a weekly, AI-scored list of startups that just raised — each with the right role to contact and a ready-to-send angle. Reach them in the 48-hour window that converts 4× better." />
+  <meta property="og:title" content="FreshRaise — sell to startups the week they raise" />
+  <meta property="og:description" content="A weekly, AI-scored digest of freshly-funded startups, with the role to contact and an outreach angle. Built for people who sell to funded startups." />
+  <meta property="og:type" content="website" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { ink: '#0B1F3A', ink2: '#0e2647', accent: '#1FB6A6', accent2: '#17a297' },
+        fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+      } }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    .grain { background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px); background-size: 22px 22px; }
+    .glow { background: radial-gradient(60% 60% at 50% 0%, rgba(31,182,166,.18) 0%, rgba(31,182,166,0) 70%); }
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] .chev { transform: rotate(180deg); }
+  </style>
+</head>
+<body class="font-sans text-ink bg-white antialiased">
+
+  <!-- Netlify Forms requires a static copy of the form at build time. Hidden; harmless if not on Netlify. -->
+  <form name="waitlist" netlify netlify-honeypot="bot-field" hidden>
+    <input type="email" name="email" />
+    <input type="text" name="vertical" />
+  </form>
+
+  <!-- NAV -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-ink/85 text-white border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+      <a href="#" class="font-extrabold text-xl tracking-tight">Fresh<span class="text-accent">Raise</span></a>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-white/80">
+        <a href="#problem" class="hover:text-white">Why</a>
+        <a href="#how" class="hover:text-white">How it works</a>
+        <a href="#pricing" class="hover:text-white">Pricing</a>
+        <a href="#faq" class="hover:text-white">FAQ</a>
+      </nav>
+      <a href="#cta" class="bg-accent hover:bg-accent2 text-ink font-bold text-sm px-4 py-2 rounded-lg">Get the free sample</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative bg-ink text-white overflow-hidden grain">
+    <div class="absolute inset-0 glow"></div>
+    <div class="relative max-w-6xl mx-auto px-5 pt-20 pb-24 text-center">
+      <span class="inline-block text-xs font-semibold tracking-wider uppercase text-accent bg-accent/10 border border-accent/20 rounded-full px-3 py-1 mb-6">For people who sell to funded startups</span>
+      <h1 class="text-4xl md:text-6xl font-black leading-[1.05] max-w-4xl mx-auto">
+        The startups worth selling to<br class="hidden md:block" /> just raised. <span class="text-accent">You'll know by Monday.</span>
+      </h1>
+      <p class="mt-6 text-lg md:text-xl text-white/75 max-w-2xl mx-auto">
+        FreshRaise emails you a weekly, AI-scored list of freshly-funded startups — each with the
+        <strong class="text-white">right role to contact</strong> and a <strong class="text-white">ready-to-send angle</strong>.
+        Reach them inside the 48-hour window that converts up to <strong class="text-white">4× better</strong>.
+      </p>
+
+      <!-- Email capture (Netlify Forms) -->
+      <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+            class="mt-9 max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+        <input type="hidden" name="form-name" value="waitlist" />
+        <p class="hidden"><label>Don't fill: <input name="bot-field" /></label></p>
+        <input required type="email" name="email" placeholder="you@company.com"
+               class="flex-1 px-4 py-3 rounded-xl text-ink placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent" />
+        <button type="submit" class="bg-accent hover:bg-accent2 text-ink font-bold px-6 py-3 rounded-xl whitespace-nowrap">
+          Send me this week's free list →
+        </button>
+      </form>
+      <p class="mt-3 text-xs text-white/50">Free weekly sample. No card. Unsubscribe anytime.</p>
+
+      <!-- source strip -->
+      <div class="mt-14">
+        <p class="text-xs uppercase tracking-widest text-white/40 mb-4">We read 50+ public funding sources so you don't have to</p>
+        <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-white/60 font-semibold">
+          <span>TechCrunch</span><span>Crunchbase&nbsp;News</span><span>EU-Startups</span><span>Tech.eu</span><span>Finsmes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section id="problem" class="max-w-6xl mx-auto px-5 py-20">
+    <div class="max-w-3xl">
+      <p class="text-accent2 font-bold uppercase tracking-wider text-sm">The problem</p>
+      <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">By the time you hear they raised, the budget's already spent.</h2>
+      <p class="mt-5 text-lg text-slate-600">A funding round is the loudest "we have budget and we're about to buy" signal in B2B. But finding those companies the moment it matters is a grind — and the window slams shut fast.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 mt-12">
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="text-3xl">🐌</div>
+        <h3 class="mt-3 font-bold text-lg">You find out too late</h3>
+        <p class="mt-2 text-slate-600 text-sm">By the time a raise hits your feed, three other vendors already booked the call. 71% of funded firms pick a vendor within 90 days.</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="text-3xl">⏳</div>
+        <h3 class="mt-3 font-bold text-lg">Tools make you do the work</h3>
+        <p class="mt-2 text-slate-600 text-sm">Crunchbase and Apollo hand you a raw firehose. You still filter, research, and figure out who to email and what to say. That's your whole morning, gone.</p>
+      </div>
+      <div class="rounded-2xl border border-slate-200 p-6">
+        <div class="text-3xl">💸</div>
+        <h3 class="mt-3 font-bold text-lg">Enterprise intent is overkill</h3>
+        <p class="mt-2 text-slate-600 text-sm">Bombora-class intent data runs ~$25k/yr. Absurd when you sell one thing to one type of buyer and just need the right accounts, now.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="bg-slate-50 border-y border-slate-200">
+    <div class="max-w-6xl mx-auto px-5 py-20 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="text-accent2 font-bold uppercase tracking-wider text-sm">The solution</p>
+        <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">A done-thinking list, not another dashboard.</h2>
+        <p class="mt-5 text-lg text-slate-600">Every Monday, FreshRaise sends a tight, scored list of startups in <em>your</em> vertical that just raised. We don't dump data — our AI reads the news, dedupes it, scores the heat, and writes the part that actually takes time:</p>
+        <ul class="mt-6 space-y-3">
+          <li class="flex gap-3"><span class="text-accent2 font-bold">✓</span><span><strong>Why now</strong> — what the raise means they'll buy or hire, in one line.</span></li>
+          <li class="flex gap-3"><span class="text-accent2 font-bold">✓</span><span><strong>Who to contact</strong> — the role most likely to own your budget.</span></li>
+          <li class="flex gap-3"><span class="text-accent2 font-bold">✓</span><span><strong>A ready-to-send angle</strong> — a concrete opener, not a template.</span></li>
+          <li class="flex gap-3"><span class="text-accent2 font-bold">✓</span><span><strong>CSV export</strong> — drop it straight into your sequence.</span></li>
+        </ul>
+      </div>
+      <!-- sample card -->
+      <div class="rounded-3xl bg-white shadow-xl border border-slate-200 p-6">
+        <div class="flex items-center justify-between text-xs text-slate-400 mb-4">
+          <span class="font-extrabold text-ink text-base">Fresh<span class="text-accent">Raise</span></span>
+          <span>Issue 2026-W26 · sample</span>
+        </div>
+        <div class="rounded-2xl border border-slate-200 p-4">
+          <div class="flex justify-between items-baseline"><h4 class="font-bold text-ink">Northwind Labs</h4><span class="text-green-600 font-bold text-sm">heat 88</span></div>
+          <p class="text-sm text-slate-600 mt-2"><strong>Trigger:</strong> Raised $9M Series A (led by Accel), this week.</p>
+          <p class="text-sm text-slate-600 mt-1"><strong>Why now:</strong> Series A means a hiring + tooling spree in the next 60 days — prime moment for onboarding/GTM services.</p>
+          <p class="text-sm text-slate-600 mt-1"><strong>Who to contact:</strong> Head of Growth / VP Revenue</p>
+          <p class="text-sm text-teal-700 mt-1"><strong>Angle:</strong> "Congrats on the Accel round — most teams hit a GTM bottleneck at exactly this stage…"</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 p-4 mt-3 opacity-60">
+          <div class="flex justify-between items-baseline"><h4 class="font-bold text-ink">Cadence&nbsp;AI</h4><span class="text-yellow-600 font-bold text-sm">heat 74</span></div>
+          <p class="text-sm text-slate-600 mt-2"><strong>Trigger:</strong> $3.2M seed round announced.</p>
+          <p class="text-sm text-slate-400 mt-1">Why now · Who to contact · Angle 🔒</p>
+        </div>
+        <p class="text-center text-xs text-slate-400 mt-4">+ 23 more accounts in the full issue</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="max-w-6xl mx-auto px-5 py-20">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="text-accent2 font-bold uppercase tracking-wider text-sm">How it works</p>
+      <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">From raise to reply in three steps.</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 mt-14">
+      <div class="relative rounded-2xl border border-slate-200 p-7">
+        <div class="text-accent font-black text-5xl/none">1</div>
+        <h3 class="mt-4 font-bold text-lg">Pick your vertical</h3>
+        <p class="mt-2 text-slate-600 text-sm">Tell us what you sell and to whom. We tune the radar to the exact slice of freshly-funded companies you care about.</p>
+      </div>
+      <div class="relative rounded-2xl border border-slate-200 p-7">
+        <div class="text-accent font-black text-5xl/none">2</div>
+        <h3 class="mt-4 font-bold text-lg">We do the reading & thinking</h3>
+        <p class="mt-2 text-slate-600 text-sm">Our engine scans 50+ public funding sources, dedupes the noise, scores each account, and writes the why-now, the contact role, and the angle.</p>
+      </div>
+      <div class="relative rounded-2xl border border-slate-200 p-7">
+        <div class="text-accent font-black text-5xl/none">3</div>
+        <h3 class="mt-4 font-bold text-lg">You open one email & sell</h3>
+        <p class="mt-2 text-slate-600 text-sm">Monday morning, the scored list lands in your inbox with a CSV export. Start your outreach inside the window that converts best.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="bg-ink text-white grain">
+    <div class="max-w-6xl mx-auto px-5 py-20">
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="text-accent font-bold uppercase tracking-wider text-sm">Pricing</p>
+        <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">One good deal closes the year.</h2>
+        <p class="mt-4 text-white/70">A single client won from a FreshRaise lead pays for years of subscription. Start free.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 mt-14 items-start">
+        <!-- Free -->
+        <div class="rounded-3xl bg-white/5 border border-white/10 p-7">
+          <h3 class="font-bold text-xl">Sample</h3>
+          <p class="text-white/60 text-sm mt-1">See the goods.</p>
+          <p class="mt-5 text-4xl font-black">€0</p>
+          <p class="text-white/50 text-sm">free, forever</p>
+          <a href="#cta" class="mt-6 block text-center bg-white/10 hover:bg-white/20 font-bold py-3 rounded-xl">Get the free list</a>
+          <ul class="mt-6 space-y-2 text-sm text-white/75">
+            <li>✓ Top 5 funded accounts weekly</li>
+            <li>✓ Trigger + heat score</li>
+            <li>✗ Why-now, contact role & angle</li>
+            <li>✗ CSV export</li>
+          </ul>
+        </div>
+        <!-- Pro -->
+        <div class="rounded-3xl bg-white text-ink p-7 shadow-2xl ring-2 ring-accent relative">
+          <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-ink text-xs font-bold px-3 py-1 rounded-full">Most popular</span>
+          <h3 class="font-bold text-xl">Pro</h3>
+          <p class="text-slate-500 text-sm mt-1">The full weekly edge.</p>
+          <p class="mt-5 text-4xl font-black">€39<span class="text-lg font-semibold text-slate-400">/mo</span></p>
+          <p class="text-slate-400 text-sm">or €390/yr (2 months free)</p>
+          <a href="#cta" class="mt-6 block text-center bg-accent hover:bg-accent2 text-ink font-bold py-3 rounded-xl">Start free, upgrade anytime</a>
+          <ul class="mt-6 space-y-2 text-sm text-slate-600">
+            <li>✓ <strong>Full list</strong> (~25 scored accounts/wk)</li>
+            <li>✓ Why-now, contact role & angle</li>
+            <li>✓ CSV export</li>
+            <li>✓ One vertical of your choice</li>
+            <li>✓ Searchable issue archive</li>
+          </ul>
+        </div>
+        <!-- Agency -->
+        <div class="rounded-3xl bg-white/5 border border-white/10 p-7">
+          <h3 class="font-bold text-xl">Agency</h3>
+          <p class="text-white/60 text-sm mt-1">For teams selling at scale.</p>
+          <p class="mt-5 text-4xl font-black">€99<span class="text-lg font-semibold text-white/40">/mo</span></p>
+          <p class="text-white/50 text-sm">or €990/yr</p>
+          <a href="#cta" class="mt-6 block text-center bg-white/10 hover:bg-white/20 font-bold py-3 rounded-xl">Talk to us</a>
+          <ul class="mt-6 space-y-2 text-sm text-white/75">
+            <li>✓ Everything in Pro</li>
+            <li>✓ Up to 3 seats</li>
+            <li>✓ Request a custom vertical</li>
+            <li>✓ Priority signal coverage</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="max-w-3xl mx-auto px-5 py-20">
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center">Questions, answered.</h2>
+    <div class="mt-10 divide-y divide-slate-200 border-y border-slate-200">
+      <details class="py-5">
+        <summary class="flex justify-between items-center font-semibold text-lg">Where does the data come from? <span class="chev transition-transform">⌄</span></summary>
+        <p class="mt-3 text-slate-600">Public funding news — TechCrunch, Crunchbase News, EU-Startups, Tech.eu, Finsmes and 50+ others, plus targeted public news queries for your vertical. We read, dedupe, and interpret it; we don't scrape private data.</p>
+      </details>
+      <details class="py-5">
+        <summary class="flex justify-between items-center font-semibold text-lg">Is this GDPR-compliant? <span class="chev transition-transform">⌄</span></summary>
+        <p class="mt-3 text-slate-600">Yes by design. FreshRaise delivers company-level signals and the <em>role</em> to contact — not a database of personal emails. You source the individual contact yourself, lawfully, once you've decided the account is worth it.</p>
+      </details>
+      <details class="py-5">
+        <summary class="flex justify-between items-center font-semibold text-lg">How is this different from Crunchbase or Apollo? <span class="chev transition-transform">⌄</span></summary>
+        <p class="mt-3 text-slate-600">Those give you a raw firehose to filter and interpret yourself. FreshRaise does the filtering and the thinking — scoring each account and writing the why-now, the contact role, and the angle — so you act instead of research.</p>
+      </details>
+      <details class="py-5">
+        <summary class="flex justify-between items-center font-semibold text-lg">How fresh are the signals? <span class="chev transition-transform">⌄</span></summary>
+        <p class="mt-3 text-slate-600">Each Monday's issue covers raises announced in the prior days — landing you well inside the 48-hour-to-90-day window where funded firms choose vendors.</p>
+      </details>
+      <details class="py-5">
+        <summary class="flex justify-between items-center font-semibold text-lg">Can I get my own niche? <span class="chev transition-transform">⌄</span></summary>
+        <p class="mt-3 text-slate-600">Pro includes one vertical of your choice. Agency lets you request custom verticals. Tell us what you sell and we'll tune the radar.</p>
+      </details>
+      <details class="py-5">
+        <summary class="flex justify-between items-center font-semibold text-lg">What if it's not useful? <span class="chev transition-transform">⌄</span></summary>
+        <p class="mt-3 text-slate-600">Start on the free sample — no card. If Pro doesn't earn its keep, cancel in one click. We'd rather you stay because it works.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="cta" class="bg-slate-50 border-t border-slate-200">
+    <div class="max-w-3xl mx-auto px-5 py-20 text-center">
+      <h2 class="text-3xl md:text-4xl font-extrabold">Get this week's freshly-funded list — free.</h2>
+      <p class="mt-4 text-lg text-slate-600">See exactly who just raised in your space, scored and ready to act on. Upgrade only if it earns it.</p>
+      <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+            class="mt-8 max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+        <input type="hidden" name="form-name" value="waitlist" />
+        <p class="hidden"><label>Don't fill: <input name="bot-field" /></label></p>
+        <input required type="email" name="email" placeholder="you@company.com"
+               class="flex-1 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-accent" />
+        <button type="submit" class="bg-ink hover:bg-ink2 text-white font-bold px-6 py-3 rounded-xl whitespace-nowrap">Send me the free list →</button>
+      </form>
+      <p class="mt-3 text-xs text-slate-400">Join founders, SDRs and agencies who sell to funded startups.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-white/60">
+    <div class="max-w-6xl mx-auto px-5 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+      <span class="font-extrabold text-white text-lg">Fresh<span class="text-accent">Raise</span></span>
+      <p>© 2026 FreshRaise. Buying signals for people who sell to funded startups.</p>
+      <div class="flex gap-5">
+        <a href="#faq" class="hover:text-white">FAQ</a>
+        <a href="mailto:hello@freshraise.com" class="hover:text-white">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
