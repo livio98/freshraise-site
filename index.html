@@ -30,11 +30,9 @@
 </head>
 <body class="font-sans text-ink bg-white antialiased">
 
-  <!-- Netlify Forms requires a static copy of the form at build time. Hidden; harmless if not on Netlify. -->
-  <form name="waitlist" netlify netlify-honeypot="bot-field" hidden>
-    <input type="email" name="email" />
-    <input type="text" name="vertical" />
-  </form>
+  <!-- Email capture: mailto fallback (works with zero backend on GitHub Pages).
+       To capture into a database instead, swap the form action for a Formspree
+       endpoint (https://formspree.io) — one-line change, see README. -->
 
   <!-- NAV -->
   <header class="sticky top-0 z-40 backdrop-blur bg-ink/85 text-white border-b border-white/10">
@@ -46,7 +44,7 @@
         <a href="#pricing" class="hover:text-white">Pricing</a>
         <a href="#faq" class="hover:text-white">FAQ</a>
       </nav>
-      <a href="#cta" class="bg-accent hover:bg-accent2 text-ink font-bold text-sm px-4 py-2 rounded-lg">Get the free sample</a>
+      <a href="sample.html" class="bg-accent hover:bg-accent2 text-ink font-bold text-sm px-4 py-2 rounded-lg">See this week's sample</a>
     </div>
   </header>
 
@@ -64,18 +62,17 @@
         Reach them inside the 48-hour window that converts up to <strong class="text-white">4× better</strong>.
       </p>
 
-      <!-- Email capture (Netlify Forms) -->
-      <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+      <!-- Email capture (mailto fallback — works with no backend on GitHub Pages) -->
+      <form action="mailto:livioivandro@gmail.com" method="POST" enctype="text/plain"
             class="mt-9 max-w-md mx-auto flex flex-col sm:flex-row gap-3">
-        <input type="hidden" name="form-name" value="waitlist" />
-        <p class="hidden"><label>Don't fill: <input name="bot-field" /></label></p>
         <input required type="email" name="email" placeholder="you@company.com"
                class="flex-1 px-4 py-3 rounded-xl text-ink placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent" />
         <button type="submit" class="bg-accent hover:bg-accent2 text-ink font-bold px-6 py-3 rounded-xl whitespace-nowrap">
-          Send me this week's free list →
+          Subscribe for the weekly list →
         </button>
       </form>
       <p class="mt-3 text-xs text-white/50">Free weekly sample. No card. Unsubscribe anytime.</p>
+      <p class="mt-4"><a href="sample.html" class="inline-block text-accent font-semibold underline decoration-accent/40 hover:decoration-accent">👉 See this week's sample issue now — live, real funding data →</a></p>
 
       <!-- source strip -->
       <div class="mt-14">
@@ -268,15 +265,14 @@
     <div class="max-w-3xl mx-auto px-5 py-20 text-center">
       <h2 class="text-3xl md:text-4xl font-extrabold">Get this week's freshly-funded list — free.</h2>
       <p class="mt-4 text-lg text-slate-600">See exactly who just raised in your space, scored and ready to act on. Upgrade only if it earns it.</p>
-      <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+      <form action="mailto:livioivandro@gmail.com" method="POST" enctype="text/plain"
             class="mt-8 max-w-md mx-auto flex flex-col sm:flex-row gap-3">
-        <input type="hidden" name="form-name" value="waitlist" />
-        <p class="hidden"><label>Don't fill: <input name="bot-field" /></label></p>
         <input required type="email" name="email" placeholder="you@company.com"
                class="flex-1 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-accent" />
-        <button type="submit" class="bg-ink hover:bg-ink2 text-white font-bold px-6 py-3 rounded-xl whitespace-nowrap">Send me the free list →</button>
+        <button type="submit" class="bg-ink hover:bg-ink2 text-white font-bold px-6 py-3 rounded-xl whitespace-nowrap">Subscribe for the weekly list →</button>
       </form>
-      <p class="mt-3 text-xs text-slate-400">Join founders, SDRs and agencies who sell to funded startups.</p>
+      <p class="mt-3 text-sm"><a href="sample.html" class="text-ink font-semibold underline decoration-accent hover:text-accent2">Or see this week's sample issue first →</a></p>
+      <p class="mt-2 text-xs text-slate-400">Join founders, SDRs and agencies who sell to funded startups.</p>
     </div>
   </section>
 
