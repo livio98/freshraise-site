@@ -4,10 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FreshRaise — The freshly-funded startups worth selling to, every Monday</title>
-  <meta name="description" content="FreshRaise emails B2B sellers a weekly, AI-scored list of startups that just raised — each with the right role to contact and a ready-to-send angle. Reach them in the 48-hour window that converts 4× better." />
+  <meta name="description" content="FreshRaise emails B2B sellers a weekly, AI-scored list of startups that just raised — each with the right role to contact and a ready-to-send angle. Reach them while the budget is fresh and the shortlist is still open." />
   <meta property="og:title" content="FreshRaise — sell to startups the week they raise" />
   <meta property="og:description" content="A weekly, AI-scored digest of freshly-funded startups, with the role to contact and an outreach angle. Built for people who sell to funded startups." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://getfreshraise.com/" />
+  <link rel="canonical" href="https://getfreshraise.com/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="FreshRaise — sell to startups the week they raise" />
+  <meta name="twitter:description" content="A weekly, AI-scored digest of freshly-funded startups, with the role to contact and an outreach angle." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1F3A'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='36' font-weight='bold' text-anchor='middle' fill='%231FB6A6'%3EF%3C/text%3E%3C/svg%3E" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -27,12 +33,18 @@
     details > summary::-webkit-details-marker { display: none; }
     details[open] .chev { transform: rotate(180deg); }
   </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"Organization","name":"FreshRaise","url":"https://getfreshraise.com/","email":"hello@getfreshraise.com","description":"Weekly AI-scored buying signals on freshly-funded startups, for people who sell to funded startups."},
+    {"@type":"WebSite","name":"FreshRaise","url":"https://getfreshraise.com/"}
+  ]}
+  </script>
 </head>
 <body class="font-sans text-ink bg-white antialiased">
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-2 focus:left-2 focus:bg-white focus:text-ink focus:px-3 focus:py-2 focus:rounded focus:font-semibold">Skip to content</a>
 
-  <!-- Email capture: mailto fallback (works with zero backend on GitHub Pages).
-       To capture into a database instead, swap the form action for a Formspree
-       endpoint (https://formspree.io) — one-line change, see README. -->
+  <!-- Email capture → beehiiv list (freshraise.beehiiv.com). beehiiv handles the
+       weekly send, double opt-in, and (on the Scale plan) paid subscriptions + payout. -->
 
   <!-- NAV -->
   <header class="sticky top-0 z-40 backdrop-blur bg-ink/85 text-white border-b border-white/10">
@@ -48,6 +60,7 @@
     </div>
   </header>
 
+  <main id="main">
   <!-- HERO -->
   <section class="relative bg-ink text-white overflow-hidden grain">
     <div class="absolute inset-0 glow"></div>
@@ -59,24 +72,24 @@
       <p class="mt-6 text-lg md:text-xl text-white/75 max-w-2xl mx-auto">
         FreshRaise emails you a weekly, AI-scored list of freshly-funded startups — each with the
         <strong class="text-white">right role to contact</strong> and a <strong class="text-white">ready-to-send angle</strong>.
-        Reach them inside the 48-hour window that converts up to <strong class="text-white">4× better</strong>.
+        Reach them while the budget is fresh and the shortlist is still open.
       </p>
 
       <!-- Email capture → beehiiv list (handles the newsletter send + paid subscriptions). -->
       <form action="https://freshraise.beehiiv.com/subscribe" method="get"
             class="mt-9 max-w-md mx-auto flex flex-col sm:flex-row gap-3">
-        <input required type="email" name="email" placeholder="you@company.com"
-               class="flex-1 px-4 py-3 rounded-xl text-ink placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-accent" />
+        <input required type="email" name="email" placeholder="you@company.com" aria-label="Email address"
+               class="flex-1 px-4 py-3 rounded-xl text-ink placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-accent" />
         <button type="submit" class="bg-accent hover:bg-accent2 text-ink font-bold px-6 py-3 rounded-xl whitespace-nowrap">
           Subscribe for the weekly list →
         </button>
       </form>
-      <p class="mt-3 text-xs text-white/50">Free weekly sample. No card. Unsubscribe anytime.</p>
+      <p class="mt-3 text-xs text-white/60">Free weekly sample. No card. Unsubscribe anytime. By subscribing you agree to our <a href="privacy.html" class="underline hover:text-white">Privacy Policy</a>.</p>
       <p class="mt-4"><a href="sample.html" class="inline-block text-accent font-semibold underline decoration-accent/40 hover:decoration-accent">👉 See this week's sample issue now — live, real funding data →</a></p>
 
       <!-- source strip -->
       <div class="mt-14">
-        <p class="text-xs uppercase tracking-widest text-white/40 mb-4">We read 50+ public funding sources so you don't have to</p>
+        <p class="text-xs uppercase tracking-widest text-white/60 mb-4">We read 50+ public funding sources so you don't have to</p>
         <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-white/60 font-semibold">
           <span>TechCrunch</span><span>Crunchbase&nbsp;News</span><span>EU-Startups</span><span>Tech.eu</span><span>Finsmes</span>
         </div>
@@ -87,7 +100,7 @@
   <!-- PROBLEM -->
   <section id="problem" class="max-w-6xl mx-auto px-5 py-20">
     <div class="max-w-3xl">
-      <p class="text-accent2 font-bold uppercase tracking-wider text-sm">The problem</p>
+      <p class="text-teal-700 font-bold uppercase tracking-wider text-sm">The problem</p>
       <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">By the time you hear they raised, the budget's already spent.</h2>
       <p class="mt-5 text-lg text-slate-600">A funding round is the loudest "we have budget and we're about to buy" signal in B2B. But finding those companies the moment it matters is a grind — and the window slams shut fast.</p>
     </div>
@@ -95,7 +108,7 @@
       <div class="rounded-2xl border border-slate-200 p-6">
         <div class="text-3xl">🐌</div>
         <h3 class="mt-3 font-bold text-lg">You find out too late</h3>
-        <p class="mt-2 text-slate-600 text-sm">By the time a raise hits your feed, three other vendors already booked the call. 71% of funded firms pick a vendor within 90 days.</p>
+        <p class="mt-2 text-slate-600 text-sm">By the time a raise hits your feed, other vendors have already booked the call. Funded firms shortlist vendors fast — often within the first quarter.</p>
       </div>
       <div class="rounded-2xl border border-slate-200 p-6">
         <div class="text-3xl">⏳</div>
@@ -114,14 +127,14 @@
   <section class="bg-slate-50 border-y border-slate-200">
     <div class="max-w-6xl mx-auto px-5 py-20 grid md:grid-cols-2 gap-12 items-center">
       <div>
-        <p class="text-accent2 font-bold uppercase tracking-wider text-sm">The solution</p>
+        <p class="text-teal-700 font-bold uppercase tracking-wider text-sm">The solution</p>
         <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">A done-thinking list, not another dashboard.</h2>
         <p class="mt-5 text-lg text-slate-600">Every Monday, FreshRaise sends a tight, scored list of startups in <em>your</em> vertical that just raised. We don't dump data — our AI reads the news, dedupes it, scores the heat, and writes the part that actually takes time:</p>
         <ul class="mt-6 space-y-3">
-          <li class="flex gap-3"><span class="text-accent2 font-bold">✓</span><span><strong>Why now</strong> — what the raise means they'll buy or hire, in one line.</span></li>
-          <li class="flex gap-3"><span class="text-accent2 font-bold">✓</span><span><strong>Who to contact</strong> — the role most likely to own your budget.</span></li>
-          <li class="flex gap-3"><span class="text-accent2 font-bold">✓</span><span><strong>A ready-to-send angle</strong> — a concrete opener, not a template.</span></li>
-          <li class="flex gap-3"><span class="text-accent2 font-bold">✓</span><span><strong>CSV export</strong> — drop it straight into your sequence.</span></li>
+          <li class="flex gap-3"><span class="text-teal-700 font-bold">✓</span><span><strong>Why now</strong> — what the raise means they'll buy or hire, in one line.</span></li>
+          <li class="flex gap-3"><span class="text-teal-700 font-bold">✓</span><span><strong>Who to contact</strong> — the role most likely to own your budget.</span></li>
+          <li class="flex gap-3"><span class="text-teal-700 font-bold">✓</span><span><strong>A ready-to-send angle</strong> — a concrete opener, not a template.</span></li>
+          <li class="flex gap-3"><span class="text-teal-700 font-bold">✓</span><span><strong>CSV export</strong> — drop it straight into your sequence.</span></li>
         </ul>
       </div>
       <!-- sample card -->
@@ -150,7 +163,7 @@
   <!-- HOW IT WORKS -->
   <section id="how" class="max-w-6xl mx-auto px-5 py-20">
     <div class="text-center max-w-2xl mx-auto">
-      <p class="text-accent2 font-bold uppercase tracking-wider text-sm">How it works</p>
+      <p class="text-teal-700 font-bold uppercase tracking-wider text-sm">How it works</p>
       <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">From raise to reply in three steps.</h2>
     </div>
     <div class="grid md:grid-cols-3 gap-6 mt-14">
@@ -178,7 +191,7 @@
       <div class="text-center max-w-2xl mx-auto">
         <p class="text-accent font-bold uppercase tracking-wider text-sm">Pricing</p>
         <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">One good deal closes the year.</h2>
-        <p class="mt-4 text-white/70">A single client won from a FreshRaise lead pays for years of subscription. Start free.</p>
+        <p class="mt-4 text-white/70">A single client won from a FreshRaise lead pays for years of subscription. Start free — paid plans open soon, and early subscribers lock in founding-member pricing.</p>
       </div>
       <div class="grid md:grid-cols-3 gap-6 mt-14 items-start">
         <!-- Free -->
@@ -208,16 +221,15 @@
             <li>✓ Why-now, contact role & angle</li>
             <li>✓ CSV export</li>
             <li>✓ One vertical of your choice</li>
-            <li>✓ Searchable issue archive</li>
           </ul>
         </div>
         <!-- Agency -->
         <div class="rounded-3xl bg-white/5 border border-white/10 p-7">
           <h3 class="font-bold text-xl">Agency</h3>
           <p class="text-white/60 text-sm mt-1">For teams selling at scale.</p>
-          <p class="mt-5 text-4xl font-black">€99<span class="text-lg font-semibold text-white/40">/mo</span></p>
+          <p class="mt-5 text-4xl font-black">€99<span class="text-lg font-semibold text-white/60">/mo</span></p>
           <p class="text-white/50 text-sm">or €990/yr</p>
-          <a href="#cta" class="mt-6 block text-center bg-white/10 hover:bg-white/20 font-bold py-3 rounded-xl">Talk to us</a>
+          <a href="mailto:hello@getfreshraise.com" class="mt-6 block text-center bg-white/10 hover:bg-white/20 font-bold py-3 rounded-xl">Talk to us</a>
           <ul class="mt-6 space-y-2 text-sm text-white/75">
             <li>✓ Everything in Pro</li>
             <li>✓ Up to 3 seats</li>
@@ -267,14 +279,16 @@
       <p class="mt-4 text-lg text-slate-600">See exactly who just raised in your space, scored and ready to act on. Upgrade only if it earns it.</p>
       <form action="https://freshraise.beehiiv.com/subscribe" method="get"
             class="mt-8 max-w-md mx-auto flex flex-col sm:flex-row gap-3">
-        <input required type="email" name="email" placeholder="you@company.com"
-               class="flex-1 px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-accent" />
+        <input required type="email" name="email" placeholder="you@company.com" aria-label="Email address"
+               class="flex-1 px-4 py-3 rounded-xl border border-slate-300 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-accent" />
         <button type="submit" class="bg-ink hover:bg-ink2 text-white font-bold px-6 py-3 rounded-xl whitespace-nowrap">Subscribe for the weekly list →</button>
       </form>
-      <p class="mt-3 text-sm"><a href="sample.html" class="text-ink font-semibold underline decoration-accent hover:text-accent2">Or see this week's sample issue first →</a></p>
-      <p class="mt-2 text-xs text-slate-400">Join founders, SDRs and agencies who sell to funded startups.</p>
+      <p class="mt-3 text-sm"><a href="sample.html" class="text-ink font-semibold underline decoration-accent hover:text-teal-700">Or see this week's sample issue first →</a></p>
+      <p class="mt-2 text-xs text-slate-500">Built for founders, SDRs and agencies who sell to funded startups. By subscribing you agree to our <a href="privacy.html" class="underline hover:text-ink">Privacy Policy</a>.</p>
     </div>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer class="bg-ink text-white/60">
@@ -283,7 +297,9 @@
       <p>© 2026 FreshRaise. Buying signals for people who sell to funded startups.</p>
       <div class="flex gap-5">
         <a href="#faq" class="hover:text-white">FAQ</a>
-        <a href="mailto:hello@freshraise.com" class="hover:text-white">Contact</a>
+        <a href="privacy.html" class="hover:text-white">Privacy</a>
+        <a href="terms.html" class="hover:text-white">Terms</a>
+        <a href="mailto:hello@getfreshraise.com" class="hover:text-white">Contact</a>
       </div>
     </div>
   </footer>
