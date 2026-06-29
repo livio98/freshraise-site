@@ -1,4 +1,4 @@
-name: Weekly FreshRaise issue
+name: Weekly RoundSignal issue
 
 # Runs every Monday 06:00 UTC, and on-demand from the Actions tab.
 on:
@@ -29,12 +29,12 @@ jobs:
       - name: Build this week's issue + RSS feed
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          SITE_BASE_URL: https://getfreshraise.com
+          SITE_BASE_URL: https://getroundsignal.com
         run: python weekly_feed.py
       - name: Commit refreshed feed + sample
         run: |
-          git config user.name "freshraise-bot"
-          git config user.email "freshraise-bot@users.noreply.github.com"
+          git config user.name "roundsignal-bot"
+          git config user.email "roundsignal-bot@users.noreply.github.com"
           git add feed.xml sample.html sample.csv
           git commit -m "Weekly issue refresh [skip ci]" || { echo "no changes to commit"; exit 0; }
           git pull --rebase --autostash origin main
