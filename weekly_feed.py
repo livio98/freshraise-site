@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""FreshRaise — self-contained weekly builder for GitHub Actions.
+"""RoundSignal — self-contained weekly builder for GitHub Actions.
 
 One file, no local package: the GitHub Actions cron runs this weekly, it builds
 the issue (live funding feeds -> Claude -> scored accounts) and writes
@@ -32,8 +32,8 @@ sys.stdout.reconfigure(encoding="utf-8")
 
 # ── Config ───────────────────────────────────────────────────────────────────
 MODEL = os.getenv("CLAUDE_MODEL", "claude-opus-4-8")
-SITE_BASE_URL = os.getenv("SITE_BASE_URL", "https://getfreshraise.com").rstrip("/")
-USER_AGENT = "FreshRaise/1.0 (signals@getfreshraise.com)"
+SITE_BASE_URL = os.getenv("SITE_BASE_URL", "https://getroundsignal.com").rstrip("/")
+USER_AGENT = "RoundSignal/1.0 (signals@getroundsignal.com)"
 INK, ACCENT = "#0B1F3A", "#1FB6A6"
 
 DEFAULT_FEEDS = [
@@ -62,7 +62,7 @@ LAUNCH_VERTICAL = {
 }
 
 _EXTRACT_SYSTEM = (
-    "You are the analyst behind FreshRaise, a weekly buying-signal digest. Your "
+    "You are the analyst behind RoundSignal, a weekly buying-signal digest. Your "
     "readers SELL services to freshly-funded startups and act within 48h of a "
     "raise. From a noisy stream of news items you produce a clean, DE-DUPLICATED, "
     "ranked list of real funding/expansion events that fit the target vertical. "
@@ -230,12 +230,12 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
     )
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{robots}<title>FreshRaise {issue_label} &mdash; freshly-funded startups worth selling to</title>
+{robots}<title>RoundSignal {issue_label} &mdash; freshly-funded startups worth selling to</title>
 <meta name="description" content="{html.escape(vertical_name)} &mdash; {len(accounts)} freshly-funded accounts, scored, with the role to contact. Week {issue_label}."></head>
 <body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
 <div style="max-width:720px;margin:0 auto;padding:28px 18px">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-    <a href="{SITE_BASE_URL}/" style="font-weight:800;font-size:22px;color:{INK};text-decoration:none">Fresh<span style="color:{ACCENT}">Raise</span></a>
+    <a href="{SITE_BASE_URL}/" style="font-weight:800;font-size:22px;color:{INK};text-decoration:none">Round<span style="color:{ACCENT}">Signal</span></a>
     <span style="margin-left:auto;color:#64748b;font-size:13px">Issue {issue_label}</span>
   </div>
   <p style="color:#475569;font-size:14px;margin:0 0 4px">{html.escape(vertical_name)}</p>
@@ -243,7 +243,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
   {locked_note}
   {''.join(rows)}
   {cta}
-  <p style="color:#64748b;font-size:12px;margin-top:24px">&copy; FreshRaise. Signals sourced from public news; verify before outreach.</p>
+  <p style="color:#64748b;font-size:12px;margin-top:24px">&copy; RoundSignal. Signals sourced from public news; verify before outreach.</p>
 </div></body></html>"""
 
 
@@ -264,11 +264,11 @@ def digest_to_csv(accounts, public=False):
 
 def build_rss(accounts, issue_label, pubdate):
     content = render_archive_html(accounts, LAUNCH_VERTICAL["name"], issue_label)
-    title = f"FreshRaise {issue_label}: {len(accounts)} freshly-funded accounts to sell to this week"
+    title = f"RoundSignal {issue_label}: {len(accounts)} freshly-funded accounts to sell to this week"
     link = f"{SITE_BASE_URL}/sample.html"
     built = format_datetime(_dt.datetime.now(_dt.timezone.utc))
     # guid stable per (issue, build-date) so a same-week corrective re-run IS re-sent.
-    guid = f"freshraise-{issue_label}-{pubdate:%Y%m%d}"
+    guid = f"roundsignal-{issue_label}-{pubdate:%Y%m%d}"
     item = (
         "  <item>\n"
         f"    <title>{html.escape(title)}</title>\n"
@@ -281,7 +281,7 @@ def build_rss(accounts, issue_label, pubdate):
     return (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n'
-        "  <title>FreshRaise - Weekly funded-startup signals</title>\n"
+        "  <title>RoundSignal - Weekly funded-startup signals</title>\n"
         f"  <link>{SITE_BASE_URL}/</link>\n"
         f'  <atom:link href="{SITE_BASE_URL}/feed.xml" rel="self" type="application/rss+xml"/>\n'
         "  <description>Each week: freshly-funded startups, the role to contact, and a ready-to-send angle.</description>\n"
