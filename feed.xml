@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>FreshRaise - Weekly funded-startup signals</title>
-  <link>https://getfreshraise.com/</link>
-  <atom:link href="https://getfreshraise.com/feed.xml" rel="self" type="application/rss+xml"/>
+  <title>RoundSignal - Weekly funded-startup signals</title>
+  <link>https://getroundsignal.com/</link>
+  <atom:link href="https://getroundsignal.com/feed.xml" rel="self" type="application/rss+xml"/>
   <description>Each week: freshly-funded startups, the role to contact, and a ready-to-send angle.</description>
   <language>en</language>
-  <lastBuildDate>Sun, 28 Jun 2026 22:39:13 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 29 Jun 2026 00:45:22 +0000</lastBuildDate>
   <item>
-    <title>FreshRaise 2026-W26: 16 freshly-funded accounts to sell to this week</title>
-    <link>https://getfreshraise.com/sample.html</link>
-    <guid isPermaLink="false">freshraise-2026-W26-20260628</guid>
-    <pubDate>Sun, 28 Jun 2026 22:39:13 +0000</pubDate>
+    <title>RoundSignal 2026-W27: 16 freshly-funded accounts to sell to this week</title>
+    <link>https://getroundsignal.com/sample.html</link>
+    <guid isPermaLink="false">roundsignal-2026-W27-20260629</guid>
+    <pubDate>Mon, 29 Jun 2026 00:45:22 +0000</pubDate>
     <description><![CDATA[<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex"><title>FreshRaise 2026-W26 &mdash; freshly-funded startups worth selling to</title>
-<meta name="description" content="Freshly-funded B2B SaaS &amp; tech startups (pre-seed -&gt; Series B) &mdash; 16 freshly-funded accounts, scored, with the role to contact. Week 2026-W26."></head>
+<meta name="robots" content="noindex"><title>RoundSignal 2026-W27 &mdash; freshly-funded startups worth selling to</title>
+<meta name="description" content="Freshly-funded B2B SaaS &amp; tech startups (pre-seed -&gt; Series B) &mdash; 16 freshly-funded accounts, scored, with the role to contact. Week 2026-W27."></head>
 <body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
 <div style="max-width:720px;margin:0 auto;padding:28px 18px">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-    <a href="https://getfreshraise.com/" style="font-weight:800;font-size:22px;color:#0B1F3A;text-decoration:none">Fresh<span style="color:#1FB6A6">Raise</span></a>
-    <span style="margin-left:auto;color:#64748b;font-size:13px">Issue 2026-W26</span>
+    <a href="https://getroundsignal.com/" style="font-weight:800;font-size:22px;color:#0B1F3A;text-decoration:none">Round<span style="color:#1FB6A6">Signal</span></a>
+    <span style="margin-left:auto;color:#64748b;font-size:13px">Issue 2026-W27</span>
   </div>
   <p style="color:#475569;font-size:14px;margin:0 0 4px">Freshly-funded B2B SaaS &amp; tech startups (pre-seed -&gt; Series B)</p>
   <p style="color:#64748b;font-size:13px;margin:0 0 14px">16 trigger-ready accounts, scored and contextualized. </p>
@@ -29,181 +29,181 @@
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
             <h3 style="margin:0;font-size:18px;color:#0B1F3A">Almetra (formerly Deltia)</h3>
-            <span style="font-weight:700;color:#15803d;font-size:14px">heat 91</span>
+            <span style="font-weight:700;color:#15803d;font-size:14px">heat 88</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €16-16.3M Series A led by blisce/, with NAP, Merantix Capital, Robert Bosch — Tech.eu &amp; EU-Startups, as of 25 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Corroborated by two sources; a Berlin manufacturing-intelligence startup raising a fresh Series A to fund product development and US expansion needs hands across growth, hiring and RevOps.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> VP Marketing / Head of Growth</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Reference their stated US go-to-market push and offer a US-market demand-gen playbook tailored to shopfloor/manufacturing buyers.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €16.3M Series A led by blisce/, with NAP, Merantix Capital, Robert Bosch &amp; others (EU-Startups &amp; Tech.eu, as of 25 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Fresh Series A with explicit plans to accelerate product development and expand into the US — they&#x27;ll be hiring and building out GTM fast. Multi-source corroboration raises confidence.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> VP Engineering / Head of Product</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Reference their US expansion plan post-Series A and offer a manufacturing-intelligence product/UX sprint to ship the new &#x27;automation layer&#x27; faster.</p>
           <a href="https://tech.eu/2026/06/25/almetra-secures-eur163m-series-a-to-drive-smarter-manufacturing/" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Compri</h3>
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">HR Duo</h3>
             <span style="font-weight:700;color:#15803d;font-size:14px">heat 86</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €3.2M seed led by Picus Capital — Tech.eu, as of 24 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Milan AI-procurement SaaS at seed stage with fresh capital — prime moment to land design, dev and outbound services before they build internal teams.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Co-founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Open with how other seed-stage AI procurement tools shortened sales cycles to industrial buyers via targeted ABM, and offer a 30-day pilot.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €1.6M growth round led by Puma Growth Partners with Enterprise Ireland (EU-Startups, as of 25 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Explicitly raising to grow their UK sales team and strengthen SaaS infrastructure — direct demand for recruiting, RevOps and dev services right now.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Head of Sales / CEO</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer to stand up their UK sales motion (recruiting + RevOps playbook) tied to the SME HRTech opportunity they cited.</p>
+          <a href="https://www.eu-startups.com/2026/06/amid-a-e500-700-million-sme-hrtech-opportunity-irelands-hr-duo-secures-e1-6-million-for-growth/" style="font-size:12px;color:#64748b">source</a>
+        </div>
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Compri</h3>
+            <span style="font-weight:700;color:#15803d;font-size:14px">heat 83</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €3.2M seed led by Picus Capital (Tech.eu, as of 24 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Milan-based AI procurement SaaS just closed seed and is in build/hire mode — prime window for dev, design and growth support.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Co-founder / CTO</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Pitch a focused growth-engineering or demand-gen sprint to convert their AI procurement product into pipeline with industrial buyers.</p>
           <a href="https://tech.eu/2026/06/24/compri-secures-eur32m-to-build-ai-powered-procurement-teams/" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
             <h3 style="margin:0;font-size:18px;color:#0B1F3A">Kalipso</h3>
-            <span style="font-weight:700;color:#15803d;font-size:14px">heat 84</span>
+            <span style="font-weight:700;color:#15803d;font-size:14px">heat 80</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $3.2M funding for regulatory-compliance (RegTech) platform — Tech.eu, as of 25 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Barcelona RegTech SaaS just funded and scaling; lawyer/engineer team will need growth, content and RevOps support to commercialise.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Co-founder / Head of Growth</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Pitch a compliance-buyer content engine (whitepapers + demand gen) that speaks to risk/legal decision-makers, citing their lawyer-built positioning.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $3.2M funding round (Tech.eu, as of 25 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Barcelona regtech SaaS scaling its compliance platform — fresh capital means hiring engineers and ramping go-to-market.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> CEO / Head of Growth</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer RevOps/demand-gen help to package their lawyer+engineer compliance platform for enterprise buyers post-raise.</p>
           <a href="https://tech.eu/2026/06/25/kalipso-raises-32m-to-scale-regulatory-compliance-platform/" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
             <h3 style="margin:0;font-size:18px;color:#0B1F3A">Serpier</h3>
-            <span style="font-weight:700;color:#15803d;font-size:14px">heat 82</span>
+            <span style="font-weight:700;color:#b45309;font-size:14px">heat 78</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €1.4M from True Collective and EIFO for AI marketing platform — Tech.eu, as of 25 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Danish martech raised to expand its AI e-commerce marketing platform; fresh-funded and small enough to need fractional CMO, design and dev help fast.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> CEO / Head of Marketing</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Note their EIFO backing and offer a partner/integration GTM motion to reach online retailers faster than building it in-house.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €1.4M from True Collective and EIFO (Tech.eu, as of 25 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Danish martech building an AI marketing platform for e-commerce — funded to expand, and a natural buyer of growth/dev services.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / Head of Marketing</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> As a fellow growth specialist, offer to co-build campaigns showcasing their AI visibility tool to retailers as they scale.</p>
           <a href="https://tech.eu/2026/06/25/serpier-raises-eur14m-to-help-online-retailers-improve-digital-visibility/" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
             <h3 style="margin:0;font-size:18px;color:#0B1F3A">Fika Jobs</h3>
-            <span style="font-weight:700;color:#15803d;font-size:14px">heat 80</span>
+            <span style="font-weight:700;color:#b45309;font-size:14px">heat 78</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $4M for a video-first AI hiring platform — TechCrunch, as of 23 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> (unverified) Single-source but a fresh $4M HR-tech SaaS raise — perfect window for recruiting, growth and product-design services as they scale the platform.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Co-founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Reference their AI-agent interview angle and offer a launch-PR + demand-gen sprint to win recruiter customers.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $4M round for video-first AI hiring platform (TechCrunch via Google News, as of 23 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Fresh $4M and an HR-tech SaaS that will scale product and GTM quickly — strong fit for dev, design and growth sellers.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> CEO / Head of Product</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer a product-design sprint to polish the candidate-facing video flow as they push for adoption post-raise.</p>
           <a href="https://news.google.com/rss/articles/CBMiygFBVV95cUxPZkxIX1ZranREV3JIbmlXd2JuUnBBSzVSWUl0NWpjSFNON1hMYmtFWThlWER4V0hiWWVHQ21jZnJDYjJlWFl6c0hZdWJ4VHEzb1JTMjZTNUY2WmZzOTRfZnV4THRrRm9ObEtZSi1iaVVHMHYxUUxpcG5yUmtuZ3JMLXJxSllTWG1EX1NWRDdHMkdVTzBnTUhXT1NFaWJNY1lkUlNhWFRfMVZjNFB0SHRPak9XLXRPZWJpUWxic1R2a1ZNQ0pOVXdzM0xB?oc=5" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
             <h3 style="margin:0;font-size:18px;color:#0B1F3A">SE3 Labs</h3>
-            <span style="font-weight:700;color:#b45309;font-size:14px">heat 78</span>
+            <span style="font-weight:700;color:#b45309;font-size:14px">heat 74</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> Emerged from stealth backed by Lakestar, Seedcamp and EWOR; spatial AI platform — Tech.eu, as of 26 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> (unverified) Just out of stealth with top-tier backers but no disclosed amount — early window to embed brand, web and developer-marketing support.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> Emerged from stealth, backed by Lakestar, Seedcamp and EWOR (Tech.eu, as of 26 Jun 2026); amount not disclosed</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Just exited stealth with notable backers — early-stage spatial-AI startup that needs brand, web, and GTM as it goes public with its platform.</p>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Co-founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congratulate on the stealth launch and offer a launch-narrative + positioning package for technical autonomous-systems buyers.</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer launch-grade positioning and website/design work to capitalize on the stealth-exit press moment.</p>
           <a href="https://tech.eu/2026/06/26/backed-by-lakestar-seedcamp-and-ewor-se3-unveils-spatial-ai-platform-for-autonomous-systems/" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Wakeline</h3>
-            <span style="font-weight:700;color:#b45309;font-size:14px">heat 76</span>
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Kyrok</h3>
+            <span style="font-weight:700;color:#b45309;font-size:14px">heat 73</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €2.1M pre-seed led by TechVision Fonds (TVF) — Tech.eu, as of 24 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Düsseldorf deeptech (continuously-adaptive AI) at pre-seed; small team newly funded and likely to outsource dev, design and early go-to-market.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CTO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer a lean MVP-to-market sprint for deeptech, referencing their adaptive-AI focus and need to show traction to investors.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €3.1M pre-seed (The SaaS News &amp; FinSMEs, as of 23 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Corroborated pre-seed for a SaaS startup — fresh capital and small team mean outsourced dev/design/growth is highly relevant.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer fractional growth or dev capacity to help a lean pre-seed team ship fast without over-hiring.</p>
+          <a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxPQkFXenpiQnJZdk82dTh4RXlnRHRUdTFINVVFVkpZQlBzdFlkV2lHRVRFci1jVVFBSm01Yjk5Y3paVFNkcFIyRVdSdG9acU5pLU42ZE9GTXpOUjJEV2d1QmZhQmpMRXkzdk0weWkyY3hEajNSNVRubndKN010bXlIOA?oc=5" style="font-size:12px;color:#64748b">source</a>
+        </div>
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Wakeline</h3>
+            <span style="font-weight:700;color:#b45309;font-size:14px">heat 71</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €2.1M pre-seed led by TechVision Fonds (Tech.eu, as of 24 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Düsseldorf deeptech AI startup just raised pre-seed — early team that will need engineering and positioning help.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Co-founder / CTO</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer ML/infra engineering support to help them productionize &#x27;continuously adaptive AI&#x27; faster.</p>
           <a href="https://tech.eu/2026/06/24/wakeline-lands-eur21m-to-bring-continuous-learning-to-ai/" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Kyrok</h3>
-            <span style="font-weight:700;color:#b45309;font-size:14px">heat 75</span>
-          </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €3.1M pre-seed — The SaaS News &amp; FinSMEs, as of 23 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Corroborated across two outlets; a fresh pre-seed SaaS raise means budget and a near-empty back office — ideal for fractional CFO/CMO and growth services.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Open with how other pre-seed SaaS teams set up RevOps and reporting before their seed raise, offering a quick audit.</p>
-          <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE5Kb2lKbENnOGk2eHNiY29CU3dYODcyNXMwcFVfSDRuY1VWQ1RRc2pNeGhfS2FUX2tlOXVGTHZYbS1GNHlJblZDOEMzdEJqQ1h4enNIQldYY3NibWJKcGFjQ09yb1ZvOFZqOWFxOQ?oc=5" style="font-size:12px;color:#64748b">source</a>
-        </div>
-        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h3 style="margin:0;font-size:18px;color:#0B1F3A">HR Duo</h3>
-            <span style="font-weight:700;color:#b45309;font-size:14px">heat 74</span>
-          </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €1.6M led by Puma Growth Partners with Enterprise Ireland — EU-Startups, as of 25 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Irish HR-tech SaaS raising specifically to grow its UK sales team and harden SaaS infra — direct demand for recruiting, RevOps and dev services now.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Head of Sales / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> They said they&#x27;re building a UK sales team — offer recruiting + sales-ops setup to hit the ground running in the UK market.</p>
-          <a href="https://www.eu-startups.com/2026/06/amid-a-e500-700-million-sme-hrtech-opportunity-irelands-hr-duo-secures-e1-6-million-for-growth/" style="font-size:12px;color:#64748b">source</a>
-        </div>
-        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
             <h3 style="margin:0;font-size:18px;color:#0B1F3A">AethexAI</h3>
-            <span style="font-weight:700;color:#b45309;font-size:14px">heat 72</span>
+            <span style="font-weight:700;color:#b45309;font-size:14px">heat 69</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $3M pre-seed for full-stack voice AI infrastructure — afrotech.com, as of 22 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> (unverified) Single-source pre-seed; voice-AI infra startup targeting emerging markets needs enterprise sales, dev and growth support to scale.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $3M pre-seed (afrotech.com via Google News, as of 22 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Voice-AI infrastructure startup with fresh pre-seed targeting enterprises in emerging markets — needs dev and GTM scaling.</p>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Reference their emerging-markets enterprise focus and offer a B2B sales-enablement + localization package.</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer enterprise sales enablement / RevOps to convert their voice-AI infra into emerging-market enterprise deals.</p>
           <a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxPSFdaY3BCVEs1SjBQbHVlRllXSHFyazlZWUFYbEt0d20wZW9sdkh2X1lhNHA5eDFiZlNnWmxpRGo2ejBYcGg1cG1GSzR2UmVwWDFqVkNlYlJOaVg5cnM3UEIwcU1QVDBIdlU3eGYtS2tDZ2V2ME9DTzF3R0gyNEFZNXlWMWxPcFl6QTRHSU9Ta1kyMndCWkE?oc=5" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
             <h3 style="margin:0;font-size:18px;color:#0B1F3A">Lumenai</h3>
-            <span style="font-weight:700;color:#b45309;font-size:14px">heat 66</span>
+            <span style="font-weight:700;color:#b45309;font-size:14px">heat 62</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> Pre-seed round (amount undisclosed) — The SaaS News, as of 24 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> (unverified) Newly pre-seed SaaS with no disclosed amount; early window to win brand, web and growth work before they staff up.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> (unverified) Pre-seed round, amount not disclosed (The SaaS News via Google News, as of 24 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Single thin item, but a freshly pre-seed-funded SaaS startup is a classic early buyer of outsourced product and growth help.</p>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congratulate on the pre-seed and offer a positioning + landing-page sprint to convert early interest into pipeline.</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Reach out to congratulate on the pre-seed and offer a low-commitment design/dev sprint to accelerate their MVP.</p>
           <a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxOdzlQVnRzUjBaVEh6RDVNVmJPTEtUN2FVQUJ5S2p1bUt3TzhUblpaWjJLQjBpWGw4OFpBTnFwb3pZRmdXU293Rkp1Z0RITk9LS2FmbEFpckJVd0ExNEVXQmNTcW5kYTY1ZFdqdVl3M1UxcHRhc1FQXzNBbm15TVBNUnU1aFE1Sm5Ydjl5RURZd2ktcmpnbzZtRF96bVJJak0tVEt5aWgtSWttVzV6bWdJ?oc=5" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Sovra</h3>
-            <span style="font-weight:700;color:#b45309;font-size:14px">heat 64</span>
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Acodyne</h3>
+            <span style="font-weight:700;color:#b45309;font-size:14px">heat 60</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $2M pre-seed for stablecoin-powered fintech — EnterpriseAM, as of 22 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> (unverified) Single-source fintech pre-seed; fresh capital and tiny team mean early demand for dev, compliance-content and growth support.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €2.5M pre-seed (Resilience Media via Google News, as of 25 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Copenhagen autonomous cargo-drone startup just raised pre-seed — hardware-heavy but will need software dev, brand and recruiting.</p>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Open with how early fintechs de-risk launch with compliance-ready content and a focused dev sprint, citing their stablecoin angle.</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer recruiting or embedded-software dev capacity to a lean drone team scaling post-pre-seed.</p>
+          <a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxQenJXSzVZOFJNcW44b2gtakRuWWNvaFY4bWtaQmdEWEVFSlJkS1hwbGdaRTg5ODhwSTdTMW5nVmxEdGRmZXFrSW5CNjRkTERJZF9QcDY5TlNyNFpsSFVrM1B4dFdXOUNhbHRGYjNYNVNVN0czOHZISWpORURsOU05Y1JyWWN6R0ZDeGp4MVNLcC1WM05hTEp1aU1pcG5XNFRhS05xLVY0Tm5tRVdEZU1wN2VhZS1teVA4WGlTTHliWQ?oc=5" style="font-size:12px;color:#64748b">source</a>
+        </div>
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Sovra</h3>
+            <span style="font-weight:700;color:#64748b;font-size:14px">heat 57</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> (unverified) $2M pre-seed (EnterpriseAM via Google News, as of 22 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Stablecoin-powered fintech with fresh pre-seed — early team likely to need dev, compliance and growth support.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer fintech-savvy growth or dev help to a newly funded stablecoin startup building out its product.</p>
           <a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxPVHprYUJiM2FZT1h6ekVaNDNqMVRoZXg1SG5LWmJBTlJXbHk2bGllS05ZUlJWQWRPVUhOaGNYZ19CTm55S1oxeXNFV2tNR1U5Y2NYMWNyRkxtb3QwR2tiSzEyZ210bVNXQzJTQ1JPVDZHWElfOWkxbTlYTElZc0hma29rczFFV1VzdlJIaDZYZXpsTHhaSFhYVEdXY3FuWThyZ2swWm9nUEx3YmRna2piM3Yzc0pyUQ?oc=5" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
             <h3 style="margin:0;font-size:18px;color:#0B1F3A">Ground</h3>
-            <span style="font-weight:700;color:#b45309;font-size:14px">heat 63</span>
+            <span style="font-weight:700;color:#64748b;font-size:14px">heat 56</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $3.6M pre-seed (Superstate co-founder) to help fintechs access onchain yield — The Block, as of 24 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> (unverified) Fresh pre-seed B2B fintech infra; early team will need dev, design and B2B GTM to reach fintech customers.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> (unverified) $3.6M pre-seed (The Block via Google News, as of 24 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Fintech infra startup (onchain yield for fintechs) with fresh pre-seed — early-stage buyer of dev and growth services.</p>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Reference their fintech-developer audience and offer a docs+developer-marketing package to drive integration adoption.</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer go-to-market or integration-engineering help to get their onchain-yield product into fintech hands quickly.</p>
           <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxObXNuakEteG54Y3UwelNEbFFUVXlFMUxyN3BQc2EwZU1scmxiejNvc2NQWE5NWld4NUJJNmtoOWZMZlUwZ2R0ZHc0YzRZRFVSakJaTkRDdHdfUlNDQWtrdTZBck95WlFsOTNmbHF3NTR6NXVNMVpCQjV1RTVZWjNrREpuOGJDaWUzRFpRWlNCUnQxSDFhMW82WQ?oc=5" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Cambrian</h3>
-            <span style="font-weight:700;color:#b45309;font-size:14px">heat 62</span>
-          </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $6M seed (a16z CSX-backed) to build a blockchain data oracle network — The Block, as of 24 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> (unverified) Single-source seed but a16z CSX backing signals momentum; early-stage infra team needs developer-marketing and growth support.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congratulate on a16z CSX backing and offer a developer-relations + technical-content program to grow oracle adoption.</p>
-          <a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxOR2hhc0ZQN1FBZEw4bTNiMkpVc1kxa2J0NG9yNFZHUEtWT1NwMzdBUUZ6UUNaOHZVVy1Ub3NqQkg4cWExNXpYamVZZXEyMTBCdmRlWTFYMWZhOTJIRnI2dWFKUkdvWjJNdFpjUG5ISWJLc0k1TnpfVjBIb2RCbzYxWUdLdFNUc1NyQnRrN0ZKVGVFbTNsR2JBYnIwTlEtSFF3S3BITQ?oc=5" style="font-size:12px;color:#64748b">source</a>
-        </div>
-        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
             <h3 style="margin:0;font-size:18px;color:#0B1F3A">Lytmus AI</h3>
-            <span style="font-weight:700;color:#64748b;font-size:14px">heat 58</span>
+            <span style="font-weight:700;color:#64748b;font-size:14px">heat 52</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> ₹5 crore pre-seed led by Boundless Ventures — Business Standard, as of 28 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> (unverified) Fresh AI pre-seed; small newly-funded team is an early target for dev, design and go-to-market services.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> (unverified) ₹5 crore (~$600K) pre-seed led by Boundless Ventures (Business Standard via Google News, as of 28 Jun 2026)</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Freshly pre-seed-funded AI startup in India — small team and new capital make outsourced dev/growth attractive.</p>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Open with a quick MVP-to-market plan for AI startups and reference their Boundless Ventures backing.</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer affordable dev or growth capacity to help a lean AI team move from pre-seed to first traction.</p>
           <a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxOM0lpamttQlI0bGNzcjdKVVpNMFZiV0VGU2Nudl9nelFGYnp2N2lzYW5KdEpnZk5tQVFKUlBFbDMxWmtHZUhJOUszbktySzRNUlJYTXVwbTdzNl81RnkzSjNrek56eTFGd0NYUHdyUmVBUUlheWVuaGVsckl1eW5UUzJZd3VQZHE2WDVFc2hDX05nLTdxVE1lWHNUbXZpQVl5b2xJQ2llLUJSTk5xV29XbjJ3QmlPd1N1UC0yU0hHWTFmTTF3U25oa2l4bVY4SVlNVVdNYlBhZUZIUdIB3wFBVV95cUxNRDVRYlJyTGVYcTBxR3h2VklCWE9naWkwZXZJN051ZVc0Vm9oM0NRWW9ZRDg1UW1vX0NoMjN1akljYk9GVWRweUpNQWhheVRfNTlZeXRYLW45Z1lrU1VEZGxncEVERzFRaDdCdW4zMGJHN05kbzRYLU9TajFXdkN0WW5lVEJGeUlaTFpPMWxScnJPb0ROWGdXRktHRXdVNl9sTU1zUWdJdjY4emxQTmRZQ25wb0VyMVpUVlNWekhnZWo3eHcyMHd4UzhlOGptdW44YmE0Y2VUcEs2cU81Z0VR?oc=5" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Point2 Technology</h3>
-            <span style="font-weight:700;color:#64748b;font-size:14px">heat 52</span>
+            <h3 style="margin:0;font-size:18px;color:#0B1F3A">Point2 Technology Inc.</h3>
+            <span style="font-weight:700;color:#64748b;font-size:14px">heat 48</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> Form D filed with SEC — as of 26 Jun 2026</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> (unverified) New SEC Form D suggests a fresh raise at a US tech/semiconductor SaaS-adjacent startup; worth a fast, exploratory outreach before details surface.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> CEO / VP Operations</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Reference the new Form D filing and offer a discreet GTM or RevOps readiness check tied to the capital they just raised.</p>
-          <a href="https://www.sec.gov/Archives/edgar/data/1708694/000092963826000002/0000929638-26-002376-index.htm" style="font-size:12px;color:#64748b">source</a>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> (unverified) SEC Form D filed (SEC EDGAR, as of 26 Jun 2026); amount not disclosed in item</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> A new Form D filing signals a fresh capital raise at a tech company — worth a quick qualification before competitors notice.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> CEO / VP Engineering</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Reference their recent Form D filing and offer engineering or GTM capacity to deploy the new capital efficiently.</p>
+          <a href="https://www.sec.gov/Archives/edgar/data/1708694/000092963826002376/0000929638-26-002376-index.htm" style="font-size:12px;color:#64748b">source</a>
         </div>
   
-  <p style="color:#64748b;font-size:12px;margin-top:24px">&copy; FreshRaise. Signals sourced from public news; verify before outreach.</p>
+  <p style="color:#64748b;font-size:12px;margin-top:24px">&copy; RoundSignal. Signals sourced from public news; verify before outreach.</p>
 </div></body></html>]]></description>
   </item>
 </channel>
