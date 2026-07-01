@@ -216,6 +216,16 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
           <a href="{html.escape(a.source_url)}" style="font-size:12px;color:#64748b">source</a>
         </div>""")
     robots = "" if public else '<meta name="robots" content="noindex">'
+    canonical = f'<link rel="canonical" href="{SITE_BASE_URL}/sample.html">' if public else ""
+    social = (
+        f'<meta property="og:type" content="website">'
+        f'<meta property="og:title" content="RoundSignal {issue_label} &mdash; freshly-funded startups worth selling to">'
+        f'<meta property="og:description" content="{len(accounts)} freshly-funded accounts, scored, with the role to contact.">'
+        f'<meta property="og:url" content="{SITE_BASE_URL}/sample.html">'
+        f'<meta property="og:image" content="{SITE_BASE_URL}/og-image.png">'
+        f'<meta name="twitter:card" content="summary_large_image">'
+        f'<meta name="twitter:image" content="{SITE_BASE_URL}/og-image.png">'
+    ) if public else ""
     locked_note = (
         f'<p style="color:#475569;font-size:13px;margin:0 0 18px">Free preview &mdash; full details on the top {free_n}. '
         f'<a href="{SITE_BASE_URL}/#pricing" style="color:#0f766e;font-weight:600">Unlock all {len(accounts)} accounts &rarr;</a></p>'
@@ -230,7 +240,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
     )
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{robots}<title>RoundSignal {issue_label} &mdash; freshly-funded startups worth selling to</title>
+{robots}{canonical}{social}<title>RoundSignal {issue_label} &mdash; freshly-funded startups worth selling to</title>
 <meta name="description" content="{html.escape(vertical_name)} &mdash; {len(accounts)} freshly-funded accounts, scored, with the role to contact. Week {issue_label}."></head>
 <body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
 <div style="max-width:720px;margin:0 auto;padding:28px 18px">
@@ -309,7 +319,19 @@ def main():
     # PUBLIC csv = teaser columns only (paid columns withheld).
     with open("sample.csv", "w", encoding="utf-8") as f:
         f.write(digest_to_csv(accounts, public=True))
-    print(f"OK: {len(accounts)} accounts, issue {label} -> feed.xml + sample.html (gated) + sample.csv (teaser)")
+    # Refresh sitemap lastmod so the weekly-changing pages carry an honest date.
+    today = now.date().isoformat()
+    with open("sitemap.xml", "w", encoding="utf-8") as f:
+        f.write(
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            f'  <url><loc>{SITE_BASE_URL}/</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>\n'
+            f'  <url><loc>{SITE_BASE_URL}/sample.html</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>\n'
+            f'  <url><loc>{SITE_BASE_URL}/privacy.html</loc><lastmod>2026-06-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>\n'
+            f'  <url><loc>{SITE_BASE_URL}/terms.html</loc><lastmod>2026-06-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>\n'
+            '</urlset>\n'
+        )
+    print(f"OK: {len(accounts)} accounts, issue {label} -> feed.xml + sample.html (gated) + sample.csv (teaser) + sitemap.xml")
 
 
 if __name__ == "__main__":
