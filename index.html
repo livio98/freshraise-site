@@ -47,6 +47,43 @@
     ]}
   ]}
   </script>
+  <!-- RoundSignal FX: motion + 3D depth (reduced-motion & no-JS safe) -->
+  <style id="rs-fx">
+  :root{--rs-ease:cubic-bezier(.22,1,.36,1)}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--rs-ease),transform .7s var(--rs-ease);will-change:opacity,transform}
+  .reveal.in{opacity:1;transform:none}
+  @keyframes rsUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  .hero-in{position:relative;z-index:2}
+  .hero-in>*{opacity:0;animation:rsUp .9s var(--rs-ease) forwards}
+  .hero-in>*:nth-child(1){animation-delay:.05s}
+  .hero-in>*:nth-child(2){animation-delay:.14s}
+  .hero-in>*:nth-child(3){animation-delay:.23s}
+  .hero-in>*:nth-child(4){animation-delay:.32s}
+  .hero-in>*:nth-child(5){animation-delay:.41s}
+  .hero-in>*:nth-child(6){animation-delay:.5s}
+  .hero-in>*:nth-child(7){animation-delay:.59s}
+  .orb{position:absolute;border-radius:9999px;filter:blur(70px);pointer-events:none;z-index:0}
+  @keyframes rsDrift{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-34px,0)}}
+  .orb-a{width:440px;height:440px;background:radial-gradient(circle,rgba(31,182,166,.55),transparent 62%);top:-140px;left:-90px;animation:rsDrift 10s ease-in-out infinite}
+  .orb-b{width:380px;height:380px;background:radial-gradient(circle,rgba(23,162,151,.42),transparent 62%);top:30px;right:-70px;animation:rsDrift 13s ease-in-out infinite reverse}
+  .orb-c{width:300px;height:300px;background:radial-gradient(circle,rgba(31,182,166,.3),transparent 62%);bottom:-120px;left:38%;animation:rsDrift 15s ease-in-out infinite}
+  @keyframes rsSheen{to{background-position:200% center}}
+  .grad-accent{background:linear-gradient(100deg,#1FB6A6,#8ff0e6,#1FB6A6);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:rsSheen 5.5s linear infinite}
+  .tilt{transition:transform .3s var(--rs-ease),box-shadow .3s var(--rs-ease);will-change:transform;transform-style:preserve-3d}
+  .tilt:hover{box-shadow:0 34px 66px -24px rgba(11,31,58,.4)}
+  .fx-btn{position:relative;overflow:hidden;transition:transform .2s var(--rs-ease),box-shadow .2s var(--rs-ease)}
+  .fx-btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -10px rgba(31,182,166,.5)}
+  .fx-btn::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(120deg,transparent 32%,rgba(255,255,255,.4),transparent 68%);transform:translateX(-130%);transition:transform .65s var(--rs-ease);pointer-events:none}
+  .fx-btn:hover::after{transform:translateX(130%)}
+  header.rs-scrolled{box-shadow:0 10px 34px -14px rgba(0,0,0,.55)}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1!important;transform:none!important;transition:none!important}
+    .hero-in>*{opacity:1!important;animation:none!important}
+    .orb,.grad-accent{animation:none!important}
+    .tilt,.fx-btn{transition:none!important}
+  }
+  </style>
+  <noscript><style>.reveal{opacity:1;transform:none}.hero-in>*{opacity:1;animation:none}</style></noscript>
 </head>
 <body class="font-sans text-ink bg-white antialiased">
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-2 focus:left-2 focus:bg-white focus:text-ink focus:px-3 focus:py-2 focus:rounded focus:font-semibold">Skip to content</a>
@@ -64,7 +101,7 @@
         <a href="#pricing" class="hover:text-white">Pricing</a>
         <a href="#faq" class="hover:text-white">FAQ</a>
       </nav>
-      <a href="sample.html" class="bg-accent hover:bg-accent2 text-ink font-bold text-sm px-4 py-2 rounded-lg">See this week's sample</a>
+      <a href="sample.html" class="bg-accent hover:bg-accent2 text-ink font-bold text-sm px-4 py-2 rounded-lg fx-btn">See this week's sample</a>
     </div>
   </header>
 
@@ -72,10 +109,11 @@
   <!-- HERO -->
   <section class="relative bg-ink text-white overflow-hidden grain">
     <div class="absolute inset-0 glow"></div>
-    <div class="relative max-w-6xl mx-auto px-5 pt-20 pb-24 text-center">
+      <div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div>
+    <div class="relative max-w-6xl mx-auto px-5 pt-20 pb-24 text-center hero-in">
       <span class="inline-block text-xs font-semibold tracking-wider uppercase text-accent bg-accent/10 border border-accent/20 rounded-full px-3 py-1 mb-6">For people who sell to funded startups</span>
       <h1 class="text-4xl md:text-6xl font-black leading-[1.05] max-w-4xl mx-auto">
-        The startups worth selling to<br class="hidden md:block" /> just raised. <span class="text-accent">You'll know by Monday.</span>
+        The startups worth selling to<br class="hidden md:block" /> just raised. <span class="text-accent grad-accent">You'll know by Monday.</span>
       </h1>
       <p class="mt-6 text-lg md:text-xl text-white/75 max-w-2xl mx-auto">
         RoundSignal emails you a weekly, AI-scored list of freshly-funded startups — each with the
@@ -88,7 +126,7 @@
             class="mt-9 max-w-md mx-auto flex flex-col sm:flex-row gap-3">
         <input required type="email" name="email" placeholder="you@company.com" aria-label="Email address"
                class="flex-1 px-4 py-3 rounded-xl text-ink placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-accent" />
-        <button type="submit" class="bg-accent hover:bg-accent2 text-ink font-bold px-6 py-3 rounded-xl whitespace-nowrap">
+        <button type="submit" class="bg-accent hover:bg-accent2 text-ink font-bold px-6 py-3 rounded-xl whitespace-nowrap fx-btn">
           Subscribe for the weekly list →
         </button>
       </form>
@@ -107,23 +145,23 @@
 
   <!-- PROBLEM -->
   <section id="problem" class="max-w-6xl mx-auto px-5 py-20">
-    <div class="max-w-3xl">
+    <div class="max-w-3xl reveal">
       <p class="text-teal-700 font-bold uppercase tracking-wider text-sm">The problem</p>
       <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">By the time you hear they raised, the budget's already spent.</h2>
       <p class="mt-5 text-lg text-slate-600">A funding round is the loudest "we have budget and we're about to buy" signal in B2B. But finding those companies the moment it matters is a grind — and the window slams shut fast.</p>
     </div>
     <div class="grid md:grid-cols-3 gap-6 mt-12">
-      <div class="rounded-2xl border border-slate-200 p-6">
+      <div class="rounded-2xl border border-slate-200 p-6 reveal tilt">
         <div class="text-3xl">🐌</div>
         <h3 class="mt-3 font-bold text-lg">You find out too late</h3>
         <p class="mt-2 text-slate-600 text-sm">By the time a raise hits your feed, other vendors have already booked the call. Funded firms shortlist vendors fast — often within the first quarter.</p>
       </div>
-      <div class="rounded-2xl border border-slate-200 p-6">
+      <div class="rounded-2xl border border-slate-200 p-6 reveal tilt">
         <div class="text-3xl">⏳</div>
         <h3 class="mt-3 font-bold text-lg">Tools make you do the work</h3>
         <p class="mt-2 text-slate-600 text-sm">Crunchbase and Apollo hand you a raw firehose. You still filter, research, and figure out who to email and what to say. That's your whole morning, gone.</p>
       </div>
-      <div class="rounded-2xl border border-slate-200 p-6">
+      <div class="rounded-2xl border border-slate-200 p-6 reveal tilt">
         <div class="text-3xl">💸</div>
         <h3 class="mt-3 font-bold text-lg">Enterprise intent is overkill</h3>
         <p class="mt-2 text-slate-600 text-sm">Bombora-class intent data runs ~$25k/yr. Absurd when you sell one thing to one type of buyer and just need the right accounts, now.</p>
@@ -146,7 +184,7 @@
         </ul>
       </div>
       <!-- sample card -->
-      <div class="rounded-3xl bg-white shadow-xl border border-slate-200 p-6">
+      <div class="rounded-3xl bg-white shadow-xl border border-slate-200 p-6 reveal tilt">
         <div class="flex items-center justify-between text-xs text-slate-400 mb-4">
           <span class="font-extrabold text-ink text-base">Round<span class="text-accent">Signal</span></span>
           <span>Issue 2026-W26 · sample</span>
@@ -170,22 +208,22 @@
 
   <!-- HOW IT WORKS -->
   <section id="how" class="max-w-6xl mx-auto px-5 py-20">
-    <div class="text-center max-w-2xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto reveal">
       <p class="text-teal-700 font-bold uppercase tracking-wider text-sm">How it works</p>
       <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">From raise to reply in three steps.</h2>
     </div>
     <div class="grid md:grid-cols-3 gap-6 mt-14">
-      <div class="relative rounded-2xl border border-slate-200 p-7">
+      <div class="relative rounded-2xl border border-slate-200 p-7 reveal tilt">
         <div class="text-accent font-black text-5xl/none">1</div>
         <h3 class="mt-4 font-bold text-lg">Pick your vertical</h3>
         <p class="mt-2 text-slate-600 text-sm">Tell us what you sell and to whom. We tune the radar to the exact slice of freshly-funded companies you care about.</p>
       </div>
-      <div class="relative rounded-2xl border border-slate-200 p-7">
+      <div class="relative rounded-2xl border border-slate-200 p-7 reveal tilt">
         <div class="text-accent font-black text-5xl/none">2</div>
         <h3 class="mt-4 font-bold text-lg">We do the reading & thinking</h3>
         <p class="mt-2 text-slate-600 text-sm">Our engine scans 50+ public funding sources, dedupes the noise, scores each account, and writes the why-now, the contact role, and the angle.</p>
       </div>
-      <div class="relative rounded-2xl border border-slate-200 p-7">
+      <div class="relative rounded-2xl border border-slate-200 p-7 reveal tilt">
         <div class="text-accent font-black text-5xl/none">3</div>
         <h3 class="mt-4 font-bold text-lg">You open one email & sell</h3>
         <p class="mt-2 text-slate-600 text-sm">Monday morning, the scored list lands in your inbox with a CSV export. Start your outreach inside the window that converts best.</p>
@@ -196,14 +234,14 @@
   <!-- PRICING -->
   <section id="pricing" class="bg-ink text-white grain">
     <div class="max-w-6xl mx-auto px-5 py-20">
-      <div class="text-center max-w-2xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto reveal">
         <p class="text-accent font-bold uppercase tracking-wider text-sm">Pricing</p>
         <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">One good deal closes the year.</h2>
         <p class="mt-4 text-white/70">A single client won from a RoundSignal lead pays for years of subscription. Start free — paid plans open soon, and early subscribers lock in founding-member pricing.</p>
       </div>
       <div class="grid md:grid-cols-3 gap-6 mt-14 items-start">
         <!-- Free -->
-        <div class="rounded-3xl bg-white/5 border border-white/10 p-7">
+        <div class="rounded-3xl bg-white/5 border border-white/10 p-7 reveal tilt">
           <h3 class="font-bold text-xl">Sample</h3>
           <p class="text-white/60 text-sm mt-1">See the goods.</p>
           <p class="mt-5 text-4xl font-black">€0</p>
@@ -217,13 +255,13 @@
           </ul>
         </div>
         <!-- Pro -->
-        <div class="rounded-3xl bg-white text-ink p-7 shadow-2xl ring-2 ring-accent relative">
+        <div class="rounded-3xl bg-white text-ink p-7 shadow-2xl ring-2 ring-accent relative reveal tilt">
           <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent text-ink text-xs font-bold px-3 py-1 rounded-full">Most popular</span>
           <h3 class="font-bold text-xl">Pro</h3>
           <p class="text-slate-500 text-sm mt-1">The full weekly edge.</p>
           <p class="mt-5 text-4xl font-black">€39<span class="text-lg font-semibold text-slate-400">/mo</span></p>
           <p class="text-slate-400 text-sm">or €390/yr (2 months free)</p>
-          <a href="https://roundsignal.beehiiv.com/upgrade?offer_id=1cf13c53-9b75-4a64-8cfc-996256a49f9b" class="mt-6 block text-center bg-accent hover:bg-accent2 text-ink font-bold py-3 rounded-xl">Start free — then €39/mo →</a>
+          <a href="https://roundsignal.beehiiv.com/upgrade?offer_id=1cf13c53-9b75-4a64-8cfc-996256a49f9b" class="mt-6 block text-center bg-accent hover:bg-accent2 text-ink font-bold py-3 rounded-xl fx-btn">Start free — then €39/mo →</a>
           <ul class="mt-6 space-y-2 text-sm text-slate-600">
             <li>✓ <strong>Full list</strong> (~25 scored accounts/wk)</li>
             <li>✓ Why-now, contact role & angle</li>
@@ -232,7 +270,7 @@
           </ul>
         </div>
         <!-- Agency -->
-        <div class="rounded-3xl bg-white/5 border border-white/10 p-7">
+        <div class="rounded-3xl bg-white/5 border border-white/10 p-7 reveal tilt">
           <h3 class="font-bold text-xl">Agency</h3>
           <p class="text-white/60 text-sm mt-1">For teams selling at scale.</p>
           <p class="mt-5 text-4xl font-black">€99<span class="text-lg font-semibold text-white/60">/mo</span></p>
@@ -253,27 +291,27 @@
   <section id="faq" class="max-w-3xl mx-auto px-5 py-20">
     <h2 class="text-3xl md:text-4xl font-extrabold text-center">Questions, answered.</h2>
     <div class="mt-10 divide-y divide-slate-200 border-y border-slate-200">
-      <details class="py-5">
+      <details class="py-5 reveal">
         <summary class="flex justify-between items-center font-semibold text-lg">Where does the data come from? <span class="chev transition-transform">⌄</span></summary>
         <p class="mt-3 text-slate-600">Public funding news — TechCrunch, Crunchbase News, EU-Startups, Tech.eu, Finsmes and 50+ others, plus targeted public news queries for your vertical. We read, dedupe, and interpret it; we don't scrape private data.</p>
       </details>
-      <details class="py-5">
+      <details class="py-5 reveal">
         <summary class="flex justify-between items-center font-semibold text-lg">Is this GDPR-compliant? <span class="chev transition-transform">⌄</span></summary>
         <p class="mt-3 text-slate-600">Yes by design. RoundSignal delivers company-level signals and the <em>role</em> to contact — not a database of personal emails. You source the individual contact yourself, lawfully, once you've decided the account is worth it.</p>
       </details>
-      <details class="py-5">
+      <details class="py-5 reveal">
         <summary class="flex justify-between items-center font-semibold text-lg">How is this different from Crunchbase or Apollo? <span class="chev transition-transform">⌄</span></summary>
         <p class="mt-3 text-slate-600">Those give you a raw firehose to filter and interpret yourself. RoundSignal does the filtering and the thinking — scoring each account and writing the why-now, the contact role, and the angle — so you act instead of research.</p>
       </details>
-      <details class="py-5">
+      <details class="py-5 reveal">
         <summary class="flex justify-between items-center font-semibold text-lg">How fresh are the signals? <span class="chev transition-transform">⌄</span></summary>
         <p class="mt-3 text-slate-600">Each Monday's issue covers raises announced in the prior days — landing you well inside the 48-hour-to-90-day window where funded firms choose vendors.</p>
       </details>
-      <details class="py-5">
+      <details class="py-5 reveal">
         <summary class="flex justify-between items-center font-semibold text-lg">Can I get my own niche? <span class="chev transition-transform">⌄</span></summary>
         <p class="mt-3 text-slate-600">Pro includes one vertical of your choice. Agency lets you request custom verticals. Tell us what you sell and we'll tune the radar.</p>
       </details>
-      <details class="py-5">
+      <details class="py-5 reveal">
         <summary class="flex justify-between items-center font-semibold text-lg">What if it's not useful? <span class="chev transition-transform">⌄</span></summary>
         <p class="mt-3 text-slate-600">Start on the free sample — no card. If Pro doesn't earn its keep, cancel in one click. We'd rather you stay because it works.</p>
       </details>
@@ -282,14 +320,14 @@
 
   <!-- FINAL CTA -->
   <section id="cta" class="bg-slate-50 border-t border-slate-200">
-    <div class="max-w-3xl mx-auto px-5 py-20 text-center">
+    <div class="max-w-3xl mx-auto px-5 py-20 text-center reveal">
       <h2 class="text-3xl md:text-4xl font-extrabold">Get this week's freshly-funded list — free.</h2>
       <p class="mt-4 text-lg text-slate-600">See exactly who just raised in your space, scored and ready to act on. Upgrade only if it earns it.</p>
       <form action="https://roundsignal.beehiiv.com/subscribe" method="get"
             class="mt-8 max-w-md mx-auto flex flex-col sm:flex-row gap-3">
         <input required type="email" name="email" placeholder="you@company.com" aria-label="Email address"
                class="flex-1 px-4 py-3 rounded-xl border border-slate-300 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-accent" />
-        <button type="submit" class="bg-ink hover:bg-ink2 text-white font-bold px-6 py-3 rounded-xl whitespace-nowrap">Subscribe for the weekly list →</button>
+        <button type="submit" class="bg-ink hover:bg-ink2 text-white font-bold px-6 py-3 rounded-xl whitespace-nowrap fx-btn">Subscribe for the weekly list →</button>
       </form>
       <p class="mt-3 text-sm"><a href="sample.html" class="text-ink font-semibold underline decoration-accent hover:text-teal-700">Or see this week's sample issue first →</a></p>
       <p class="mt-2 text-xs text-slate-500">Built for founders, SDRs and agencies who sell to funded startups. By subscribing you agree to our <a href="privacy.html" class="underline hover:text-ink">Privacy Policy</a>.</p>
@@ -312,5 +350,32 @@
     </div>
   </footer>
 
+  <script>
+  (function(){
+    var rm=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+    var rev=[].slice.call(document.querySelectorAll('.reveal'));
+    if('IntersectionObserver'in window && !rm){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){
+        if(e.isIntersecting){var el=e.target;
+          var sibs=[].slice.call(el.parentNode.children).filter(function(n){return n.classList&&n.classList.contains('reveal')});
+          el.style.transitionDelay=(Math.max(0,sibs.indexOf(el))*80)+'ms';
+          el.classList.add('in');io.unobserve(el);}
+      })},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+      rev.forEach(function(el){io.observe(el)});
+    } else { rev.forEach(function(el){el.classList.add('in')}); }
+    if(!rm && window.matchMedia && matchMedia('(pointer:fine)').matches){
+      document.querySelectorAll('.tilt').forEach(function(c){
+        c.addEventListener('pointermove',function(e){
+          var r=c.getBoundingClientRect();
+          var x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+          c.style.transform='perspective(950px) rotateX('+(-y*5).toFixed(2)+'deg) rotateY('+(x*6).toFixed(2)+'deg) translateY(-4px)';
+        });
+        c.addEventListener('pointerleave',function(){c.style.transform='';});
+      });
+    }
+    var hdr=document.querySelector('header');
+    if(hdr){var on=function(){hdr.classList.toggle('rs-scrolled',(window.scrollY||0)>10)};addEventListener('scroll',on,{passive:true});on();}
+  })();
+  </script>
 </body>
 </html>
