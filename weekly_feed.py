@@ -196,7 +196,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
             rows.append(f"""
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h3 style="margin:0;font-size:18px;color:{INK}">{html.escape(a.company)}</h3>
+            <h2 style="margin:0;font-size:18px;color:{INK}">{html.escape(a.company)}</h2>
             <span style="font-weight:700;color:{_heat(a.score)};font-size:14px">heat {a.score}</span>
           </div>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> {html.escape(a.trigger)}</p>
@@ -206,7 +206,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
             rows.append(f"""
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h3 style="margin:0;font-size:18px;color:{INK}">{html.escape(a.company)}</h3>
+            <h2 style="margin:0;font-size:18px;color:{INK}">{html.escape(a.company)}</h2>
             <span style="font-weight:700;color:{_heat(a.score)};font-size:14px">heat {a.score}</span>
           </div>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> {html.escape(a.trigger)}</p>
@@ -243,18 +243,18 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
 {robots}{canonical}{social}<title>RoundSignal {issue_label} &mdash; freshly-funded startups worth selling to</title>
 <meta name="description" content="{html.escape(vertical_name)} &mdash; {len(accounts)} freshly-funded accounts, scored, with the role to contact. Week {issue_label}."></head>
 <body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
-<div style="max-width:720px;margin:0 auto;padding:28px 18px">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+<main style="max-width:720px;margin:0 auto;padding:28px 18px">
+  <header style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
     <a href="{SITE_BASE_URL}/" style="font-weight:800;font-size:22px;color:{INK};text-decoration:none">Round<span style="color:{ACCENT}">Signal</span></a>
     <span style="margin-left:auto;color:#64748b;font-size:13px">Issue {issue_label}</span>
-  </div>
-  <p style="color:#475569;font-size:14px;margin:0 0 4px">{html.escape(vertical_name)}</p>
+  </header>
+  <h1 style="color:{INK};font-size:22px;font-weight:800;margin:0 0 4px">Freshly-funded {html.escape(vertical_name)}</h1>
   <p style="color:#64748b;font-size:13px;margin:0 0 14px">{len(accounts)} trigger-ready accounts, scored and contextualized. {gated_note}</p>
   {locked_note}
   {''.join(rows)}
   {cta}
   <p style="color:#64748b;font-size:12px;margin-top:24px">&copy; RoundSignal. Signals sourced from public news; verify before outreach.</p>
-</div></body></html>"""
+</main></body></html>"""
 
 
 def digest_to_csv(accounts, public=False):
