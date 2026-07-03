@@ -248,7 +248,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
 <body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
 <main style="max-width:720px;margin:0 auto;padding:28px 18px">
   <header style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-    <a href="{SITE_BASE_URL}/" style="font-weight:800;font-size:22px;color:{INK};text-decoration:none">Round<span style="color:{ACCENT}">Signal</span></a>
+    <a href="{SITE_BASE_URL}/" style="display:flex;align-items:center;gap:9px;font-weight:800;font-size:22px;color:{INK};text-decoration:none"><img src="{SITE_BASE_URL}/logo.svg" alt="" width="26" height="26" style="border-radius:6px;display:block">Round<span style="color:{ACCENT}">Signal</span></a>
     <span style="margin-left:auto;color:#64748b;font-size:13px">Issue {issue_label}</span>
   </header>
   <h1 style="color:{INK};font-size:22px;font-weight:800;margin:0 0 4px">Freshly-funded {html.escape(vertical_name)}</h1>
