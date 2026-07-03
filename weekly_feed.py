@@ -217,6 +217,9 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
         </div>""")
     robots = "" if public else '<meta name="robots" content="noindex">'
     canonical = f'<link rel="canonical" href="{SITE_BASE_URL}/sample.html">' if public else ""
+    # GoatCounter analytics (public page only; inert until the site code is registered)
+    analytics = ('<script data-goatcounter="https://roundsignal.goatcounter.com/count" '
+                 'async src="https://gc.zgo.at/count.js"></script>') if public else ""
     social = (
         f'<meta property="og:type" content="website">'
         f'<meta property="og:title" content="RoundSignal {issue_label} &mdash; freshly-funded startups worth selling to">'
@@ -254,7 +257,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
   {''.join(rows)}
   {cta}
   <p style="color:#64748b;font-size:12px;margin-top:24px">&copy; RoundSignal. Signals sourced from public news; verify before outreach.</p>
-</main></body></html>"""
+</main>{analytics}</body></html>"""
 
 
 def digest_to_csv(accounts, public=False):
