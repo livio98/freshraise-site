@@ -236,9 +236,11 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
     )
     cta = (
         f'<div style="text-align:center;margin:30px 0 6px">'
-        f'<a href="{SITE_BASE_URL}/#cta" style="display:inline-block;background:{ACCENT};color:{INK};'
+        f'<a href="https://roundsignal.beehiiv.com/upgrade?offer_id=1cf13c53-9b75-4a64-8cfc-996256a49f9b" '
+        f'style="display:inline-block;background:{ACCENT};color:{INK};'
         f'font-weight:700;padding:13px 24px;border-radius:12px;text-decoration:none">'
-        f'Get this list every Monday &mdash; free &rarr;</a></div>'
+        f'Get the full list every Monday &mdash; try 7 days free &rarr;</a>'
+        f'<p style="color:#64748b;font-size:12px;margin:8px 0 0">Then $39/mo or $390/yr. Cancel anytime before the trial ends.</p></div>'
         if (public or gated) else ""
     )
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
