@@ -3,9 +3,11 @@
 
 One file, no local package: the GitHub Actions cron runs this weekly, it builds
 the issue (live funding feeds -> Claude -> scored accounts) and writes
-feed.xml + sample.html + sample.csv to the repo root. The workflow then commits
-them; GitHub Pages serves them; beehiiv RSS-to-Send (Max plan) emails the new
-issue to subscribers. Fully unattended.
+the feed + sample.html + sample.csv to the repo root. The workflow then commits
+them; GitHub Pages serves them. The full-issue feed uses a tokenized filename
+(FEED_FILENAME) so the standard /feed.xml path never exposes the paid content;
+delivery to subscribers is a manual Monday publish on beehiiv (RSS-to-Send
+needs the Max plan) - see MONDAY-RUNBOOK.md.
 
 Needs only the ANTHROPIC_API_KEY env var (a GitHub Actions secret).
 Deps: anthropic, feedparser, tenacity  (see requirements-ci.txt).
@@ -35,6 +37,8 @@ MODEL = os.getenv("CLAUDE_MODEL", "claude-opus-4-8")
 SITE_BASE_URL = os.getenv("SITE_BASE_URL", "https://getroundsignal.com").rstrip("/")
 USER_AGENT = "RoundSignal/1.0 (signals@getroundsignal.com)"
 INK, ACCENT = "#0B1F3A", "#1FB6A6"
+# Full-issue RSS: tokenized name — /feed.xml is the first path scrapers probe.
+FEED_FILENAME = "feed-7d27d289dd65.xml"
 
 DEFAULT_FEEDS = [
     {"source": "FinSMEs", "signal": "funding", "url": "https://www.finsmes.com/feed/"},
@@ -298,7 +302,7 @@ def build_rss(accounts, issue_label, pubdate):
         '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n'
         "  <title>RoundSignal - Weekly funded-startup signals</title>\n"
         f"  <link>{SITE_BASE_URL}/</link>\n"
-        f'  <atom:link href="{SITE_BASE_URL}/feed.xml" rel="self" type="application/rss+xml"/>\n'
+        f'  <atom:link href="{SITE_BASE_URL}/{FEED_FILENAME}" rel="self" type="application/rss+xml"/>\n'
         "  <description>Each week: freshly-funded startups, the role to contact, and a ready-to-send angle.</description>\n"
         "  <language>en</language>\n"
         f"  <lastBuildDate>{built}</lastBuildDate>\n"
@@ -314,7 +318,7 @@ def main():
         sys.exit("Empty digest - aborting (feeds or API issue)")
     label = _issue_label()
     now = _dt.datetime.now(_dt.timezone.utc)
-    with open("feed.xml", "w", encoding="utf-8") as f:
+    with open(FEED_FILENAME, "w", encoding="utf-8") as f:
         f.write(build_rss(accounts, label, now))
     # PUBLIC sample = indexable, GATED teaser (full details only on the top 5).
     with open("sample.html", "w", encoding="utf-8") as f:
@@ -336,7 +340,7 @@ def main():
             f'  <url><loc>{SITE_BASE_URL}/terms.html</loc><lastmod>2026-06-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>\n'
             '</urlset>\n'
         )
-    print(f"OK: {len(accounts)} accounts, issue {label} -> feed.xml + sample.html (gated) + sample.csv (teaser) + sitemap.xml")
+    print(f"OK: {len(accounts)} accounts, issue {label} -> {FEED_FILENAME} + sample.html (gated) + sample.csv (teaser) + sitemap.xml")
 
 
 if __name__ == "__main__":
