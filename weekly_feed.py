@@ -250,7 +250,9 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
         f'style="display:inline-block;background:{ACCENT};color:{INK};'
         f'font-weight:700;padding:13px 24px;border-radius:12px;text-decoration:none">'
         f'Get the full list every Monday &mdash; try 7 days free &rarr;</a>'
-        f'<p style="color:#64748b;font-size:12px;margin:8px 0 0">Then $39/mo or $390/yr. Cancel anytime before the trial ends.</p></div>'
+        f'<p style="color:#64748b;font-size:12px;margin:8px 0 0">Then $39/mo or $390/yr. Cancel anytime before the trial ends.</p>'
+        f'<p style="color:#475569;font-size:13px;margin:10px 0 0">Not ready for a trial? '
+        f'<a href="https://roundsignal.beehiiv.com/subscribe" style="color:#0f766e;font-weight:600">Get the free Monday preview by email &rarr;</a></p></div>'
         if (public or gated) else ""
     )
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
