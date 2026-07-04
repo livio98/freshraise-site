@@ -238,6 +238,12 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
         f'<a href="{SITE_BASE_URL}/#pricing" style="color:#0f766e;font-weight:600">Unlock all {len(accounts)} accounts &rarr;</a></p>'
         if gated else ""
     )
+    guide_link = (
+        f'<p style="color:#64748b;font-size:13px;margin-top:20px;text-align:center">New to funding-signal outreach? '
+        f'Read the guide: <a href="{SITE_BASE_URL}/guide-selling-to-funded-startups.html" '
+        f'style="color:#0f766e;font-weight:600">How to sell to newly funded startups &rarr;</a></p>'
+        if public else ""
+    )
     cta = (
         f'<div style="text-align:center;margin:30px 0 6px">'
         f'<a href="https://roundsignal.beehiiv.com/upgrade?offer_id=1cf13c53-9b75-4a64-8cfc-996256a49f9b" '
@@ -262,6 +268,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
   {locked_note}
   {''.join(rows)}
   {cta}
+  {guide_link}
   <p style="color:#64748b;font-size:12px;margin-top:24px">&copy; RoundSignal. Signals sourced from public news; verify before outreach.</p>
 </main>{analytics}</body></html>"""
 
@@ -336,6 +343,7 @@ def main():
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
             f'  <url><loc>{SITE_BASE_URL}/</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>\n'
             f'  <url><loc>{SITE_BASE_URL}/sample.html</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>\n'
+            f'  <url><loc>{SITE_BASE_URL}/guide-selling-to-funded-startups.html</loc><lastmod>2026-07-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n'
             f'  <url><loc>{SITE_BASE_URL}/privacy.html</loc><lastmod>2026-06-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>\n'
             f'  <url><loc>{SITE_BASE_URL}/terms.html</loc><lastmod>2026-06-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>\n'
             '</urlset>\n'
