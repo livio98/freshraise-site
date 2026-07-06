@@ -260,6 +260,87 @@
     </div>
   </section>
 
+  <!-- INTERACTIVE: score-for-your-service demo -->
+  <section id="score-demo" style="background:#fff;border-top:1px solid #e2e8f0">
+    <style>
+      #score-demo .sd-wrap{max-width:680px;margin:0 auto;padding:80px 20px}
+      #score-demo .sd-eyebrow{text-align:center;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0d9488;margin:0 0 10px}
+      #score-demo h2{text-align:center;font-size:30px;line-height:1.15;font-weight:800;color:#0B1F3A;margin:0 0 12px}
+      #score-demo .sd-sub{text-align:center;color:#475569;font-size:16px;line-height:1.5;margin:0 auto 6px;max-width:560px}
+      #score-demo .sd-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px 0 6px}
+      #score-demo .sd-btn{border:1px solid #e2e8f0;background:#fff;color:#334155;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s,border-color .2s;-webkit-tap-highlight-color:transparent}
+      #score-demo .sd-btn:hover{border-color:#5eead4}
+      #score-demo .sd-btn.active{background:#0B1F3A;color:#fff;border-color:#0B1F3A}
+      #score-demo .sd-cards{margin:22px auto 0;display:grid;grid-template-columns:1fr;gap:12px}
+      #score-demo .sd-card{border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;background:#fff;box-shadow:0 1px 3px rgba(11,31,58,.05);animation:sdIn .45s both}
+      @keyframes sdIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+      #score-demo .sd-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+      #score-demo .sd-name{font-weight:700;color:#0B1F3A;font-size:16px}
+      #score-demo .sd-trig{color:#64748b;font-size:13px;margin-top:2px}
+      #score-demo .sd-heat{font-weight:800;font-size:23px;line-height:1;text-align:right;white-space:nowrap}
+      #score-demo .sd-heat small{display:block;font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+      #score-demo .sd-bar{height:6px;background:#f1f5f9;border-radius:999px;overflow:hidden;margin:13px 0 10px}
+      #score-demo .sd-bar i{display:block;height:100%;width:0;border-radius:999px;transition:width .55s cubic-bezier(.4,0,.2,1)}
+      #score-demo .sd-why{color:#334155;font-size:14px;line-height:1.45}
+      #score-demo .sd-why b{color:#0f766e;font-weight:600}
+      #score-demo .sd-note{text-align:center;color:#94a3b8;font-size:12.5px;margin:22px auto 0;max-width:520px}
+      @media (prefers-reduced-motion:reduce){#score-demo .sd-card{animation:none}#score-demo .sd-bar i{transition:none}}
+    </style>
+    <div class="sd-wrap">
+      <p class="sd-eyebrow">Try it — 10 seconds</p>
+      <h2>The same week. Scored for what <em style="font-style:normal;color:#0d9488">you</em> sell.</h2>
+      <p class="sd-sub">A $18M data-privacy raise is a goldmine for a dev shop and noise for a brand studio. Pick your service — watch the exact same accounts re-rank for you.</p>
+      <div class="sd-btns" role="tablist">
+        <button class="sd-btn active" data-svc="dev">Dev shop</button>
+        <button class="sd-btn" data-svc="design">Design studio</button>
+        <button class="sd-btn" data-svc="growth">Growth / RevOps</button>
+        <button class="sd-btn" data-svc="recruiting">Recruiting</button>
+      </div>
+      <div id="sd-cards" class="sd-cards"></div>
+      <p class="sd-note">Illustrative scores on a real recent week. Subscribers get this every Monday — scored for their exact offer, with the role to contact and an opening line already written.</p>
+    </div>
+    <script>
+    (function(){
+      var DATA=[
+        {c:"Sherpa.ai",t:"$18M · data-privacy AI platform",s:{dev:92,design:58,growth:84,recruiting:70},r:{dev:"Build them a <b>compliance-ready demo environment</b>.",design:"Some brand polish, but not the main need.",growth:"<b>Enterprise onboarding funnel</b> to shorten sales cycles.",recruiting:"Scaling infra — a bit of eng hiring."}},
+        {c:"CurifyLabs",t:"€12M · expanding to the US",s:{dev:56,design:66,growth:80,recruiting:90},r:{dev:"Platform's built; less of a dev play.",design:"US launch needs a <b>fresh brand + site</b>.",growth:"<b>Localized US market-entry</b> campaign.",recruiting:"<b>Hiring a US team from scratch</b> — a goldmine."}},
+        {c:"geoSurge",t:"€10M Seed · scaling AI infra",s:{dev:88,design:48,growth:62,recruiting:86},r:{dev:"Heavy <b>infra & AI platform build-out</b>.",design:"Low design need right now.",growth:"Some demand-gen upside.",recruiting:"<b>Aggressive engineering hiring</b>."}},
+        {c:"BidScript",t:"pre-seed · 50% higher win-rate",s:{dev:54,design:78,growth:85,recruiting:46},r:{dev:"Product works; not a dev fit.",design:"<b>Brand + site</b> to match the enterprise buyers.",growth:"Turn the win-rate stat into a <b>case-study PR engine</b>.",recruiting:"Too small to hire yet."}},
+        {c:"Visiblie",t:"€500K · SME growth, needs marketing",s:{dev:44,design:72,growth:88,recruiting:38},r:{dev:"Minimal dev need.",design:"Could use a cleaner brand.",growth:"<b>Lean growth-marketing sprint</b> — perfect fractional-CMO fit.",recruiting:"Not hiring at this stage."}}
+      ];
+      var wrap=document.getElementById('sd-cards');
+      if(!wrap) return;
+      var btns=document.querySelectorAll('#score-demo .sd-btn');
+      function col(s){return s>=80?'#15803d':s>=60?'#b45309':'#64748b';}
+      function render(svc){
+        var rows=DATA.slice().sort(function(a,b){return b.s[svc]-a.s[svc];});
+        wrap.innerHTML=rows.map(function(d,i){
+          var sc=d.s[svc],c=col(sc);
+          return '<div class="sd-card" style="animation-delay:'+(i*60)+'ms">'
+            +'<div class="sd-top"><div><div class="sd-name">'+d.c+'</div><div class="sd-trig">'+d.t+'</div></div>'
+            +'<div class="sd-heat" style="color:'+c+'"><span data-t="'+sc+'">0</span><small>heat</small></div></div>'
+            +'<div class="sd-bar"><i data-w="'+sc+'" style="background:'+c+'"></i></div>'
+            +'<div class="sd-why">'+d.r[svc]+'</div></div>';
+        }).join('');
+        wrap.querySelectorAll('.sd-heat span').forEach(function(el){
+          var target=+el.getAttribute('data-t'),start=null;
+          function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/500,1);el.textContent=Math.round(p*target);if(p<1)requestAnimationFrame(step);}
+          requestAnimationFrame(step);
+        });
+        wrap.querySelectorAll('.sd-bar i').forEach(function(el){
+          requestAnimationFrame(function(){el.style.width=el.getAttribute('data-w')+'%';});
+        });
+      }
+      btns.forEach(function(b){b.addEventListener('click',function(){
+        btns.forEach(function(x){x.classList.remove('active');});
+        b.classList.add('active');
+        render(b.getAttribute('data-svc'));
+      });});
+      render('dev');
+    })();
+    </script>
+  </section>
+
   <!-- PRICING -->
   <section id="pricing" class="bg-ink text-white grain">
     <div class="max-w-6xl mx-auto px-5 py-20">
