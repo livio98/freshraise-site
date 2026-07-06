@@ -66,9 +66,10 @@ LAUNCH_VERTICAL = {
         'AI startup raises seed round',
         'European startup closes funding round',
     ],
-    # Ceiling, not a quota: some weeks fewer than this genuinely qualify (W28 had
-    # 10, W27 had 21). The prompt is told never to pad, so the real count floats.
-    "max_accounts": 20,
+    # FIXED 10/week (Federico's call). 10 is low enough to hit almost every week;
+    # the prompt still says "never pad", so a freak sub-10 week returns only what's
+    # real instead of inventing filler.
+    "max_accounts": 10,
 }
 
 _EXTRACT_SYSTEM = (
@@ -209,9 +210,10 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
       - the middle band             -> name + heat + trigger only (playbook locked);
       - the hottest `band` accounts  -> heat score ONLY, name redacted (you can see a
                                        heat-88 account exists this week, but not who).
-    band = min(5, n//4)  => exactly 5 / rest / 5 on a full ~20 list, and scales
-    down on light news weeks so a short list is never over-exposed (giving away the
-    full playbook on half a 10-item list would defeat the paywall).
+    band = min(5, n//4)  => on the standard 10-account week that's 2 full / 6 half /
+    2 hidden, and it scales up to 5 / rest / 5 on a bigger list — a short list is
+    never over-exposed (giving away the full playbook on half the list would defeat
+    the paywall).
     public=True makes it indexable + adds the signup CTA."""
 
     def _full(a):
