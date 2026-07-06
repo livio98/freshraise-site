@@ -100,6 +100,8 @@ class ScoredAccount:
     outreach_angle: str
     score: int
     source_url: str
+    website: str = ""
+    contact_email: str = ""
 
 
 # ── 1) Ingest ────────────────────────────────────────────────────────────────
@@ -165,10 +167,16 @@ def build_digest(vertical=LAUNCH_VERTICAL):
         "with weak or off-vertical items. For EACH account return: "
         "company, trigger (round/amount/date as supported), why_now (1-2 sentences "
         "written FOR the seller), role_to_contact, outreach_angle (one concrete, "
-        "non-generic opener), score (1-100 = heat/fit), source_url.\n\n"
-        'Return JSON: {"accounts":[{"company","trigger","why_now",'
-        '"role_to_contact","outreach_angle","score","source_url"}, ...]} sorted by '
-        "score descending.\n\nNEWS ITEMS (JSON):\n" + json.dumps(items, ensure_ascii=False)
+        "non-generic opener), score (1-100 = heat/fit), source_url, website, "
+        "contact_email.\n"
+        "website = the company's OFFICIAL homepage URL (https://...). contact_email = "
+        "a GENERIC company inbox at that same domain (info@, hello@ or contact@domain) "
+        "- NEVER invent a specific person's email address. If you are not confident of "
+        "the company's official domain, leave BOTH website and contact_email as empty "
+        "strings ('') rather than guessing.\n\n"
+        'Return JSON: {"accounts":[{"company","trigger","why_now","role_to_contact",'
+        '"outreach_angle","score","source_url","website","contact_email"}, ...]} sorted '
+        "by score descending.\n\nNEWS ITEMS (JSON):\n" + json.dumps(items, ensure_ascii=False)
     )
     data = _claude_json(_EXTRACT_SYSTEM, user)
     accounts = []
@@ -179,6 +187,7 @@ def build_digest(vertical=LAUNCH_VERTICAL):
                 why_now=a.get("why_now", ""), role_to_contact=a.get("role_to_contact", ""),
                 outreach_angle=a.get("outreach_angle", ""),
                 score=int(a.get("score", 0)), source_url=a.get("source_url", ""),
+                website=a.get("website", ""), contact_email=a.get("contact_email", ""),
             ))
         except (KeyError, ValueError):
             continue
@@ -216,16 +225,27 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
     the paywall).
     public=True makes it indexable + adds the signup CTA."""
 
+    def _namelink(a):
+        nm = html.escape(a.company)
+        if a.website:
+            return (f'<a href="{html.escape(a.website)}" target="_blank" rel="noopener" '
+                    f'style="color:{INK};text-decoration:none">{nm}</a>')
+        return nm
+
     def _full(a):
+        contact = html.escape(a.role_to_contact)
+        if a.contact_email:
+            contact += (' &middot; <a href="mailto:' + html.escape(a.contact_email)
+                        + '" style="color:#0f766e">' + html.escape(a.contact_email) + '</a>')
         return f"""
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h2 style="margin:0;font-size:18px;color:{INK}">{html.escape(a.company)}</h2>
+            <h2 style="margin:0;font-size:18px;color:{INK}">{_namelink(a)}</h2>
             <span style="font-weight:700;color:{_heat(a.score)};font-size:14px">heat {a.score}</span>
           </div>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> {html.escape(a.trigger)}</p>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> {html.escape(a.why_now)}</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> {html.escape(a.role_to_contact)}</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> {contact}</p>
           <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> {html.escape(a.outreach_angle)}</p>
           <a href="{html.escape(a.source_url)}" style="font-size:12px;color:#64748b">source</a>
         </div>"""
@@ -234,7 +254,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
         return f"""
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h2 style="margin:0;font-size:18px;color:{INK}">{html.escape(a.company)}</h2>
+            <h2 style="margin:0;font-size:18px;color:{INK}">{_namelink(a)}</h2>
             <span style="font-weight:700;color:{_heat(a.score)};font-size:14px">heat {a.score}</span>
           </div>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> {html.escape(a.trigger)}</p>
@@ -303,8 +323,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
         f'font-weight:700;padding:13px 24px;border-radius:12px;text-decoration:none">'
         f'Get the full list every Monday &mdash; try 7 days free &rarr;</a>'
         f'<p style="color:#64748b;font-size:12px;margin:8px 0 0">Then $49/mo or $490/yr. Cancel anytime before the trial ends.</p>'
-        f'<p style="color:#475569;font-size:13px;margin:10px 0 0">Not ready for a trial? '
-        f'<a href="https://roundsignal.beehiiv.com/subscribe" style="color:#0f766e;font-weight:600">Get the free Monday preview by email &rarr;</a></p></div>'
+        f'</div>'
         if (public or gated) else ""
     )
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
@@ -342,9 +361,9 @@ def digest_to_csv(accounts, public=False):
             else:
                 w.writerow([a.company, a.trigger, a.score])
     else:
-        w.writerow(["company", "trigger", "why_now", "role_to_contact", "outreach_angle", "score", "source_url"])
+        w.writerow(["company", "website", "trigger", "why_now", "role_to_contact", "contact_email", "outreach_angle", "score", "source_url"])
         for a in accounts:
-            w.writerow([a.company, a.trigger, a.why_now, a.role_to_contact, a.outreach_angle, a.score, a.source_url])
+            w.writerow([a.company, a.website, a.trigger, a.why_now, a.role_to_contact, a.contact_email, a.outreach_angle, a.score, a.source_url])
     return buf.getvalue()
 
 
