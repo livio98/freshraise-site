@@ -190,24 +190,24 @@ def _heat(score):
 
 
 def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
-                        gated=False, public=False, free_n=5):
-    """Render the issue. gated=True locks all but the top `free_n` (public teaser);
-    public=True makes it indexable + adds a signup CTA. The subscriber/RSS copy
-    is always ungated (gated=False)."""
-    rows = []
-    for i, a in enumerate(accounts):
-        if gated and i >= free_n:
-            rows.append(f"""
-        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h2 style="margin:0;font-size:18px;color:{INK}">{html.escape(a.company)}</h2>
-            <span style="font-weight:700;color:{_heat(a.score)};font-size:14px">heat {a.score}</span>
-          </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> {html.escape(a.trigger)}</p>
-          <p style="margin:10px 0 0;color:#475569;font-size:14px">&#128274; Why now &middot; Who to contact &middot; Angle &mdash; subscribers only</p>
-        </div>""")
-        else:
-            rows.append(f"""
+                        gated=False, public=False):
+    """Render the issue.
+
+    Subscriber copy (gated=False): every account in full, best-first.
+
+    Public teaser (gated=True): a *crescendo* reveal, ordered COLDEST-first so the
+    heat climbs as the reader scrolls while the detail locks down:
+      - the coldest `band` accounts -> shown in FULL (a real taste of the format);
+      - the middle band             -> name + heat + trigger only (playbook locked);
+      - the hottest `band` accounts  -> heat score ONLY, name redacted (you can see a
+                                       heat-88 account exists this week, but not who).
+    band = min(5, n//4)  => exactly 5 / rest / 5 on a full ~20-25 list, and scales
+    down on light news weeks so a short list is never over-exposed (giving away the
+    full playbook on half a 10-item list would defeat the paywall).
+    public=True makes it indexable + adds the signup CTA."""
+
+    def _full(a):
+        return f"""
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
             <h2 style="margin:0;font-size:18px;color:{INK}">{html.escape(a.company)}</h2>
@@ -218,7 +218,45 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> {html.escape(a.role_to_contact)}</p>
           <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> {html.escape(a.outreach_angle)}</p>
           <a href="{html.escape(a.source_url)}" style="font-size:12px;color:#64748b">source</a>
-        </div>""")
+        </div>"""
+
+    def _half(a):
+        return f"""
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h2 style="margin:0;font-size:18px;color:{INK}">{html.escape(a.company)}</h2>
+            <span style="font-weight:700;color:{_heat(a.score)};font-size:14px">heat {a.score}</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> {html.escape(a.trigger)}</p>
+          <p style="margin:10px 0 0;color:#475569;font-size:14px">&#128274; Why now &middot; Who to contact &middot; Angle &mdash; subscribers only</p>
+        </div>"""
+
+    def _hidden(a):
+        return f"""
+        <div style="border:1px dashed #cbd5e1;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fbfdfe">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+            <span style="display:inline-block;width:140px;max-width:55%;height:16px;border-radius:5px;background:#e2e8f0"></span>
+            <span style="font-weight:800;color:{_heat(a.score)};font-size:15px">heat {a.score}</span>
+          </div>
+          <p style="margin:10px 0 0;color:#94a3b8;font-size:13px">&#128274; This week&#x27;s hottest &mdash; name, trigger &amp; full playbook are subscribers only</p>
+        </div>"""
+
+    n = len(accounts)
+    if gated:
+        band = max(1, min(5, n // 4))
+        hidden_n = band
+        full_n = min(band, n - hidden_n)
+        rows = []
+        for i, a in enumerate(reversed(accounts)):   # coldest first -> hottest last
+            rank = n - 1 - i                          # 0 = hottest, n-1 = coldest
+            if rank < hidden_n:
+                rows.append(_hidden(a))
+            elif rank >= n - full_n:
+                rows.append(_full(a))
+            else:
+                rows.append(_half(a))
+    else:
+        rows = [_full(a) for a in accounts]
     robots = "" if public else '<meta name="robots" content="noindex">'
     canonical = f'<link rel="canonical" href="{SITE_BASE_URL}/sample.html">' if public else ""
     # GoatCounter analytics (public page only; inert until the site code is registered)
@@ -234,8 +272,12 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
         f'<meta name="twitter:image" content="{SITE_BASE_URL}/og-image.png">'
     ) if public else ""
     locked_note = (
-        f'<p style="color:#475569;font-size:13px;margin:0 0 18px">Free preview &mdash; full details on the top {free_n}. '
-        f'<a href="{SITE_BASE_URL}/#pricing" style="color:#0f766e;font-weight:600">Unlock all {len(accounts)} accounts &rarr;</a></p>'
+        f'<p style="color:#475569;font-size:13px;margin:0 0 16px;line-height:1.5">Free preview, in '
+        f'<strong>crescendo</strong>: the coldest picks are shown in full so you can see exactly what a '
+        f'signal looks like. As you scroll, the heat climbs and the detail locks &mdash; the hottest '
+        f'accounts of the week are subscribers-only. '
+        f'<a href="{SITE_BASE_URL}/#pricing" style="color:#0f766e;font-weight:600;white-space:nowrap">'
+        f'Unlock all {len(accounts)} &rarr;</a></p>'
         if gated else ""
     )
     guide_link = (
@@ -265,7 +307,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
     <a href="{SITE_BASE_URL}/" style="display:flex;align-items:center;gap:9px;font-weight:800;font-size:22px;color:{INK};text-decoration:none"><img src="{SITE_BASE_URL}/logo.svg" alt="" width="26" height="26" style="border-radius:6px;display:block">Round<span style="color:{ACCENT}">Signal</span></a>
     <span style="margin-left:auto;color:#64748b;font-size:13px">Issue {issue_label}</span>
   </header>
-  <h1 style="color:{INK};font-size:22px;font-weight:800;margin:0 0 4px">Freshly-funded {html.escape(vertical_name)}</h1>
+  <h1 style="color:{INK};font-size:22px;font-weight:800;margin:0 0 4px">{html.escape(vertical_name)}</h1>
   <p style="color:#64748b;font-size:13px;margin:0 0 14px">{len(accounts)} trigger-ready accounts, scored and contextualized. {gated_note}</p>
   {locked_note}
   {''.join(rows)}
@@ -279,10 +321,16 @@ def digest_to_csv(accounts, public=False):
     buf = io.StringIO()
     w = csv.writer(buf)
     if public:
-        # public teaser: no paid why-now/contact/angle columns
+        # public teaser: no paid why-now/contact/angle columns, and the hottest
+        # `band` accounts are redacted to heat only (matches the sample.html crescendo).
+        n = len(accounts)
+        band = max(1, min(5, n // 4))
         w.writerow(["company", "trigger", "score"])
-        for a in accounts:
-            w.writerow([a.company, a.trigger, a.score])
+        for i, a in enumerate(accounts):  # best-first
+            if i < band:
+                w.writerow(["(subscribers only)", "(subscribers only)", a.score])
+            else:
+                w.writerow([a.company, a.trigger, a.score])
     else:
         w.writerow(["company", "trigger", "why_now", "role_to_contact", "outreach_angle", "score", "source_url"])
         for a in accounts:
