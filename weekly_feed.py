@@ -326,6 +326,35 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
         f'</div>'
         if (public or gated) else ""
     )
+    # Ad gate (public preview only): a short interstitial before the list unlocks.
+    # JS-injected (hidden by default) so no-JS crawlers still see the content = SEO-safe,
+    # no cloaking. Replace the #rs-ad-slot inner content with a real AdSense/sponsor tag.
+    gate = (
+        '<div id="rs-gate" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.72);'
+        'z-index:9999;align-items:center;justify-content:center;padding:20px">'
+        '<div style="max-width:460px;width:100%;background:#fff;border-radius:18px;padding:26px 24px;'
+        'text-align:center;box-shadow:0 20px 60px rgba(11,31,58,.35)">'
+        '<p style="font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;'
+        'color:#94a3b8;margin:0 0 14px">Sponsored</p>'
+        '<div id="rs-ad-slot" style="min-height:160px;border:1px dashed #cbd5e1;border-radius:12px;'
+        'display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;'
+        'color:#94a3b8;font-size:14px;line-height:1.5;padding:20px;background:#f8fafc">'
+        '<span>Your ad could be here &mdash; reach people who sell to freshly-funded startups.</span>'
+        '<a href="mailto:hello@getroundsignal.com" style="color:#0f766e;font-weight:600">Sponsor this list &rarr;</a>'
+        '</div>'
+        '<button id="rs-gate-btn" disabled style="margin-top:18px;width:100%;background:#1FB6A6;'
+        'color:#0B1F3A;font-weight:700;font-size:15px;padding:12px;border:0;border-radius:12px;'
+        'cursor:not-allowed;opacity:.55">Unlocking in 5s&hellip;</button>'
+        '</div></div>'
+        '<script>(function(){var g=document.getElementById("rs-gate"),b=document.getElementById("rs-gate-btn");'
+        'if(!g||!b)return;g.style.display="flex";document.documentElement.style.overflow="hidden";var n=5;'
+        'var t=setInterval(function(){n--;if(n<=0){clearInterval(t);b.disabled=false;'
+        'b.textContent="Show me the list →";b.style.cursor="pointer";b.style.opacity="1";}'
+        'else{b.textContent="Unlocking in "+n+"s…";}},1000);'
+        'b.addEventListener("click",function(){if(b.disabled)return;g.style.display="none";'
+        'document.documentElement.style.overflow="";});})();</script>'
+        if gated else ""
+    )
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {robots}{canonical}{social}<title>RoundSignal {issue_label} &mdash; freshly-funded startups worth selling to</title>
@@ -343,7 +372,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
   {cta}
   {guide_link}
   <p style="color:#64748b;font-size:12px;margin-top:24px">&copy; RoundSignal. Signals sourced from public news; verify before outreach.</p>
-</main>{analytics}</body></html>"""
+</main>{gate}{analytics}</body></html>"""
 
 
 def digest_to_csv(accounts, public=False):
