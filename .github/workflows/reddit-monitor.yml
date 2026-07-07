@@ -1,0 +1,40 @@
+name: Reddit monitor (RoundSignal)
+
+# READ-ONLY: finds mentions + relevant threads, writes social/reddit-digest.md.
+# Never posts/comments. No-ops harmlessly (green) until the REDDIT_* secrets are set.
+# Setup steps: SOCIAL-AUTOMATION-SETUP.md
+
+on:
+  schedule:
+    - cron: "30 6 * * *"   # daily 06:30 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reddit-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install --quiet praw
+      - name: Run monitor
+        env:
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USER_AGENT: "roundsignal-monitor/1.0 by u/getroundsignal"
+        run: python scripts/reddit_monitor.py
+      - name: Commit digest
+        run: |
+          git config user.name "roundsignal-bot"
+          git config user.email "roundsignal-bot@users.noreply.github.com"
+          git add social/reddit-digest.md
+          git commit -m "reddit-monitor: refresh digest [skip ci]" || echo "no changes to commit"
+          git push || echo "nothing to push"

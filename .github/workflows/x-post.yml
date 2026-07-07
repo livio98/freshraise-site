@@ -1,0 +1,42 @@
+name: X auto-post (RoundSignal)
+
+# Posts our OWN queued content to X via the official API (OAuth 1.0a).
+# No-ops harmlessly (green) until the X_* secrets are set. Human-paced: max 1/run.
+# Setup steps: SOCIAL-AUTOMATION-SETUP.md
+
+on:
+  schedule:
+    - cron: "0 9 * * *"   # daily 09:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: x-post
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install --quiet requests requests_oauthlib
+      - name: Post to X
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          X_MAX_PER_RUN: "1"
+        run: python scripts/x_post.py
+      - name: Commit queue updates
+        run: |
+          git config user.name "roundsignal-bot"
+          git config user.email "roundsignal-bot@users.noreply.github.com"
+          git add social/x-queue.json
+          git commit -m "x-post: update queue [skip ci]" || echo "no changes to commit"
+          git push || echo "nothing to push"
