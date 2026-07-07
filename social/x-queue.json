@@ -1,0 +1,11 @@
+{
+  "_readme": "RoundSignal X post queue. The 'X auto-post' GitHub Action posts items with status 'pending' (oldest first, max 1/run) via the official X API, then sets status to 'posted'. Statuses: draft=ignored, pending=will post, posted=sent, error=failed. Edit or delete pending items anytime via git to review before they go out. COST NOTE: X charges ~$0.20 for a post that contains a link vs ~$0.015 without — keep links out of most posts (put the link in the X bio / a pinned post). No @mentions in automated posts.",
+  "posts": [
+    {
+      "id": "example-do-not-post",
+      "status": "draft",
+      "text": "EXAMPLE (status 'draft' is never posted). Set a real item's status to 'pending' to enqueue it. Keep it under 280 chars and avoid links to stay cheap.",
+      "in_reply_to": null
+    }
+  ]
+}
