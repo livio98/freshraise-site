@@ -33,8 +33,12 @@ jobs:
         run: python scripts/reddit_monitor.py
       - name: Commit digest
         run: |
-          git config user.name "roundsignal-bot"
-          git config user.email "roundsignal-bot@users.noreply.github.com"
-          git add social/reddit-digest.md
-          git commit -m "reddit-monitor: refresh digest [skip ci]" || echo "no changes to commit"
-          git push || echo "nothing to push"
+          if [ -f social/reddit-digest.md ]; then
+            git config user.name "roundsignal-bot"
+            git config user.email "roundsignal-bot@users.noreply.github.com"
+            git add social/reddit-digest.md
+            git commit -m "reddit-monitor: refresh digest [skip ci]" || echo "no changes to commit"
+            git push || echo "nothing to push"
+          else
+            echo "No digest file (secrets not set) — nothing to commit."
+          fi
