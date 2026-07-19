@@ -459,6 +459,7 @@ def main():
             f'  <url><loc>{SITE_BASE_URL}/fundraise-insider-alternative.html</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
             f'  <url><loc>{SITE_BASE_URL}/recently-funded-ai-startups.html</loc><lastmod>2026-07-17</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
             f'  <url><loc>{SITE_BASE_URL}/recently-funded-saas-startups.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
+            f'  <url><loc>{SITE_BASE_URL}/recently-funded-startups-in-europe.html</loc><lastmod>2026-07-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
             f'  <url><loc>{SITE_BASE_URL}/methodology.html</loc><lastmod>2026-07-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>\n'
             f'  <url><loc>{SITE_BASE_URL}/about.html</loc><lastmod>2026-07-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>\n'
             f'  <url><loc>{SITE_BASE_URL}/privacy.html</loc><lastmod>2026-06-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>\n'
