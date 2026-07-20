@@ -39,3 +39,15 @@ jobs:
           git commit -m "Weekly issue refresh [skip ci]" || { echo "no changes to commit"; exit 0; }
           git pull --rebase --autostash origin main
           git push
+      # Push the refreshed URLs to Bing/Yandex/Seznam/Naver instantly.
+      # No account needed: auth is the key file served at the domain root.
+      # Never fail the run because of this - it is a best-effort ping.
+      - name: Ping IndexNow
+        if: always()
+        continue-on-error: true
+        run: |
+          KEY=e0b080639a674923aac3a4568ed9337f
+          curl -sS -m 30 -o /dev/null -w "IndexNow HTTP %{http_code}\n" \
+            -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "{\"host\":\"getroundsignal.com\",\"key\":\"$KEY\",\"keyLocation\":\"https://getroundsignal.com/$KEY.txt\",\"urlList\":[\"https://getroundsignal.com/\",\"https://getroundsignal.com/sample.html\"]}" || true
