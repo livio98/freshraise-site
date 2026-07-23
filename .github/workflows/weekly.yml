@@ -35,7 +35,7 @@ jobs:
         run: |
           git config user.name "roundsignal-bot"
           git config user.email "roundsignal-bot@users.noreply.github.com"
-          git add feed-*.xml sample.html sample.csv sitemap.xml
+          git add feed-*.xml sample.html sample.csv sitemap.xml issue-*.html archive.html
           git commit -m "Weekly issue refresh [skip ci]" || { echo "no changes to commit"; exit 0; }
           git pull --rebase --autostash origin main
           git push
@@ -50,4 +50,4 @@ jobs:
           curl -sS -m 30 -o /dev/null -w "IndexNow HTTP %{http_code}\n" \
             -X POST "https://api.indexnow.org/indexnow" \
             -H "Content-Type: application/json; charset=utf-8" \
-            -d "{\"host\":\"getroundsignal.com\",\"key\":\"$KEY\",\"keyLocation\":\"https://getroundsignal.com/$KEY.txt\",\"urlList\":[\"https://getroundsignal.com/\",\"https://getroundsignal.com/sample.html\"]}" || true
+            -d "{\"host\":\"getroundsignal.com\",\"key\":\"$KEY\",\"keyLocation\":\"https://getroundsignal.com/$KEY.txt\",\"urlList\":[\"https://getroundsignal.com/\",\"https://getroundsignal.com/sample.html\",\"https://getroundsignal.com/archive.html\"]}" || true

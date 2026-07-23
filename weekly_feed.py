@@ -208,7 +208,7 @@ def _heat(score):
 
 
 def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
-                        gated=False, public=False):
+                        gated=False, public=False, permalink=None):
     """Render the issue.
 
     Subscriber copy (gated=False): every account in full, best-first.
@@ -293,7 +293,8 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
     else:
         rows = [_full(a) for a in accounts]
     robots = "" if public else '<meta name="robots" content="noindex">'
-    canonical = f'<link rel="canonical" href="{SITE_BASE_URL}/sample.html">' if public else ""
+    page_url = permalink or f"{SITE_BASE_URL}/sample.html"
+    canonical = f'<link rel="canonical" href="{page_url}">' if public else ""
     # GoatCounter analytics (public page only; inert until the site code is registered)
     analytics = ('<script data-goatcounter="https://roundsignal.goatcounter.com/count" '
                  'async src="https://gc.zgo.at/count.js"></script>') if public else ""
@@ -301,7 +302,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
         f'<meta property="og:type" content="website">'
         f'<meta property="og:title" content="RoundSignal {issue_label} &mdash; freshly-funded startups worth selling to">'
         f'<meta property="og:description" content="{len(accounts)} freshly-funded accounts, scored, with the role to contact.">'
-        f'<meta property="og:url" content="{SITE_BASE_URL}/sample.html">'
+        f'<meta property="og:url" content="{page_url}">'
         f'<meta property="og:image" content="{SITE_BASE_URL}/og-image.png">'
         f'<meta name="twitter:card" content="summary_large_image">'
         f'<meta name="twitter:image" content="{SITE_BASE_URL}/og-image.png">'
@@ -430,6 +431,58 @@ def build_rss(accounts, issue_label, pubdate):
     )
 
 
+def _label_date(label):
+    """'2026-W30' -> a human date for the Monday of that ISO week."""
+    try:
+        y, w = label.split("-W")
+        d = _dt.date.fromisocalendar(int(y), int(w), 1)
+        return d.strftime("%b %d, %Y").replace(" 0", " ")
+    except Exception:
+        return label
+
+
+def render_archive_index(labels):
+    """Static, indexable index of every dated edition. Each linked edition has
+    genuinely unique content (a different set of companies), so this is a normal
+    publication archive - not a doorway. Inline styles (index.html Tailwind is frozen)."""
+    rows = []
+    for lb in labels:
+        url = f"{SITE_BASE_URL}/issue-{lb}.html"
+        rows.append(
+            f'<li style="margin:0 0 14px"><a href="{url}" '
+            f'style="color:{INK};font-weight:700;text-decoration:none">Week of {_label_date(lb)}</a>'
+            f'<span style="color:#64748b;font-size:13px"> &mdash; freshly-funded startups worth selling to '
+            f'(issue {html.escape(lb)})</span></li>'
+        )
+    body = "\n".join(rows) if rows else '<li style="color:#64748b">The first edition publishes Monday.</li>'
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="{SITE_BASE_URL}/archive.html">
+<title>Issue archive &mdash; every week's freshly-funded startups | RoundSignal</title>
+<meta name="description" content="Browse every past RoundSignal edition: each week, the freshly-funded startups worth selling to, scored for sales-fit with who to contact and why now.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="RoundSignal issue archive">
+<meta property="og:description" content="Every week's freshly-funded startups, scored for sales-fit.">
+<meta property="og:url" content="{SITE_BASE_URL}/archive.html">
+<meta property="og:image" content="{SITE_BASE_URL}/og-image.png">
+<script data-goatcounter="https://roundsignal.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+<main style="max-width:720px;margin:0 auto;padding:28px 18px">
+  <header style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
+    <a href="{SITE_BASE_URL}/" style="display:flex;align-items:center;gap:9px;font-weight:800;font-size:22px;color:{INK};text-decoration:none"><img src="{SITE_BASE_URL}/logo.svg" alt="" width="26" height="26" style="border-radius:6px;display:block">Round<span style="color:{ACCENT}">Signal</span></a>
+  </header>
+  <h1 style="color:{INK};font-size:24px;font-weight:800;margin:0 0 6px">Issue archive</h1>
+  <p style="color:#475569;font-size:15px;margin:0 0 22px;line-height:1.5">Every Monday we publish the freshly-funded startups worth selling to that week &mdash; scored for sales-fit, with the role to contact and why now. Past editions below (the newest picks are subscribers-only; the archive shows the free preview of each).</p>
+  <ul style="list-style:none;padding:0;margin:0">
+  {body}
+  </ul>
+  <p style="margin:28px 0 0"><a href="{SITE_BASE_URL}/sample.html" style="color:#0f766e;font-weight:700;text-decoration:none">See this week's edition &rarr;</a></p>
+  <p style="color:#64748b;font-size:12px;margin-top:26px">&copy; RoundSignal. Signals sourced from public news; verify before outreach.</p>
+</main>
+</body></html>"""
+
+
 def main():
     if not os.getenv("ANTHROPIC_API_KEY"):
         sys.exit("ANTHROPIC_API_KEY not set")
@@ -445,11 +498,35 @@ def main():
         f.write(render_archive_html(accounts, LAUNCH_VERTICAL["name"], label,
                                     gated_note="Generated live from public funding sources.",
                                     gated=True, public=True))
+    # PERMANENT dated edition: a distinct URL per week. Each week's companies are
+    # different, so these accumulate as unique, indexable archive pages (a real
+    # publication archive, not keyword-variation doorways). Self-canonical.
+    issue_file = f"issue-{label}.html"
+    issue_url = f"{SITE_BASE_URL}/{issue_file}"
+    with open(issue_file, "w", encoding="utf-8") as f:
+        f.write(render_archive_html(accounts, LAUNCH_VERTICAL["name"], label,
+                                    gated_note="Generated live from public funding sources.",
+                                    gated=True, public=True, permalink=issue_url))
+    # Rebuild the archive index from every dated edition present in the repo.
+    issue_labels = sorted(
+        {fn[len("issue-"):-len(".html")] for fn in os.listdir(".")
+         if fn.startswith("issue-") and fn.endswith(".html")},
+        reverse=True,
+    )
+    with open("archive.html", "w", encoding="utf-8") as f:
+        f.write(render_archive_index(issue_labels))
     # PUBLIC csv = teaser columns only (paid columns withheld).
     with open("sample.csv", "w", encoding="utf-8") as f:
         f.write(digest_to_csv(accounts, public=True))
     # Refresh sitemap lastmod so the weekly-changing pages carry an honest date.
     today = now.date().isoformat()
+    archive_urls = (
+        f'  <url><loc>{SITE_BASE_URL}/archive.html</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>\n'
+        + "".join(
+            f'  <url><loc>{SITE_BASE_URL}/issue-{lb}.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>\n'
+            for lb in issue_labels
+        )
+    )
     with open("sitemap.xml", "w", encoding="utf-8") as f:
         f.write(
             '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -470,7 +547,8 @@ def main():
             f'  <url><loc>{SITE_BASE_URL}/about.html</loc><lastmod>2026-07-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>\n'
             f'  <url><loc>{SITE_BASE_URL}/privacy.html</loc><lastmod>2026-06-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>\n'
             f'  <url><loc>{SITE_BASE_URL}/terms.html</loc><lastmod>2026-06-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>\n'
-            '</urlset>\n'
+            + archive_urls
+            + '</urlset>\n'
         )
     print(f"OK: {len(accounts)} accounts, issue {label} -> {FEED_FILENAME} + sample.html (gated) + sample.csv (teaser) + sitemap.xml")
 
