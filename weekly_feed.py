@@ -225,6 +225,10 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
     the paywall).
     public=True makes it indexable + adds the signup CTA."""
 
+    # Best-touch window closes ~4 weeks out (the signal decays within weeks). Shown
+    # per account to make the urgency concrete and the issue forwardable.
+    window_close_str = (_dt.date.today() + _dt.timedelta(days=28)).strftime("%b %d").replace(" 0", " ")
+
     def _namelink(a):
         nm = html.escape(a.company)
         if a.website:
@@ -247,6 +251,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> {html.escape(a.why_now)}</p>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> {contact}</p>
           <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> {html.escape(a.outreach_angle)}</p>
+          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~{window_close_str} &mdash; the signal decays within weeks.</p>
           <a href="{html.escape(a.source_url)}" style="font-size:12px;color:#64748b">source</a>
         </div>"""
 
