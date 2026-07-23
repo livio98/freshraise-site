@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://getroundsignal.com/</loc><lastmod>2026-07-20</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://getroundsignal.com/sample.html</loc><lastmod>2026-07-20</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://getroundsignal.com/</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://getroundsignal.com/sample.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://getroundsignal.com/guide-selling-to-funded-startups.html</loc><lastmod>2026-07-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://getroundsignal.com/how-to-find-recently-funded-startups.html</loc><lastmod>2026-07-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://getroundsignal.com/how-to-find-startup-founder-email.html</loc><lastmod>2026-07-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -16,4 +16,6 @@
   <url><loc>https://getroundsignal.com/about.html</loc><lastmod>2026-07-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://getroundsignal.com/privacy.html</loc><lastmod>2026-06-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://getroundsignal.com/terms.html</loc><lastmod>2026-06-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://getroundsignal.com/archive.html</loc><lastmod>2026-07-23</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://getroundsignal.com/issue-2026-W30.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>
 </urlset>
