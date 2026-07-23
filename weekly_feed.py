@@ -208,8 +208,15 @@ def _heat(score):
 
 
 def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
-                        gated=False, public=False, permalink=None):
+                        gated=False, public=False, permalink=None, facts_public=False):
     """Render the issue.
+
+    facts_public=True (dated archive editions): expose the public FACTS of every
+    account — company name + the funding trigger (round/amount/date/source), which
+    are public news anyway — as crawl bait for search and AI answer engines, while
+    keeping the sales-fit SCORE, why-now, who-to-contact and the angle behind the
+    paywall. This turns each week's archive page into unique, indexable entity-rich
+    content (real company names) without giving away the paid product.
 
     Subscriber copy (gated=False): every account in full, best-first.
 
@@ -276,8 +283,22 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
           <p style="margin:10px 0 0;color:#94a3b8;font-size:13px">&#128274; This week&#x27;s hottest &mdash; name, trigger &amp; full playbook are subscribers only</p>
         </div>"""
 
+    def _facts(a):
+        # Public facts (company + round) as crawl bait; paid analysis stays locked.
+        src = (f'<a href="{html.escape(a.source_url)}" style="font-size:12px;color:#64748b">source</a>'
+               if a.source_url else "")
+        return f"""
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;margin:12px 0;background:#fff">
+          <h2 style="margin:0 0 4px;font-size:17px;color:{INK}">{_namelink(a)}</h2>
+          <p style="margin:4px 0;color:#334155;font-size:14px">{html.escape(a.trigger)}</p>
+          <p style="margin:8px 0 4px;color:#475569;font-size:13px">&#128274; Sales-fit score, why now, who to contact &amp; the outreach angle &mdash; <a href="{SITE_BASE_URL}/#pricing" style="color:#0f766e;font-weight:600">subscribers only</a></p>
+          {src}
+        </div>"""
+
     n = len(accounts)
-    if gated:
+    if facts_public:
+        rows = [_facts(a) for a in accounts]
+    elif gated:
         band = max(1, min(5, n // 4))
         hidden_n = band
         full_n = min(band, n - hidden_n)
@@ -361,9 +382,28 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
         'document.documentElement.style.overflow="";});})();</script>'
         if gated else ""
     )
+    # ItemList schema on facts-public pages: real company entities that AI/search extract.
+    if facts_public:
+        _items = [{"@type": "ListItem", "position": i + 1, "name": a.company,
+                   "url": a.website or page_url} for i, a in enumerate(accounts)]
+        itemlist = ('<script type="application/ld+json">'
+                    + json.dumps({"@context": "https://schema.org", "@type": "ItemList",
+                                  "name": f"Freshly-funded startups — {issue_label}",
+                                  "itemListElement": _items}, ensure_ascii=False)
+                    + '</script>')
+    else:
+        itemlist = ""
+    facts_note = (
+        f'<p style="color:#475569;font-size:13px;margin:0 0 16px;line-height:1.5">The companies and '
+        f'their rounds below are public. RoundSignal adds the part that isn&#x27;t &mdash; a sales-fit '
+        f'<strong>score</strong>, why the window is open <strong>now</strong>, <strong>who to contact</strong>, '
+        f'and the <strong>angle</strong> &mdash; for subscribers. '
+        f'<a href="{SITE_BASE_URL}/#pricing" style="color:#0f766e;font-weight:600">See plans &rarr;</a></p>'
+        if facts_public else ""
+    )
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{robots}{canonical}{social}<title>RoundSignal {issue_label} &mdash; freshly-funded startups worth selling to</title>
+{robots}{canonical}{social}{itemlist}<title>RoundSignal {issue_label} &mdash; freshly-funded startups worth selling to</title>
 <meta name="description" content="{html.escape(vertical_name)} &mdash; {len(accounts)} freshly-funded accounts, scored, with the role to contact. Week {issue_label}."></head>
 <body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
 <main style="max-width:720px;margin:0 auto;padding:28px 18px">
@@ -373,7 +413,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
   </header>
   <h1 style="color:{INK};font-size:22px;font-weight:800;margin:0 0 4px">{html.escape(vertical_name)}</h1>
   <p style="color:#64748b;font-size:13px;margin:0 0 14px">{len(accounts)} trigger-ready accounts, scored and contextualized. {gated_note}</p>
-  {locked_note}
+  {locked_note}{facts_note}
   {''.join(rows)}
   {cta}
   {guide_link}
@@ -506,7 +546,7 @@ def main():
     with open(issue_file, "w", encoding="utf-8") as f:
         f.write(render_archive_html(accounts, LAUNCH_VERTICAL["name"], label,
                                     gated_note="Generated live from public funding sources.",
-                                    gated=True, public=True, permalink=issue_url))
+                                    public=True, permalink=issue_url, facts_public=True))
     # Rebuild the archive index from every dated edition present in the repo.
     issue_labels = sorted(
         {fn[len("issue-"):-len(".html")] for fn in os.listdir(".")
