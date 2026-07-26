@@ -1,0 +1,72 @@
+name: Checkout links check
+
+# Perche' esiste: il link di cassa compare in 8 punti su 6 file, e due di quei
+# file vengono rigenerati ogni lunedi'. Un link sbagliato non fa fallire niente
+# di visibile - la pagina si apre e semplicemente non incassa. Questo controllo
+# e' l'unico punto in cui un errore del genere diventa rumoroso.
+#
+# Solo stdlib, nessuna dipendenza, ~5 secondi. Non chiama Anthropic.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Ancore coerenti, nessun residuo, nessuna chiave
+        run: python scripts/apply_checkout.py --check
+
+      - name: Il generatore emette il link di checkout.json
+        # Importa weekly_feed e chiama SOLO il renderer: nessuna chiamata
+        # Anthropic, nessun feed, nessun costo. Gira qui e non in locale perche'
+        # anthropic/feedparser/tenacity esistono solo in CI (requirements-ci.txt).
+        run: |
+          pip install -q -r requirements-ci.txt
+          python - <<'PY'
+          import json, sys
+          import weekly_feed as wf
+
+          cfg = json.load(open("checkout.json", encoding="utf-8"))
+          atteso = cfg["rails"][cfg["rail_attivo"]]["links"]["pro_mensile"]
+          inattivi = [u for r, d in cfg["rails"].items() if r != cfg["rail_attivo"]
+                      for u in d["links"].values() if u]
+
+          finti = [wf.ScoredAccount(
+              company=f"Test {i}", trigger="raised a seed round",
+              why_now="budget just landed", role_to_contact="CTO",
+              outreach_angle="congratulate and offer help", score=90 - i * 10,
+              source_url="https://example.com/a", website="https://example.com",
+              contact_email="hello@example.com") for i in range(3)]
+
+          html = wf.render_archive_html(finti, "dev shops", "2026-W99",
+                                        gated=True, public=True)
+
+          errori = []
+          if atteso not in html:
+              errori.append("il CTA non contiene il link del rail attivo (%s)" % atteso)
+          if 'data-rs-checkout="pro_mensile"' not in html:
+              errori.append("il CTA non porta l'attributo data-rs-checkout")
+          for u in inattivi:
+              if u in html:
+                  errori.append("il CTA contiene un link di un rail NON attivo: %s" % u)
+
+          if errori:
+              print("BLOCCA:")
+              for e in errori:
+                  print("  - " + e)
+              sys.exit(1)
+          print("passa - il generatore emette il link di checkout.json")
+          PY

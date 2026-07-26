@@ -40,6 +40,35 @@ INK, ACCENT = "#0B1F3A", "#1FB6A6"
 # Full-issue RSS: tokenized name — /feed.xml is the first path scrapers probe.
 FEED_FILENAME = "feed-7d27d289dd65.xml"
 
+
+def _load_checkout():
+    """Read the active checkout link from checkout.json — the single source of truth.
+
+    Resolved relative to __file__, not the cwd: GitHub Actions runs from the repo
+    root but a local run may not, and a path that works in one place and silently
+    breaks in the other is exactly the kind of bug that ships a dead pay button.
+
+    Fails LOUDLY on purpose. A hardcoded fallback is precisely the mechanism by
+    which a stale URL survives a checkout migration: a skipped issue is visible
+    (the Actions run goes red), a live button pointing at a dead checkout is not.
+    """
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "checkout.json")
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            cfg = json.load(f)
+        rail = cfg["rail_attivo"]
+        url = cfg["rails"][rail]["links"]["pro_mensile"]
+    except Exception as exc:
+        sys.exit("checkout.json unreadable or incomplete (%s) — refusing to render a "
+                 "pay button with a guessed URL. Fix checkout.json and re-run." % exc)
+    if not url:
+        sys.exit("checkout.json: rail %r has no pro_mensile link yet — refusing to "
+                 "render a pay button with an empty href." % rail)
+    return url
+
+
+CHECKOUT_URL = _load_checkout()
+
 DEFAULT_FEEDS = [
     {"source": "FinSMEs", "signal": "funding", "url": "https://www.finsmes.com/feed/"},
     {"source": "TechCrunch Funding", "signal": "funding", "url": "https://techcrunch.com/tag/funding/feed/"},
@@ -345,7 +374,7 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
     )
     cta = (
         f'<div style="text-align:center;margin:30px 0 6px">'
-        f'<a href="https://roundsignal.beehiiv.com/upgrade?offer_id=1cf13c53-9b75-4a64-8cfc-996256a49f9b" '
+        f'<a data-rs-checkout="pro_mensile" href="{CHECKOUT_URL}" '
         f'style="display:inline-block;background:{ACCENT};color:{INK};'
         f'font-weight:700;padding:13px 24px;border-radius:12px;text-decoration:none">'
         f'Get the full list every Monday &mdash; try 7 days free &rarr;</a>'

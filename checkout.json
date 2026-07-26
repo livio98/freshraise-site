@@ -1,0 +1,61 @@
+{
+  "_leggimi": "UNICA FONTE DI VERITA' dei link di cassa. Si modifica QUESTO file, poi si lancia 'python scripts/apply_checkout.py --apply'. NON si edita mai un href a mano: l'URL compare in 8 punti su 6 file, e due di quei file vengono RIGENERATI ogni lunedi' dal cron.",
+  "_perche_sta_in_un_repo_pubblico": "Un link di pagamento non e' un segreto: e' un URL stampato su una pagina pubblica, fatto apposta per essere cliccato da sconosciuti. Nasconderlo in una cartella privata aggiungerebbe uno step di build, un accoppiamento fra due cartelle, e la possibilita' di pubblicare un placeholder non risolto. La regola 'niente segreti nel repo pubblico' resta intatta perche' qui non c'e' nessun segreto.",
+  "aggiornato_il": "2026-07-26",
+
+  "rail_attivo": "beehiiv",
+  "_rail_attivo": "Cambiare questo valore e rilanciare --apply e' TUTTA la migrazione lato sito. E' anche il rollback: si rimette 'beehiiv' e si rilancia.",
+
+  "rails": {
+    "beehiiv": {
+      "stato": "attivo",
+      "_nota": "Il checkout ospitato da beehiiv. Una sola pagina per tier, con un interruttore Mese|Anno interno: per questo pro_mensile e pro_annuale puntano allo STESSO URL. Resta vivo finche' il piano non scende a Launch, ed e' il rollback della migrazione: NON archiviare le offerte al cutover.",
+      "links": {
+        "pro_mensile":    "https://roundsignal.beehiiv.com/upgrade?offer_id=1cf13c53-9b75-4a64-8cfc-996256a49f9b",
+        "pro_annuale":    "https://roundsignal.beehiiv.com/upgrade?offer_id=1cf13c53-9b75-4a64-8cfc-996256a49f9b",
+        "agency_mensile": "https://roundsignal.beehiiv.com/upgrade?offer_id=1ae4c048-32bd-4460-bf75-db160f0a56b2",
+        "agency_annuale": "https://roundsignal.beehiiv.com/upgrade?offer_id=1ae4c048-32bd-4460-bf75-db160f0a56b2"
+      }
+    },
+    "stripe": {
+      "stato": "in_attesa_dei_link",
+      "_nota": "Quattro Payment Link distinti, uno per prezzo. Li crea Federico (serve il login). Ognuno deve avere: prova di 7 giorni, e la spunta 'Customers can manage their subscription' - quella spunta regge TRE affermazioni gia' pubblicate sul sito ('cancel in one click' nel FAQ, 'cancel in two clicks - no call, no email' nell'asset di chiusura, e la frase sul portale in terms.html).",
+      "links": {
+        "pro_mensile":    null,
+        "pro_annuale":    null,
+        "agency_mensile": null,
+        "agency_annuale": null
+      }
+    }
+  },
+
+  "prezzi": {
+    "_nota": "Dato di VERIFICA, non di iniezione: serve a confrontare cio' che dice il sito con cio' che chiede la cassa. I prezzi nell'HTML restano testo scritto a mano. Questa migrazione cambia il rail, non i prezzi: una variabile per volta.",
+    "pro_mensile_usd": 49,
+    "pro_annuale_usd": 490,
+    "agency_mensile_usd": 99,
+    "agency_annuale_usd": 990,
+    "prova_giorni": 7
+  },
+
+  "ancore": {
+    "_nota": "Quali chiavi devono comparire in quale file, e quante volte. Se qualcuno aggiunge o toglie un bottone senza aggiornare questa mappa, --check se ne accorge. E' il controllo che cattura l'occorrenza dimenticata.",
+    "index.html":                            { "pro_mensile": 3, "agency_mensile": 1 },
+    "full-issue-4b7e2a9c31.html":            { "pro_mensile": 1 },
+    "recently-funded-fintech-startups.html": { "pro_mensile": 1 },
+    "sample.html":                           { "pro_mensile": 1 },
+    "issue-2026-W30.html":                   { "pro_mensile": 1 }
+  },
+
+  "_generati": [
+    "sample.html",
+    "issue-*.html"
+  ],
+  "__generati": "Questi file li riscrive weekly_feed.py ogni lunedi'. --apply li aggiorna comunque, cosi' il repo resta coerente in ogni istante; ma la fonte vera per loro e' il generatore, che legge questo stesso file. I due percorsi convergono sullo stesso valore invece di divergere.",
+
+  "_residui_vietati": {
+    "beehiiv": ["beehiiv.com/upgrade"],
+    "stripe":  ["buy.stripe.com"]
+  },
+  "__residui_vietati": "Frammenti che NON devono comparire da nessuna parte quando quel rail non e' attivo. E' l'asserzione negativa: cattura il link dimenticato in un file che nessuno ricordava di avere."
+}
