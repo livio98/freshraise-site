@@ -1,7 +1,19 @@
 User-agent: *
 Allow: /
 
-# Sales asset, handed out 1-to-1 only — not for indexing.
-Disallow: /full-issue-4b7e2a9c31.html
+# Nessun Disallow, di proposito.
+#
+# Qui c'era l'URL tokenizzato dell'asset di vendita, con tanto di commento che
+# spiegava cos'era. robots.txt e' pubblico ed e' il primo file che chiunque
+# legge: quella riga non nascondeva il file, lo annunciava.
+#
+# E non proteggeva nemmeno: un Disallow blocca la SCANSIONE, quindi Google non
+# poteva leggere il <meta name="robots" content="noindex"> che quella pagina
+# gia' porta in testa - e un URL bloccato ma linkato da qualche parte finisce
+# comunque nell'indice, senza contenuto. Tolto il Disallow, il noindex viene
+# finalmente letto e fa il suo lavoro.
+#
+# Regola: le pagine da tenere fuori dall'indice si escludono dall'interno, con
+# il meta robots. Mai elencandole qui.
 
 Sitemap: https://getroundsignal.com/sitemap.xml

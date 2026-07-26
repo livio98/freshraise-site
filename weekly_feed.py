@@ -556,6 +556,9 @@ def render_archive_index(labels):
 <meta property="og:description" content="Every week's freshly-funded startups, scored for sales-fit.">
 <meta property="og:url" content="{SITE_BASE_URL}/archive.html">
 <meta property="og:image" content="{SITE_BASE_URL}/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{SITE_BASE_URL}/og-image.png">
+<link rel="alternate" type="application/rss+xml" title="RoundSignal" href="{SITE_BASE_URL}/feed.xml">
 <script data-goatcounter="https://roundsignal.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
