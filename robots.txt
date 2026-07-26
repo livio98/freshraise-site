@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# Sales asset, handed out 1-to-1 only — not for indexing.
+Disallow: /full-issue-4b7e2a9c31.html
+
 Sitemap: https://getroundsignal.com/sitemap.xml
