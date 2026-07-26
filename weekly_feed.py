@@ -20,6 +20,7 @@ import html
 import io
 import json
 import os
+import subprocess
 import sys
 import time
 from dataclasses import dataclass
@@ -342,15 +343,36 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
                 rows.append(_half(a))
     else:
         rows = [_full(a) for a in accounts]
-    robots = "" if public else '<meta name="robots" content="noindex">'
+    # sample.html and issue-<label>.html come out of THIS SAME renderer with the same
+    # companies: the sample is a rotating copy of the dated edition. Only the dated one
+    # may be indexable, or the two compete in the index for identical content with an
+    # identical title. `follow` so the links leaving the sample still carry weight.
+    is_sample = public and not permalink
+    if not public:
+        robots = '<meta name="robots" content="noindex">'
+    elif is_sample:
+        robots = '<meta name="robots" content="noindex,follow">'
+    else:
+        robots = ""
     page_url = permalink or f"{SITE_BASE_URL}/sample.html"
     canonical = f'<link rel="canonical" href="{page_url}">' if public else ""
+    # Distinct title/description per variant. They used to be byte-identical, which is
+    # how three live URLs ended up presenting themselves to Google as the same page.
+    if is_sample:
+        page_title = "Free preview &mdash; this week&#x27;s freshly-funded startups | RoundSignal"
+        page_desc = (f"A free preview of this week&#x27;s RoundSignal: {len(accounts)} "
+                     f"freshly-funded accounts, with the coldest picks shown in full so you "
+                     f"can see exactly what a signal looks like.")
+    else:
+        page_title = f"RoundSignal {issue_label} &mdash; freshly-funded startups worth selling to"
+        page_desc = (f"{html.escape(vertical_name)} &mdash; {len(accounts)} freshly-funded "
+                     f"accounts, scored, with the role to contact. Week {issue_label}.")
     # GoatCounter analytics (public page only; inert until the site code is registered)
     analytics = ('<script data-goatcounter="https://roundsignal.goatcounter.com/count" '
                  'async src="https://gc.zgo.at/count.js"></script>') if public else ""
     social = (
         f'<meta property="og:type" content="website">'
-        f'<meta property="og:title" content="RoundSignal {issue_label} &mdash; freshly-funded startups worth selling to">'
+        f'<meta property="og:title" content="{page_title}">'
         f'<meta property="og:description" content="{len(accounts)} freshly-funded accounts, scored, with the role to contact.">'
         f'<meta property="og:url" content="{page_url}">'
         f'<meta property="og:image" content="{SITE_BASE_URL}/og-image.png">'
@@ -432,8 +454,8 @@ def render_archive_html(accounts, vertical_name, issue_label, gated_note="",
     )
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{robots}{canonical}{social}{itemlist}<title>RoundSignal {issue_label} &mdash; freshly-funded startups worth selling to</title>
-<meta name="description" content="{html.escape(vertical_name)} &mdash; {len(accounts)} freshly-funded accounts, scored, with the role to contact. Week {issue_label}."></head>
+{robots}{canonical}{social}{itemlist}<title>{page_title}</title>
+<meta name="description" content="{page_desc}"></head>
 <body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
 <main style="max-width:720px;margin:0 auto;padding:28px 18px">
   <header style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
@@ -546,10 +568,30 @@ def render_archive_index(labels):
   <ul style="list-style:none;padding:0;margin:0">
   {body}
   </ul>
-  <p style="margin:28px 0 0"><a href="{SITE_BASE_URL}/sample.html" style="color:#0f766e;font-weight:700;text-decoration:none">See this week's edition &rarr;</a></p>
+  <p style="margin:28px 0 0"><a href="{SITE_BASE_URL}/#score-demo" style="color:#0f766e;font-weight:700;text-decoration:none">See how it scores for your offer &rarr;</a></p>
   <p style="color:#64748b;font-size:12px;margin-top:26px">&copy; RoundSignal. Signals sourced from public news; verify before outreach.</p>
 </main>
 </body></html>"""
+
+
+def _last_commit_date(path):
+    """The date git says the file last changed, or None when git can't answer.
+
+    Returning None on failure is deliberate: the caller then omits <lastmod> for that
+    URL, which is honest. Guessing would put us back where we started."""
+    try:
+        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", path],
+                             capture_output=True, text=True, timeout=15)
+        return out.stdout.strip() or None
+    except Exception:
+        return None
+
+
+def _sitemap_url(loc, changefreq, priority, lastmod=None):
+    tag = f"<lastmod>{lastmod}</lastmod>" if lastmod else ""
+    return (f'  <url><loc>{loc}</loc>{tag}'
+            f'<changefreq>{changefreq}</changefreq>'
+            f'<priority>{priority}</priority></url>\n')
 
 
 def main():
@@ -587,36 +629,48 @@ def main():
     # PUBLIC csv = teaser columns only (paid columns withheld).
     with open("sample.csv", "w", encoding="utf-8") as f:
         f.write(digest_to_csv(accounts, public=True))
-    # Refresh sitemap lastmod so the weekly-changing pages carry an honest date.
+    # Sitemap.
+    #
+    # sample.html is deliberately ABSENT: it is now noindex (a rotating copy of the dated
+    # issue), and listing a noindex URL asks Google to crawl exactly what we just told it
+    # to drop.
+    #
+    # lastmod comes from git, or is omitted entirely — never invented. The old literals
+    # drifted the moment a page was edited: on 26/07 seventeen of eighteen URLs claimed a
+    # date older than the real last edit, right when we needed a recrawl. os.path.getmtime
+    # is NOT the fix either — actions/checkout stamps every file with the checkout time, so
+    # it would swear the whole site changed every Monday. An absent lastmod beats a false
+    # one: Google discounts the signal outright once it stops matching what it fetches.
     today = now.date().isoformat()
-    archive_urls = (
-        f'  <url><loc>{SITE_BASE_URL}/archive.html</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>\n'
-        + "".join(
-            f'  <url><loc>{SITE_BASE_URL}/issue-{lb}.html</loc><changefreq>yearly</changefreq><priority>0.5</priority></url>\n'
-            for lb in issue_labels
-        )
-    )
+    static_pages = [
+        ("guide-selling-to-funded-startups.html", "monthly", "0.6"),
+        ("how-to-find-recently-funded-startups.html", "monthly", "0.7"),
+        ("how-to-find-startup-founder-email.html", "monthly", "0.7"),
+        ("best-time-to-sell-to-a-startup-after-funding.html", "monthly", "0.7"),
+        ("growth-list-alternative.html", "monthly", "0.7"),
+        ("fundraise-insider-alternative.html", "monthly", "0.7"),
+        ("recently-funded-ai-startups.html", "monthly", "0.7"),
+        ("recently-funded-saas-startups.html", "monthly", "0.7"),
+        ("recently-funded-startups-in-europe.html", "monthly", "0.7"),
+        ("recently-funded-fintech-startups.html", "monthly", "0.7"),
+        ("methodology.html", "monthly", "0.5"),
+        ("about.html", "monthly", "0.5"),
+        ("privacy.html", "yearly", "0.3"),
+        ("terms.html", "yearly", "0.3"),
+    ]
+    body = _sitemap_url(f"{SITE_BASE_URL}/", "weekly", "1.0", _last_commit_date("index.html"))
+    for name, freq, pri in static_pages:
+        body += _sitemap_url(f"{SITE_BASE_URL}/{name}", freq, pri, _last_commit_date(name))
+    # archive.html and this week's issue are written by this run, so today is the truth.
+    body += _sitemap_url(f"{SITE_BASE_URL}/archive.html", "weekly", "0.6", today)
+    for lb in issue_labels:
+        lm = today if lb == label else _last_commit_date(f"issue-{lb}.html")
+        body += _sitemap_url(f"{SITE_BASE_URL}/issue-{lb}.html", "yearly", "0.5", lm)
     with open("sitemap.xml", "w", encoding="utf-8") as f:
         f.write(
             '<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-            f'  <url><loc>{SITE_BASE_URL}/</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/sample.html</loc><lastmod>{today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/guide-selling-to-funded-startups.html</loc><lastmod>2026-07-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/how-to-find-recently-funded-startups.html</loc><lastmod>2026-07-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/how-to-find-startup-founder-email.html</loc><lastmod>2026-07-06</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/best-time-to-sell-to-a-startup-after-funding.html</loc><lastmod>2026-07-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/growth-list-alternative.html</loc><lastmod>2026-07-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/fundraise-insider-alternative.html</loc><lastmod>2026-07-09</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/recently-funded-ai-startups.html</loc><lastmod>2026-07-17</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/recently-funded-saas-startups.html</loc><lastmod>2026-07-18</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/recently-funded-startups-in-europe.html</loc><lastmod>2026-07-19</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/recently-funded-fintech-startups.html</loc><lastmod>2026-07-20</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/methodology.html</loc><lastmod>2026-07-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/about.html</loc><lastmod>2026-07-04</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/privacy.html</loc><lastmod>2026-06-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>\n'
-            f'  <url><loc>{SITE_BASE_URL}/terms.html</loc><lastmod>2026-06-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>\n'
-            + archive_urls
+            + body
             + '</urlset>\n'
         )
     print(f"OK: {len(accounts)} accounts, issue {label} -> {FEED_FILENAME} + sample.html (gated) + sample.csv (teaser) + sitemap.xml")

@@ -47,7 +47,11 @@ jobs:
         continue-on-error: true
         run: |
           KEY=e0b080639a674923aac3a4568ed9337f
+          # Push the DATED issue, not sample.html: the sample is noindex now, and asking
+          # a search engine to crawl a page we just excluded is a contradiction.
+          ISSUE=$(ls issue-*.html 2>/dev/null | sort | tail -1)
+          [ -n "$ISSUE" ] && ISSUE_URL=",\"https://getroundsignal.com/$ISSUE\"" || ISSUE_URL=""
           curl -sS -m 30 -o /dev/null -w "IndexNow HTTP %{http_code}\n" \
             -X POST "https://api.indexnow.org/indexnow" \
             -H "Content-Type: application/json; charset=utf-8" \
-            -d "{\"host\":\"getroundsignal.com\",\"key\":\"$KEY\",\"keyLocation\":\"https://getroundsignal.com/$KEY.txt\",\"urlList\":[\"https://getroundsignal.com/\",\"https://getroundsignal.com/sample.html\",\"https://getroundsignal.com/archive.html\"]}" || true
+            -d "{\"host\":\"getroundsignal.com\",\"key\":\"$KEY\",\"keyLocation\":\"https://getroundsignal.com/$KEY.txt\",\"urlList\":[\"https://getroundsignal.com/\",\"https://getroundsignal.com/archive.html\"$ISSUE_URL]}" || true
