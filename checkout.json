@@ -17,7 +17,8 @@
     },
     "stripe": {
       "stato": "attivo",
-      "_nota": "Quattro Payment Link LIVE, uno per prezzo, creati e verificati alla fonte il 26/07: importi 4900/49000/9900/99000 cent USD, prova di 7 giorni su tutti e quattro, URL distinti. Prodotti classificati txcd_10303002 (periodico digitale): con Managed Payments attivo Stripe fa da merchant of record e applica IVA 4% invece del 22% del software. La stessa ricetta e stata provata end-to-end in sandbox PRIMA della produzione, con un pagamento vero e il payload catturato.",
+      "_nota": "Quattro Payment Link LIVE, uno per prezzo, creati e verificati alla fonte il 26/07: importi 4900/49000/9900/99000 cent USD, prova di 7 giorni su tutti e quattro, URL distinti. Prodotti classificati txcd_10303002 (periodico digitale) invece che come software, perche' in UE i periodici digitali hanno spesso un'aliquota ridotta. La stessa ricetta e stata provata end-to-end in sandbox PRIMA della produzione, con un pagamento vero e il payload catturato.",
+      "_chi_vende": "VERIFICATO ALLA FONTE il 26/07 (support.link.com/questions/what-is-sold-through-link): la cassa e' etichettata 'Venduto tramite Link'. Link, societa' Stripe, fa gestione ordini e accettazione dell'acquisto, addebita il cliente, gestisce i rimborsi e calcola/applica automaticamente le imposte indirette. L'abbonamento resta fornito da RoundSignal secondo i suoi termini. ATTENZIONE: sull'estratto conto compare 'link.com*ROUNDSIGNAL', non 'ROUNDSIGNAL' - e' la riga che genera i 'non riconosco questo addebito', quindi e' dichiarata in terms.html e privacy.html.",
       "links": {
         "pro_mensile": "https://buy.stripe.com/bJe3cua3o69q3y3czR4Vy00",
         "pro_annuale": "https://buy.stripe.com/aFaaEWcbw0P6d8DfM34Vy01",
