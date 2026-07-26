@@ -48,11 +48,12 @@
   "ancore": {
     "_nota": "Quali chiavi devono comparire in quale file, e quante volte. Se qualcuno aggiunge o toglie un bottone senza aggiornare questa mappa, --check se ne accorge. E' il controllo che cattura l'occorrenza dimenticata.",
     "index.html": {
-      "pro_mensile": 3,
+      "pro_mensile": 6,
       "pro_annuale": 1,
       "agency_mensile": 1,
       "agency_annuale": 1
     },
+    "_nota_index": "26/07 sera: da 3 a 6 pro_mensile. Aggiunti tre punti di uscita - bottone in navbar (prima puntava al campione gratuito, non al trial), CTA sotto la demo interattiva, CTA in fondo a 'how it works'. Prima della modifica fra il bottone dell'hero (y=576) e il pricing (y=5128) c'erano 4.552 px, cioe' 6,3 schermate, senza un solo bottone.",
     "full-issue-4b7e2a9c31.html": {
       "pro_mensile": 1
     },

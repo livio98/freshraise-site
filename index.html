@@ -88,6 +88,66 @@
   }
   </style>
   <noscript><style>.reveal{opacity:1;transform:none}.hero-in>*{opacity:1;animation:none}</style></noscript>
+
+  <!-- ============================================================================
+       RS TOKENS — l'impianto, bloccato. Deve restare l'ULTIMO <style> del <head>:
+       vince a parita' di specificita' senza toccare una sola classe esistente.
+
+       Misurato sulla pagina il 26/07, prima di questo blocco:
+         10 colori di testo (fra cui 5 grigi e 3 verdi), 11 gradini tipografici,
+         9 raggi di bordo, padding di sezione presente solo su 3 sezioni su 10.
+       E' questo che si legge come "caotico": non la quantita' di testo, ma il
+       numero di livelli intermedi fra cui l'occhio non trova gerarchia.
+
+       ⚠️ Tailwind qui e' CONGELATO (nessun CDN): una classe nuova non esiste e
+       produce un elemento senza stile, in silenzio. Da qui in giu' si rimappano
+       le classi che ci sono gia'. Non se ne inventano.
+       ============================================================================ -->
+  <style id="rs-tokens">
+  :root{
+    --rs-ink:#0B1F3A;        /* navy: SOLO titoli e superfici scure */
+    --rs-body:#475569;       /* grigio del corpo */
+    --rs-muted:#94A3B8;      /* grigio delle didascalie */
+    --rs-teal:#1FB6A6;       /* verde del marchio */
+    --rs-teal-ink:#0F766E;   /* verde per testo su bianco (contrasto) */
+  }
+
+  /* 1. Il navy smette di essere il colore del CORPO e torna a fare il titolo.
+        Era usato 46 volte come testo: e' la causa della pesantezza visiva. */
+  body{color:var(--rs-body)}
+  h1,h2,h3,h4,.text-ink{color:var(--rs-ink)}
+
+  /* 2. Cinque grigi -> due. Le classi restano quelle, cambia il valore. */
+  .text-slate-700,.text-slate-600{color:var(--rs-body)}
+  .text-slate-500,.text-slate-400,.text-slate-300{color:var(--rs-muted)}
+
+  /* 3. Tre verdi -> uno + il suo stato leggibile su bianco. */
+  .text-teal-700,.text-teal-600{color:var(--rs-teal-ink)}
+
+  /* 4. Il corpo non e' piu' piu' piccolo del default: il testo dominante della
+        pagina era 14px (85 occorrenze), ed e' meta' della fatica di lettura.
+        Toccati solo i PARAGRAFI: bottoni, etichette e badge restano dove sono. */
+  /* 16px, non 15: un valore intermedio avrebbe AGGIUNTO un gradino alla scala
+     invece di toglierne uno. Qui i paragrafi a 14px salgono sul gradino che
+     esiste gia'. */
+  p.text-sm{font-size:16px;line-height:1.6}
+  p.text-slate-600,p.text-slate-500{line-height:1.65}
+
+  /* NOTA su due regole che avevo scritto e ho tolto, perche' non si ripetano:
+
+     (a) "padding uniforme su main > section". Nasceva da una mia misura difettosa:
+         avevo letto il padding sull'elemento <section>, ma le sezioni che
+         risultavano a zero ce l'hanno sul <div> interno (py-20 = gli stessi 80px).
+         Il ritmo era gia' coerente, applicato un livello piu' sotto. La regola
+         avrebbe SOMMATO 160px a meta' delle sezioni, allungando la pagina di
+         circa mille pixel: l'esatto contrario dell'obiettivo.
+
+     (b) "html,body{overflow-x:hidden}". E' la pezza classica per lo scroll
+         laterale, ma su html/body rompe position:sticky - e qui l'header e'
+         sticky. La causa vera era una sola (la riga di link del footer senza
+         flex-wrap, 478px su un viewport da 375) ed e' gia' corretta alla radice.
+         Una pezza che nasconde il sintomo avrebbe anche nascosto il prossimo. */
+  </style>
 </head>
 <body class="font-sans text-ink bg-white antialiased">
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-2 focus:left-2 focus:bg-white focus:text-ink focus:px-3 focus:py-2 focus:rounded focus:font-semibold">Skip to content</a>
@@ -102,12 +162,14 @@
     <div class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
       <a href="#" class="font-extrabold text-xl tracking-tight" style="display:flex;align-items:center;gap:10px"><svg viewBox="0 0 64 64" style="height:26px;width:26px" aria-hidden="true"><circle cx="22" cy="42" r="6" fill="#1FB6A6"/><path d="M22 28a14 14 0 0 1 14 14" fill="none" stroke="#1FB6A6" stroke-width="6" stroke-linecap="round" opacity=".8"/><path d="M22 16a26 26 0 0 1 26 26" fill="none" stroke="#1FB6A6" stroke-width="6" stroke-linecap="round" opacity=".5"/><path d="M22 4a38 38 0 0 1 38 38" fill="none" stroke="#1FB6A6" stroke-width="6" stroke-linecap="round" opacity=".28"/></svg>Round<span class="text-accent">Signal</span></a>
       <nav class="hidden md:flex items-center gap-8 text-sm text-white/80">
-        <a href="#problem" class="hover:text-white">Why</a>
+        <a href="#score-demo" class="hover:text-white">See it work</a>
         <a href="#how" class="hover:text-white">How it works</a>
         <a href="#pricing" class="hover:text-white">Pricing</a>
-        <a href="#faq" class="hover:text-white">FAQ</a>
+        <a href="sample.html" class="hover:text-white">This week's sample</a>
       </nav>
-      <a href="sample.html" class="bg-accent hover:bg-accent2 text-ink font-bold text-sm px-4 py-2 rounded-lg fx-btn">See this week's sample</a>
+      <!-- Il bottone sempre a schermo punta all'AZIONE PRIMARIA (il trial), non al campione:
+           il campione resta un passo piu' leggero, ma vive fra i link, non nel bottone. -->
+      <a data-rs-checkout="pro_mensile" href="https://buy.stripe.com/bJe3cua3o69q3y3czR4Vy00" class="bg-accent hover:bg-accent2 text-ink font-bold text-sm px-4 py-2 rounded-lg fx-btn whitespace-nowrap">Start free trial</a>
     </div>
   </header>
 
@@ -122,7 +184,7 @@
         You don't need more leads.<br class="hidden md:block" /> <span class="text-accent grad-accent">You need the 10 that fit what you sell.</span>
       </h1>
       <p class="mt-6 text-lg md:text-xl text-white/75 max-w-2xl mx-auto">
-        Every Monday, RoundSignal reads 50+ funding sources and sends you <strong class="text-white">the 10 freshly-funded startups that best match your offer</strong> — each scored, with the role to contact, why now, and an <strong class="text-white">opening line already written</strong>. Everyone else hands you the firehose — you get the shortlist, before the budget's committed.
+        Every Monday, RoundSignal sends you <strong class="text-white">the 10 freshly-funded startups that best match what you sell</strong> — each scored, with the role to contact, why now, and an <strong class="text-white">opening line already written</strong>.
       </p>
 
       <!-- Primary CTA → 7-day free trial. href managed by checkout.json (data-rs-checkout). -->
@@ -132,49 +194,117 @@
       </div>
       <p class="mt-4 text-xs text-white/60">7-day free trial, then $49/mo or $490/yr. Cancel anytime before it ends. See our <a href="privacy.html" class="underline hover:text-white">Privacy Policy</a>.</p>
 
-      <!-- source strip -->
-      <div class="mt-14">
-        <p class="text-xs uppercase tracking-widest text-white/60 mb-4">We read 50+ public funding sources so you don't have to</p>
-        <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-white/60 font-semibold">
-          <span>TechCrunch</span><span>Crunchbase&nbsp;News</span><span>EU-Startups</span><span>Tech.eu</span><span>Finsmes</span>
-        </div>
-      </div>
+      <!-- Fonti: una riga sola. Prima era un blocco con i nomi in grande, che a colpo d'occhio
+           leggeva come una fascia di loghi-CLIENTE. Sono fonti che leggiamo, non clienti: dirlo
+           in chiaro vale piu' che farlo sembrare piu' grosso di quello che e'. -->
+      <p class="mt-10 text-xs text-white/50">
+        We read 50+ public funding sources — TechCrunch, Crunchbase News, EU-Startups, Tech.eu, Finsmes and more — so you don't have to.
+      </p>
     </div>
   </section>
 
-  <!-- PROBLEM -->
-  <section id="problem" class="max-w-6xl mx-auto px-5 py-20">
-    <div class="max-w-3xl reveal">
-      <p class="text-teal-700 font-bold uppercase tracking-wider text-sm">The problem</p>
-      <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">By the time you hear they raised, the budget's already spent.</h2>
-      <p class="mt-5 text-lg text-slate-600">A funding round is the loudest "we have budget and we're about to buy" signal in B2B. But finding those companies the moment it matters is a grind — and the window slams shut fast.</p>
+  <!-- INTERACTIVE: score-for-your-service demo -->
+  <section id="score-demo" style="background:#fff;border-top:1px solid #e2e8f0">
+    <style>
+      #score-demo .sd-wrap{max-width:680px;margin:0 auto;padding:80px 20px}
+      #score-demo .sd-eyebrow{text-align:center;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0f766e;margin:0 0 10px}
+      #score-demo h2{text-align:center;font-size:30px;line-height:1.15;font-weight:800;color:#0B1F3A;margin:0 0 12px}
+      #score-demo .sd-sub{text-align:center;color:#475569;font-size:16px;line-height:1.5;margin:0 auto 6px;max-width:560px}
+      #score-demo .sd-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px 0 6px}
+      #score-demo .sd-btn{border:1px solid #e2e8f0;background:#fff;color:#475569;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s,border-color .2s;-webkit-tap-highlight-color:transparent}
+      #score-demo .sd-btn:hover{border-color:#5eead4}
+      #score-demo .sd-btn.active{background:#0B1F3A;color:#fff;border-color:#0B1F3A}
+      #score-demo .sd-cards{margin:22px auto 0;display:grid;grid-template-columns:1fr;gap:12px}
+      #score-demo .sd-card{border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;background:#fff;box-shadow:0 1px 3px rgba(11,31,58,.05);animation:sdIn .45s both}
+      @keyframes sdIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+      #score-demo .sd-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+      #score-demo .sd-name{font-weight:700;color:#0B1F3A;font-size:16px}
+      #score-demo .sd-trig{color:#94a3b8;font-size:14px;margin-top:2px}
+      #score-demo .sd-heat{font-weight:800;font-size:24px;line-height:1;text-align:right;white-space:nowrap}
+      #score-demo .sd-heat small{display:block;font-size:12px;font-weight:700;color:#94a3b8;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+      #score-demo .sd-bar{height:6px;background:#f1f5f9;border-radius:999px;overflow:hidden;margin:13px 0 10px}
+      #score-demo .sd-bar i{display:block;height:100%;width:0;border-radius:999px;transition:width .55s cubic-bezier(.4,0,.2,1)}
+      #score-demo .sd-why{color:#475569;font-size:14px;line-height:1.45}
+      #score-demo .sd-why b{color:#0f766e;font-weight:600}
+      #score-demo .sd-note{text-align:center;color:#94a3b8;font-size:12px;margin:22px auto 0;max-width:520px}
+      #score-demo .sd-cta{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center;margin-top:26px}
+      #score-demo .sd-cta-alt{color:#475569;font-weight:600;text-decoration:underline;text-decoration-color:rgba(31,182,166,.45)}
+      #score-demo .sd-cta-alt:hover{color:#0f766e;text-decoration-color:#1FB6A6}
+      @media (prefers-reduced-motion:reduce){#score-demo .sd-card{animation:none}#score-demo .sd-bar i{transition:none}}
+    </style>
+    <div class="sd-wrap">
+      <p class="sd-eyebrow">Try it — 10 seconds</p>
+      <h2>The same week. Scored for what <em style="font-style:normal;color:#0f766e">you</em> sell.</h2>
+      <p class="sd-sub">A $18M data-privacy raise is a goldmine for a dev shop and noise for a brand studio. Pick your service — watch the exact same accounts re-rank for you.</p>
+      <div class="sd-btns" role="tablist">
+        <button class="sd-btn active" data-svc="dev">Dev shop</button>
+        <button class="sd-btn" data-svc="design">Design studio</button>
+        <button class="sd-btn" data-svc="growth">Growth / RevOps</button>
+        <button class="sd-btn" data-svc="recruiting">Recruiting</button>
+      </div>
+      <div id="sd-cards" class="sd-cards"></div>
+      <p class="sd-note">Illustrative scores on a real recent week. Subscribers get this every Monday — scored for their exact offer, with the role to contact and an opening line already written.</p>
+      <!-- CTA subito dopo la prova. Prima di questa modifica fra il bottone dell'hero e quello
+           del pricing c'erano 4.552 px senza niente da cliccare: chi si convinceva qui doveva
+           scorrere sei schermate per trovare un bottone. -->
+      <div class="sd-cta">
+        <a data-rs-checkout="pro_mensile" href="https://buy.stripe.com/bJe3cua3o69q3y3czR4Vy00" class="bg-accent hover:bg-accent2 text-ink font-bold px-6 py-3 rounded-xl whitespace-nowrap fx-btn">Get this for what you sell →</a>
+        <a href="sample.html" class="sd-cta-alt">or see this week's real list →</a>
+      </div>
     </div>
-    <div class="grid md:grid-cols-3 gap-6 mt-12">
-      <div class="rounded-2xl border border-slate-200 p-6 reveal tilt">
-        <div class="text-3xl" aria-hidden="true">🐌</div>
-        <h3 class="mt-3 font-bold text-lg">You find out too late</h3>
-        <p class="mt-2 text-slate-600 text-sm">By the time a raise hits your feed, other vendors have already booked the call. Funded firms shortlist vendors fast — often within the first quarter.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 p-6 reveal tilt">
-        <div class="text-3xl" aria-hidden="true">⏳</div>
-        <h3 class="mt-3 font-bold text-lg">Tools make you do the work</h3>
-        <p class="mt-2 text-slate-600 text-sm">Crunchbase and Apollo hand you a raw firehose. You still filter, research, and figure out who to email and what to say. That's your whole morning, gone.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 p-6 reveal tilt">
-        <div class="text-3xl" aria-hidden="true">💸</div>
-        <h3 class="mt-3 font-bold text-lg">Enterprise intent is overkill</h3>
-        <p class="mt-2 text-slate-600 text-sm">Bombora-class intent data runs ~$25k/yr. Absurd when you sell one thing to one type of buyer and just need the right accounts, now.</p>
-      </div>
-    </div>
+    <script>
+    (function(){
+      var DATA=[
+        {c:"Sherpa.ai",t:"$18M · data-privacy AI platform",s:{dev:92,design:58,growth:84,recruiting:70},r:{dev:"Build them a <b>compliance-ready demo environment</b>.",design:"Some brand polish, but not the main need.",growth:"<b>Enterprise onboarding funnel</b> to shorten sales cycles.",recruiting:"Scaling infra — a bit of eng hiring."}},
+        {c:"CurifyLabs",t:"€12M · expanding to the US",s:{dev:56,design:66,growth:80,recruiting:90},r:{dev:"Platform's built; less of a dev play.",design:"US launch needs a <b>fresh brand + site</b>.",growth:"<b>Localized US market-entry</b> campaign.",recruiting:"<b>Hiring a US team from scratch</b> — a goldmine."}},
+        {c:"geoSurge",t:"€10M Seed · scaling AI infra",s:{dev:88,design:48,growth:62,recruiting:86},r:{dev:"Heavy <b>infra & AI platform build-out</b>.",design:"Low design need right now.",growth:"Some demand-gen upside.",recruiting:"<b>Aggressive engineering hiring</b>."}},
+        {c:"BidScript",t:"pre-seed · 50% higher win-rate",s:{dev:54,design:78,growth:85,recruiting:46},r:{dev:"Product works; not a dev fit.",design:"<b>Brand + site</b> to match the enterprise buyers.",growth:"Turn the win-rate stat into a <b>case-study PR engine</b>.",recruiting:"Too small to hire yet."}},
+        {c:"Visiblie",t:"€500K · SME growth, needs marketing",s:{dev:44,design:72,growth:88,recruiting:38},r:{dev:"Minimal dev need.",design:"Could use a cleaner brand.",growth:"<b>Lean growth-marketing sprint</b> — perfect fractional-CMO fit.",recruiting:"Not hiring at this stage."}}
+      ];
+      var wrap=document.getElementById('sd-cards');
+      if(!wrap) return;
+      var btns=document.querySelectorAll('#score-demo .sd-btn');
+      function col(s){return s>=80?'#15803d':s>=60?'#b45309':'#64748b';}
+      function render(svc){
+        var rows=DATA.slice().sort(function(a,b){return b.s[svc]-a.s[svc];});
+        wrap.innerHTML=rows.map(function(d,i){
+          var sc=d.s[svc],c=col(sc);
+          return '<div class="sd-card" style="animation-delay:'+(i*60)+'ms">'
+            +'<div class="sd-top"><div><div class="sd-name">'+d.c+'</div><div class="sd-trig">'+d.t+'</div></div>'
+            +'<div class="sd-heat" style="color:'+c+'"><span data-t="'+sc+'">0</span><small>heat</small></div></div>'
+            +'<div class="sd-bar"><i data-w="'+sc+'" style="background:'+c+'"></i></div>'
+            +'<div class="sd-why">'+d.r[svc]+'</div></div>';
+        }).join('');
+        wrap.querySelectorAll('.sd-heat span').forEach(function(el){
+          var target=+el.getAttribute('data-t'),start=null;
+          function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/500,1);el.textContent=Math.round(p*target);if(p<1)requestAnimationFrame(step);}
+          requestAnimationFrame(step);
+        });
+        wrap.querySelectorAll('.sd-bar i').forEach(function(el){
+          requestAnimationFrame(function(){el.style.width=el.getAttribute('data-w')+'%';});
+        });
+      }
+      btns.forEach(function(b){b.addEventListener('click',function(){
+        btns.forEach(function(x){x.classList.remove('active');});
+        b.classList.add('active');
+        render(b.getAttribute('data-svc'));
+      });});
+      render('dev');
+    })();
+    </script>
   </section>
 
-  <!-- SOLUTION -->
-  <section class="bg-slate-50 border-y border-slate-200">
+  <!-- COSA RICEVI (ex "SOLUTION").
+       La sezione "PROBLEM" con le tre card a emoji e' stata eliminata: diceva la stessa cosa
+       della colonna sinistra della tabella comparativa, con 142 parole in piu' e tre emoji.
+       Qui la prosa e' tagliata da 197 a ~35 parole: restano l'anatomia di una voce e la card
+       di esempio, che sono PRODOTTO, non argomento. -->
+  <section id="what" class="bg-slate-50 border-y border-slate-200">
     <div class="max-w-6xl mx-auto px-5 py-20 grid md:grid-cols-2 gap-12 items-center">
       <div>
-        <p class="text-teal-700 font-bold uppercase tracking-wider text-sm">The solution</p>
-        <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">A done-thinking list, not another dashboard.</h2>
-        <p class="mt-5 text-lg text-slate-600">Every Monday, RoundSignal sends a tight, scored list of startups in <em>your</em> vertical that just raised. We don't dump data — our AI reads the news, dedupes it, scores the heat, and writes the part that actually takes time:</p>
+        <p class="text-teal-700 font-bold uppercase tracking-wider text-sm">What lands on Monday</p>
+        <h2 class="mt-3 text-3xl md:text-4xl font-extrabold">Every account, already thought through.</h2>
+        <p class="mt-5 text-lg text-slate-600">Four things on each of the ten — the part that actually takes your morning:</p>
         <ul class="mt-6 space-y-3">
           <li class="flex gap-3"><span class="text-teal-700 font-bold">✓</span><span><strong>Why now</strong> — what the raise means they'll buy or hire, in one line.</span></li>
           <li class="flex gap-3"><span class="text-teal-700 font-bold">✓</span><span><strong>Who to contact</strong> — the role most likely to own your budget.</span></li>
@@ -228,6 +358,10 @@
         <p class="mt-2 text-slate-600 text-sm">Monday morning, the scored list lands in your inbox, ranked best-first. Start your outreach inside the window that converts best.</p>
       </div>
     </div>
+    <!-- Terzo punto di uscita: chiude il varco fra la demo e il pricing. -->
+    <div class="text-center reveal" style="margin-top:2.75rem">
+      <a data-rs-checkout="pro_mensile" href="https://buy.stripe.com/bJe3cua3o69q3y3czR4Vy00" class="bg-accent hover:bg-accent2 text-ink font-bold px-6 py-3 rounded-xl whitespace-nowrap fx-btn">Start your 7-day free trial →</a>
+    </div>
   </section>
 
   <!-- DIFFERENCE: raw list vs RoundSignal -->
@@ -240,109 +374,29 @@
       </div>
       <div class="mt-12 reveal" style="max-width:56rem;margin-left:auto;margin-right:auto;background:#fff;border:1px solid #e2e8f0;border-radius:20px;overflow:hidden;box-shadow:0 24px 50px -24px rgba(11,31,58,.28)">
         <div style="display:grid;grid-template-columns:1fr 1fr">
-          <div style="padding:13px 18px;background:#f1f5f9;color:#64748b;font-weight:700;font-size:13px;border-bottom:1px solid #e2e8f0">A raw funding list</div>
-          <div style="padding:13px 18px;background:rgba(31,182,166,.12);color:#0f766e;font-weight:700;font-size:13px;border-bottom:1px solid #e2e8f0;border-left:1px solid #e2e8f0">RoundSignal</div>
+          <div style="padding:13px 18px;background:#f1f5f9;color:#94a3b8;font-weight:700;font-size:12px;border-bottom:1px solid #e2e8f0">A raw funding list</div>
+          <div style="padding:13px 18px;background:rgba(31,182,166,.12);color:#0f766e;font-weight:700;font-size:12px;border-bottom:1px solid #e2e8f0;border-left:1px solid #e2e8f0">RoundSignal</div>
 
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#64748b;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#cbd5e1;flex:none">✕</span><span>300 rows this week. Sort them yourself.</span></div>
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-bottom:1px solid #eef2f6;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0d9488;font-weight:700;flex:none">✓</span><span>10 that fit what you sell. Already sorted.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#94a3b8;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#94a3b8;flex:none">✕</span><span>300 rows this week. Sort them yourself.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-bottom:1px solid #eef2f6;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0f766e;font-weight:700;flex:none">✓</span><span>10 that fit what you sell. Already sorted.</span></div>
 
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#64748b;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#cbd5e1;flex:none">✕</span><span>A name and a raised amount. You figure out why it matters.</span></div>
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-bottom:1px solid #eef2f6;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0d9488;font-weight:700;flex:none">✓</span><span>Why now and a ready-to-send opening line — on every account.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#94a3b8;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#94a3b8;flex:none">✕</span><span>A name and a raised amount. You figure out why it matters.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-bottom:1px solid #eef2f6;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0f766e;font-weight:700;flex:none">✓</span><span>Why now and a ready-to-send opening line — on every account.</span></div>
 
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#64748b;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#cbd5e1;flex:none">✕</span><span>Qualify, research, write — hours before the first email goes out.</span></div>
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-bottom:1px solid #eef2f6;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0d9488;font-weight:700;flex:none">✓</span><span>Open one email and start selling. The homework's already done.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#94a3b8;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#94a3b8;flex:none">✕</span><span>Qualify, research, write — hours before the first email goes out.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-bottom:1px solid #eef2f6;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0f766e;font-weight:700;flex:none">✓</span><span>Open one email and start selling. The homework's already done.</span></div>
 
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#64748b;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#cbd5e1;flex:none">✕</span><span>By the time it reaches you, the budget's spent and the shortlist is closed.</span></div>
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-bottom:1px solid #eef2f6;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0d9488;font-weight:700;flex:none">✓</span><span>In your inbox by Monday — while the money's fresh and the shortlist's still open.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#94a3b8;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#94a3b8;flex:none">✕</span><span>By the time it reaches you, the budget's spent and the shortlist is closed.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-bottom:1px solid #eef2f6;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0f766e;font-weight:700;flex:none">✓</span><span>In your inbox by Monday — while the money's fresh and the shortlist's still open.</span></div>
 
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#64748b"><span aria-hidden="true" style="color:#cbd5e1;flex:none">✕</span><span>Everyone gets the same firehose, whatever they sell.</span></div>
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0d9488;font-weight:700;flex:none">✓</span><span>Matched to your vertical, so every account is one you can actually close.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#94a3b8"><span aria-hidden="true" style="color:#94a3b8;flex:none">✕</span><span>Everyone gets the same firehose, whatever they sell.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0f766e;font-weight:700;flex:none">✓</span><span>Matched to your vertical, so every account is one you can actually close.</span></div>
         </div>
       </div>
       <p class="text-center text-slate-600 reveal" style="margin-top:2rem">Not a mock-up — <a href="sample.html" class="font-semibold underline decoration-accent hover:text-teal-700">see it on this week's real list →</a></p>
     </div>
   </section>
 
-  <!-- INTERACTIVE: score-for-your-service demo -->
-  <section id="score-demo" style="background:#fff;border-top:1px solid #e2e8f0">
-    <style>
-      #score-demo .sd-wrap{max-width:680px;margin:0 auto;padding:80px 20px}
-      #score-demo .sd-eyebrow{text-align:center;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0d9488;margin:0 0 10px}
-      #score-demo h2{text-align:center;font-size:30px;line-height:1.15;font-weight:800;color:#0B1F3A;margin:0 0 12px}
-      #score-demo .sd-sub{text-align:center;color:#475569;font-size:16px;line-height:1.5;margin:0 auto 6px;max-width:560px}
-      #score-demo .sd-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:26px 0 6px}
-      #score-demo .sd-btn{border:1px solid #e2e8f0;background:#fff;color:#334155;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s,border-color .2s;-webkit-tap-highlight-color:transparent}
-      #score-demo .sd-btn:hover{border-color:#5eead4}
-      #score-demo .sd-btn.active{background:#0B1F3A;color:#fff;border-color:#0B1F3A}
-      #score-demo .sd-cards{margin:22px auto 0;display:grid;grid-template-columns:1fr;gap:12px}
-      #score-demo .sd-card{border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;background:#fff;box-shadow:0 1px 3px rgba(11,31,58,.05);animation:sdIn .45s both}
-      @keyframes sdIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-      #score-demo .sd-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-      #score-demo .sd-name{font-weight:700;color:#0B1F3A;font-size:16px}
-      #score-demo .sd-trig{color:#64748b;font-size:13px;margin-top:2px}
-      #score-demo .sd-heat{font-weight:800;font-size:23px;line-height:1;text-align:right;white-space:nowrap}
-      #score-demo .sd-heat small{display:block;font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
-      #score-demo .sd-bar{height:6px;background:#f1f5f9;border-radius:999px;overflow:hidden;margin:13px 0 10px}
-      #score-demo .sd-bar i{display:block;height:100%;width:0;border-radius:999px;transition:width .55s cubic-bezier(.4,0,.2,1)}
-      #score-demo .sd-why{color:#334155;font-size:14px;line-height:1.45}
-      #score-demo .sd-why b{color:#0f766e;font-weight:600}
-      #score-demo .sd-note{text-align:center;color:#94a3b8;font-size:12.5px;margin:22px auto 0;max-width:520px}
-      @media (prefers-reduced-motion:reduce){#score-demo .sd-card{animation:none}#score-demo .sd-bar i{transition:none}}
-    </style>
-    <div class="sd-wrap">
-      <p class="sd-eyebrow">Try it — 10 seconds</p>
-      <h2>The same week. Scored for what <em style="font-style:normal;color:#0d9488">you</em> sell.</h2>
-      <p class="sd-sub">A $18M data-privacy raise is a goldmine for a dev shop and noise for a brand studio. Pick your service — watch the exact same accounts re-rank for you.</p>
-      <div class="sd-btns" role="tablist">
-        <button class="sd-btn active" data-svc="dev">Dev shop</button>
-        <button class="sd-btn" data-svc="design">Design studio</button>
-        <button class="sd-btn" data-svc="growth">Growth / RevOps</button>
-        <button class="sd-btn" data-svc="recruiting">Recruiting</button>
-      </div>
-      <div id="sd-cards" class="sd-cards"></div>
-      <p class="sd-note">Illustrative scores on a real recent week. Subscribers get this every Monday — scored for their exact offer, with the role to contact and an opening line already written.</p>
-    </div>
-    <script>
-    (function(){
-      var DATA=[
-        {c:"Sherpa.ai",t:"$18M · data-privacy AI platform",s:{dev:92,design:58,growth:84,recruiting:70},r:{dev:"Build them a <b>compliance-ready demo environment</b>.",design:"Some brand polish, but not the main need.",growth:"<b>Enterprise onboarding funnel</b> to shorten sales cycles.",recruiting:"Scaling infra — a bit of eng hiring."}},
-        {c:"CurifyLabs",t:"€12M · expanding to the US",s:{dev:56,design:66,growth:80,recruiting:90},r:{dev:"Platform's built; less of a dev play.",design:"US launch needs a <b>fresh brand + site</b>.",growth:"<b>Localized US market-entry</b> campaign.",recruiting:"<b>Hiring a US team from scratch</b> — a goldmine."}},
-        {c:"geoSurge",t:"€10M Seed · scaling AI infra",s:{dev:88,design:48,growth:62,recruiting:86},r:{dev:"Heavy <b>infra & AI platform build-out</b>.",design:"Low design need right now.",growth:"Some demand-gen upside.",recruiting:"<b>Aggressive engineering hiring</b>."}},
-        {c:"BidScript",t:"pre-seed · 50% higher win-rate",s:{dev:54,design:78,growth:85,recruiting:46},r:{dev:"Product works; not a dev fit.",design:"<b>Brand + site</b> to match the enterprise buyers.",growth:"Turn the win-rate stat into a <b>case-study PR engine</b>.",recruiting:"Too small to hire yet."}},
-        {c:"Visiblie",t:"€500K · SME growth, needs marketing",s:{dev:44,design:72,growth:88,recruiting:38},r:{dev:"Minimal dev need.",design:"Could use a cleaner brand.",growth:"<b>Lean growth-marketing sprint</b> — perfect fractional-CMO fit.",recruiting:"Not hiring at this stage."}}
-      ];
-      var wrap=document.getElementById('sd-cards');
-      if(!wrap) return;
-      var btns=document.querySelectorAll('#score-demo .sd-btn');
-      function col(s){return s>=80?'#15803d':s>=60?'#b45309':'#64748b';}
-      function render(svc){
-        var rows=DATA.slice().sort(function(a,b){return b.s[svc]-a.s[svc];});
-        wrap.innerHTML=rows.map(function(d,i){
-          var sc=d.s[svc],c=col(sc);
-          return '<div class="sd-card" style="animation-delay:'+(i*60)+'ms">'
-            +'<div class="sd-top"><div><div class="sd-name">'+d.c+'</div><div class="sd-trig">'+d.t+'</div></div>'
-            +'<div class="sd-heat" style="color:'+c+'"><span data-t="'+sc+'">0</span><small>heat</small></div></div>'
-            +'<div class="sd-bar"><i data-w="'+sc+'" style="background:'+c+'"></i></div>'
-            +'<div class="sd-why">'+d.r[svc]+'</div></div>';
-        }).join('');
-        wrap.querySelectorAll('.sd-heat span').forEach(function(el){
-          var target=+el.getAttribute('data-t'),start=null;
-          function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/500,1);el.textContent=Math.round(p*target);if(p<1)requestAnimationFrame(step);}
-          requestAnimationFrame(step);
-        });
-        wrap.querySelectorAll('.sd-bar i').forEach(function(el){
-          requestAnimationFrame(function(){el.style.width=el.getAttribute('data-w')+'%';});
-        });
-      }
-      btns.forEach(function(b){b.addEventListener('click',function(){
-        btns.forEach(function(x){x.classList.remove('active');});
-        b.classList.add('active');
-        render(b.getAttribute('data-svc'));
-      });});
-      render('dev');
-    })();
-    </script>
-  </section>
 
   <!-- PRICING -->
   <section id="pricing" class="bg-ink text-white grain">
@@ -404,21 +458,15 @@
         <summary class="flex justify-between items-center font-semibold text-lg">How is this different from Crunchbase or Apollo? <span class="chev transition-transform" aria-hidden="true">⌄</span></summary>
         <p class="mt-3 text-slate-600">Those give you a raw firehose to filter and interpret yourself. RoundSignal does the filtering and the thinking — scoring each account and writing the why-now, the contact role, and the angle — so you act instead of research.</p>
       </details>
-      <details class="py-5 reveal">
-        <summary class="flex justify-between items-center font-semibold text-lg">How fresh are the signals? <span class="chev transition-transform" aria-hidden="true">⌄</span></summary>
-        <p class="mt-3 text-slate-600">Each Monday's issue covers raises announced in the prior days — landing you well inside the 48-hour-to-90-day window where funded firms choose vendors.</p>
-      </details>
+      <!-- Da 8 voci a 5. Tolte:
+           - "How fresh are the signals?" -> gia' detto ovunque ("every Monday").
+           - "What if it's not useful?"   -> gia' coperto dai termini del trial.
+           - "Why isn't there a free tier?" -> era l'unica DIFENSIVA: piantava un
+             dubbio che il lettore non aveva ancora avuto. Una FAQ deve togliere
+             obiezioni, non fornirle. -->
       <details class="py-5 reveal">
         <summary class="flex justify-between items-center font-semibold text-lg">Can I get my own niche? <span class="chev transition-transform" aria-hidden="true">⌄</span></summary>
         <p class="mt-3 text-slate-600">Pro includes one vertical of your choice. Agency lets you request custom verticals. Tell us what you sell and we'll tune the radar.</p>
-      </details>
-      <details class="py-5 reveal">
-        <summary class="flex justify-between items-center font-semibold text-lg">What if it's not useful? <span class="chev transition-transform" aria-hidden="true">⌄</span></summary>
-        <p class="mt-3 text-slate-600">Start on the free sample — no card. If Pro doesn't earn its keep, cancel in one click. We'd rather you stay because it works.</p>
-      </details>
-      <details class="py-5 reveal">
-        <summary class="flex justify-between items-center font-semibold text-lg">Why isn't there a free tier? <span class="chev transition-transform" aria-hidden="true">⌄</span></summary>
-        <p class="mt-3 text-slate-600">Because the value is freshness, and a free list would be a stale list — worthless for outreach. Every Monday we score that week's raises for sales-fit; the 7-day trial is your free look at the real thing, no strings.</p>
       </details>
       <details class="py-5 reveal">
         <summary class="flex justify-between items-center font-semibold text-lg">Who is RoundSignal for? <span class="chev transition-transform" aria-hidden="true">⌄</span></summary>
@@ -448,16 +496,16 @@
       <h2 style="font-size:20px;font-weight:800;color:#0B1F3A;margin:0">Guides</h2>
       <p style="margin:8px 0 0;font-size:14px;color:#475569">Everything we've learned about finding freshly-funded companies and selling into the window after a raise.</p>
       <div style="margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));column-gap:32px;row-gap:12px;font-size:14px">
-        <a href="how-to-find-recently-funded-startups.html" style="color:#334155;text-decoration:none">How to find recently funded startups</a>
-        <a href="guide-selling-to-funded-startups.html" style="color:#334155;text-decoration:none">Selling to funded startups: the full guide</a>
-        <a href="best-time-to-sell-to-a-startup-after-funding.html" style="color:#334155;text-decoration:none">The best time to sell after a raise</a>
-        <a href="how-to-find-startup-founder-email.html" style="color:#334155;text-decoration:none">How to find a startup founder's email</a>
-        <a href="recently-funded-ai-startups.html" style="color:#334155;text-decoration:none">Recently funded AI startups</a>
-        <a href="recently-funded-saas-startups.html" style="color:#334155;text-decoration:none">Recently funded SaaS startups</a>
-        <a href="recently-funded-fintech-startups.html" style="color:#334155;text-decoration:none">Recently funded fintech startups</a>
-        <a href="recently-funded-startups-in-europe.html" style="color:#334155;text-decoration:none">Recently funded startups in Europe</a>
-        <a href="growth-list-alternative.html" style="color:#334155;text-decoration:none">Growth List alternative</a>
-        <a href="fundraise-insider-alternative.html" style="color:#334155;text-decoration:none">Fundraise Insider alternative</a>
+        <a href="how-to-find-recently-funded-startups.html" style="color:#475569;text-decoration:none">How to find recently funded startups</a>
+        <a href="guide-selling-to-funded-startups.html" style="color:#475569;text-decoration:none">Selling to funded startups: the full guide</a>
+        <a href="best-time-to-sell-to-a-startup-after-funding.html" style="color:#475569;text-decoration:none">The best time to sell after a raise</a>
+        <a href="how-to-find-startup-founder-email.html" style="color:#475569;text-decoration:none">How to find a startup founder's email</a>
+        <a href="recently-funded-ai-startups.html" style="color:#475569;text-decoration:none">Recently funded AI startups</a>
+        <a href="recently-funded-saas-startups.html" style="color:#475569;text-decoration:none">Recently funded SaaS startups</a>
+        <a href="recently-funded-fintech-startups.html" style="color:#475569;text-decoration:none">Recently funded fintech startups</a>
+        <a href="recently-funded-startups-in-europe.html" style="color:#475569;text-decoration:none">Recently funded startups in Europe</a>
+        <a href="growth-list-alternative.html" style="color:#475569;text-decoration:none">Growth List alternative</a>
+        <a href="fundraise-insider-alternative.html" style="color:#475569;text-decoration:none">Fundraise Insider alternative</a>
       </div>
       <p style="margin:20px 0 0;font-size:14px"><a href="archive.html" style="color:#0f766e;font-weight:700;text-decoration:none">Browse every past edition in the issue archive &rarr;</a></p>
     </div>
@@ -468,7 +516,7 @@
     <div class="max-w-6xl mx-auto px-5 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
       <span class="font-extrabold text-white text-lg" style="display:inline-flex;align-items:center;gap:9px"><svg viewBox="0 0 64 64" style="height:22px;width:22px" aria-hidden="true"><circle cx="22" cy="42" r="6" fill="#1FB6A6"/><path d="M22 28a14 14 0 0 1 14 14" fill="none" stroke="#1FB6A6" stroke-width="6" stroke-linecap="round" opacity=".8"/><path d="M22 16a26 26 0 0 1 26 26" fill="none" stroke="#1FB6A6" stroke-width="6" stroke-linecap="round" opacity=".5"/><path d="M22 4a38 38 0 0 1 38 38" fill="none" stroke="#1FB6A6" stroke-width="6" stroke-linecap="round" opacity=".28"/></svg>Round<span class="text-accent">Signal</span></span>
       <p>© 2026 RoundSignal. Buying signals for people who sell to funded startups.</p>
-      <div class="flex gap-5">
+      <div class="flex flex-wrap justify-center gap-5">
         <a href="methodology.html" class="hover:text-white">How it works</a>
         <a href="about.html" class="hover:text-white">About</a>
         <a href="guide-selling-to-funded-startups.html" class="hover:text-white">Guide</a>
