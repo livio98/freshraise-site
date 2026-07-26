@@ -65,7 +65,11 @@
   .hero-in>*:nth-child(5){animation-delay:.41s}
   .hero-in>*:nth-child(6){animation-delay:.5s}
   .hero-in>*:nth-child(7){animation-delay:.59s}
-  .orb{position:absolute;border-radius:9999px;filter:blur(70px);pointer-events:none;z-index:0}
+  /* will-change:transform da' a ogni orb il suo livello di compositing: il
+     blur da 70px viene rasterizzato UNA VOLTA e poi solo traslato, invece di
+     essere ricalcolato a ogni frame dell'animazione. Sono tre elementi, non
+     un uso indiscriminato. */
+  .orb{position:absolute;border-radius:9999px;filter:blur(70px);pointer-events:none;z-index:0;will-change:transform}
   @keyframes rsDrift{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-34px,0)}}
   .orb-a{width:440px;height:440px;background:radial-gradient(circle,rgba(31,182,166,.55),transparent 62%);top:-140px;left:-90px;animation:rsDrift 10s ease-in-out infinite}
   .orb-b{width:380px;height:380px;background:radial-gradient(circle,rgba(23,162,151,.42),transparent 62%);top:30px;right:-70px;animation:rsDrift 13s ease-in-out infinite reverse}
@@ -106,16 +110,34 @@
   <style id="rs-tokens">
   :root{
     --rs-ink:#0B1F3A;        /* navy: SOLO titoli e superfici scure */
-    --rs-body:#475569;       /* grigio del corpo */
-    --rs-muted:#94A3B8;      /* grigio delle didascalie */
+    --rs-body:#475569;       /* grigio del corpo   — 7,4:1 su bianco */
+    --rs-muted:#64748B;      /* grigio secondario  — 4,8:1 su bianco, conforme AA.
+                                NON #94A3B8: su bianco fa 2,56:1, sotto ogni soglia.
+                                Consolidare la palette non deve MAI voler dire
+                                schiarire il testo: il conteggio dei colori e' un
+                                mezzo, la leggibilita' e' il fine. */
     --rs-teal:#1FB6A6;       /* verde del marchio */
     --rs-teal-ink:#0F766E;   /* verde per testo su bianco (contrasto) */
   }
 
   /* 1. Il navy smette di essere il colore del CORPO e torna a fare il titolo.
         Era usato 46 volte come testo: e' la causa della pesantezza visiva. */
-  body{color:var(--rs-body)}
-  h1,h2,h3,h4,.text-ink{color:var(--rs-ink)}
+  /* ⚠️⚠️ QUI CI SONO CADUTO DUE VOLTE, e vale la pena scriverlo per esteso.
+     Primo tentativo: body{color:grigio} + h1,h2,h3,h4{color:navy}. I titoli
+     dentro le sezioni scure non hanno classe di colore, ereditavano il bianco:
+     forzati a navy SU NAVY, "You don't need more leads." e "Agency" spariti.
+     Secondo tentativo: .text-white h3{color:#fff} per rimediare. Ma la card
+     "Pro" e' un DIV.bg-white DENTRO la sezione .text-white, e il selettore
+     discendente e' entrato anche li': bianco su bianco. Stesso bug, al contrario.
+
+     La lezione non e' "mi mancava un'eccezione": e' che PILOTARE I COLORI PER
+     EREDITARIETA' SU UN ALBERO CHE ALTERNA FONDI CHIARI E SCURI e' fragile per
+     costruzione, e ogni pezza ne apre un'altra.
+
+     Quindi: l'ereditarieta' NON si tocca piu'. Si rimappano soltanto le classi
+     che portano gia' un colore esplicito. Una regola cosi' non puo' rendere
+     invisibile niente, perche' non decide mai il colore di un elemento che non
+     ne aveva gia' uno suo. */
 
   /* 2. Cinque grigi -> due. Le classi restano quelle, cambia il valore. */
   .text-slate-700,.text-slate-600{color:var(--rs-body)}
@@ -165,7 +187,7 @@
         <a href="#score-demo" class="hover:text-white">See it work</a>
         <a href="#how" class="hover:text-white">How it works</a>
         <a href="#pricing" class="hover:text-white">Pricing</a>
-        <a href="sample.html" class="hover:text-white">This week's sample</a>
+        <a href="#faq" class="hover:text-white">FAQ</a>
       </nav>
       <!-- Il bottone sempre a schermo punta all'AZIONE PRIMARIA (il trial), non al campione:
            il campione resta un passo piu' leggero, ma vive fra i link, non nel bottone. -->
@@ -190,7 +212,6 @@
       <!-- Primary CTA → 7-day free trial. href managed by checkout.json (data-rs-checkout). -->
       <div class="mt-9 flex flex-col sm:flex-row gap-4 justify-center items-center">
         <a data-rs-checkout="pro_mensile" href="https://buy.stripe.com/bJe3cua3o69q3y3czR4Vy00" class="bg-accent hover:bg-accent2 text-ink font-bold px-6 py-3 rounded-xl whitespace-nowrap fx-btn">Start your 7-day free trial →</a>
-        <a href="sample.html" class="text-white/80 hover:text-white font-semibold underline decoration-accent/40 hover:decoration-accent whitespace-nowrap">or see this week's free sample →</a>
       </div>
       <p class="mt-4 text-xs text-white/60">7-day free trial, then $49/mo or $490/yr. Cancel anytime before it ends. See our <a href="privacy.html" class="underline hover:text-white">Privacy Policy</a>.</p>
 
@@ -219,14 +240,14 @@
       @keyframes sdIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
       #score-demo .sd-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
       #score-demo .sd-name{font-weight:700;color:#0B1F3A;font-size:16px}
-      #score-demo .sd-trig{color:#94a3b8;font-size:14px;margin-top:2px}
+      #score-demo .sd-trig{color:#64748b;font-size:14px;margin-top:2px}
       #score-demo .sd-heat{font-weight:800;font-size:24px;line-height:1;text-align:right;white-space:nowrap}
-      #score-demo .sd-heat small{display:block;font-size:12px;font-weight:700;color:#94a3b8;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+      #score-demo .sd-heat small{display:block;font-size:12px;font-weight:700;color:#64748b;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
       #score-demo .sd-bar{height:6px;background:#f1f5f9;border-radius:999px;overflow:hidden;margin:13px 0 10px}
       #score-demo .sd-bar i{display:block;height:100%;width:0;border-radius:999px;transition:width .55s cubic-bezier(.4,0,.2,1)}
       #score-demo .sd-why{color:#475569;font-size:14px;line-height:1.45}
       #score-demo .sd-why b{color:#0f766e;font-weight:600}
-      #score-demo .sd-note{text-align:center;color:#94a3b8;font-size:12px;margin:22px auto 0;max-width:520px}
+      #score-demo .sd-note{text-align:center;color:#64748b;font-size:12px;margin:22px auto 0;max-width:520px}
       #score-demo .sd-cta{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;align-items:center;margin-top:26px}
       #score-demo .sd-cta-alt{color:#475569;font-weight:600;text-decoration:underline;text-decoration-color:rgba(31,182,166,.45)}
       #score-demo .sd-cta-alt:hover{color:#0f766e;text-decoration-color:#1FB6A6}
@@ -249,7 +270,6 @@
            scorrere sei schermate per trovare un bottone. -->
       <div class="sd-cta">
         <a data-rs-checkout="pro_mensile" href="https://buy.stripe.com/bJe3cua3o69q3y3czR4Vy00" class="bg-accent hover:bg-accent2 text-ink font-bold px-6 py-3 rounded-xl whitespace-nowrap fx-btn">Get this for what you sell →</a>
-        <a href="sample.html" class="sd-cta-alt">or see this week's real list →</a>
       </div>
     </div>
     <script>
@@ -374,26 +394,25 @@
       </div>
       <div class="mt-12 reveal" style="max-width:56rem;margin-left:auto;margin-right:auto;background:#fff;border:1px solid #e2e8f0;border-radius:20px;overflow:hidden;box-shadow:0 24px 50px -24px rgba(11,31,58,.28)">
         <div style="display:grid;grid-template-columns:1fr 1fr">
-          <div style="padding:13px 18px;background:#f1f5f9;color:#94a3b8;font-weight:700;font-size:12px;border-bottom:1px solid #e2e8f0">A raw funding list</div>
+          <div style="padding:13px 18px;background:#f1f5f9;color:#64748b;font-weight:700;font-size:12px;border-bottom:1px solid #e2e8f0">A raw funding list</div>
           <div style="padding:13px 18px;background:rgba(31,182,166,.12);color:#0f766e;font-weight:700;font-size:12px;border-bottom:1px solid #e2e8f0;border-left:1px solid #e2e8f0">RoundSignal</div>
 
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#94a3b8;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#94a3b8;flex:none">✕</span><span>300 rows this week. Sort them yourself.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#64748b;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#64748b;flex:none">✕</span><span>300 rows this week. Sort them yourself.</span></div>
           <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-bottom:1px solid #eef2f6;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0f766e;font-weight:700;flex:none">✓</span><span>10 that fit what you sell. Already sorted.</span></div>
 
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#94a3b8;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#94a3b8;flex:none">✕</span><span>A name and a raised amount. You figure out why it matters.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#64748b;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#64748b;flex:none">✕</span><span>A name and a raised amount. You figure out why it matters.</span></div>
           <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-bottom:1px solid #eef2f6;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0f766e;font-weight:700;flex:none">✓</span><span>Why now and a ready-to-send opening line — on every account.</span></div>
 
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#94a3b8;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#94a3b8;flex:none">✕</span><span>Qualify, research, write — hours before the first email goes out.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#64748b;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#64748b;flex:none">✕</span><span>Qualify, research, write — hours before the first email goes out.</span></div>
           <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-bottom:1px solid #eef2f6;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0f766e;font-weight:700;flex:none">✓</span><span>Open one email and start selling. The homework's already done.</span></div>
 
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#94a3b8;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#94a3b8;flex:none">✕</span><span>By the time it reaches you, the budget's spent and the shortlist is closed.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#64748b;border-bottom:1px solid #eef2f6"><span aria-hidden="true" style="color:#64748b;flex:none">✕</span><span>By the time it reaches you, the budget's spent and the shortlist is closed.</span></div>
           <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-bottom:1px solid #eef2f6;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0f766e;font-weight:700;flex:none">✓</span><span>In your inbox by Monday — while the money's fresh and the shortlist's still open.</span></div>
 
-          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#94a3b8"><span aria-hidden="true" style="color:#94a3b8;flex:none">✕</span><span>Everyone gets the same firehose, whatever they sell.</span></div>
+          <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#64748b"><span aria-hidden="true" style="color:#64748b;flex:none">✕</span><span>Everyone gets the same firehose, whatever they sell.</span></div>
           <div style="padding:15px 18px;font-size:14px;line-height:1.45;display:flex;gap:8px;align-items:flex-start;color:#0b1f3a;border-left:1px solid #e2e8f0"><span aria-hidden="true" style="color:#0f766e;font-weight:700;flex:none">✓</span><span>Matched to your vertical, so every account is one you can actually close.</span></div>
         </div>
       </div>
-      <p class="text-center text-slate-600 reveal" style="margin-top:2rem">Not a mock-up — <a href="sample.html" class="font-semibold underline decoration-accent hover:text-teal-700">see it on this week's real list →</a></p>
     </div>
   </section>
 
@@ -482,7 +501,6 @@
       <p class="mt-4 text-lg text-slate-600">Start your trial and get the full scored list, ready to act on. Cancel anytime before it ends and you won't be charged.</p>
       <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
         <a data-rs-checkout="pro_mensile" href="https://buy.stripe.com/bJe3cua3o69q3y3czR4Vy00" class="bg-ink hover:bg-ink2 text-white font-bold px-6 py-3 rounded-xl whitespace-nowrap fx-btn">Start your 7-day free trial →</a>
-        <a href="sample.html" class="text-ink font-semibold underline decoration-accent hover:text-teal-700 whitespace-nowrap">or see this week's free sample →</a>
       </div>
       <p class="mt-3 text-xs text-slate-500">Built for founders, SDRs and agencies who sell to funded startups. 7-day free trial, then $49/mo or $490/yr — cancel anytime. See our <a href="privacy.html" class="underline hover:text-ink">Privacy Policy</a>.</p>
     </div>
@@ -542,15 +560,43 @@
       })},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
       rev.forEach(function(el){io.observe(el)});
     } else { rev.forEach(function(el){el.classList.add('in')}); }
+    /* TILT — riscritto per la fluidita'.
+       Prima: getBoundingClientRect() DENTRO il pointermove, cioe' una lettura di
+       layout forzata a ogni singolo movimento del mouse, seguita da una scrittura
+       di stile. E' layout thrashing da manuale: su dieci card e un PC lento si
+       vede. Ora il rettangolo si legge UNA VOLTA all'ingresso del puntatore, e la
+       scrittura passa da requestAnimationFrame: al massimo un aggiornamento per
+       frame invece di uno per evento. */
     if(!rm && window.matchMedia && matchMedia('(pointer:fine)').matches){
       document.querySelectorAll('.tilt').forEach(function(c){
-        c.addEventListener('pointermove',function(e){
-          var r=c.getBoundingClientRect();
-          var x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+        var r=null, atteso=false, mx=0, my=0;
+        function applica(){
+          atteso=false;
+          if(!r) return;
+          var x=(mx-r.left)/r.width-.5, y=(my-r.top)/r.height-.5;
           c.style.transform='perspective(950px) rotateX('+(-y*5).toFixed(2)+'deg) rotateY('+(x*6).toFixed(2)+'deg) translateY(-4px)';
+        }
+        c.addEventListener('pointerenter',function(){ r=c.getBoundingClientRect(); });
+        c.addEventListener('pointermove',function(e){
+          mx=e.clientX; my=e.clientY;
+          if(!atteso){ atteso=true; requestAnimationFrame(applica); }
         });
-        c.addEventListener('pointerleave',function(){c.style.transform='';});
+        c.addEventListener('pointerleave',function(){ r=null; c.style.transform=''; });
       });
+    }
+
+    /* Le animazioni infinite dell'hero (i tre orb sfocati e il gradiente del
+       titolo) giravano anche a hero fuori schermo: il compositor ri-sfocava
+       440px di blur a ogni frame per sempre. Ora si fermano quando l'hero esce
+       dalla vista. */
+    var hero=document.querySelector('.hero-in');
+    hero=hero&&hero.closest('section');
+    if(hero && !rm && 'IntersectionObserver' in window){
+      var animati=[].slice.call(hero.querySelectorAll('.orb,.grad-accent'));
+      new IntersectionObserver(function(es){
+        var visibile=es[0].isIntersecting;
+        animati.forEach(function(el){ el.style.animationPlayState=visibile?'running':'paused'; });
+      },{threshold:0}).observe(hero);
     }
     var hdr=document.querySelector('header');
     if(hdr){var on=function(){hdr.classList.toggle('rs-scrolled',(window.scrollY||0)>10)};addEventListener('scroll',on,{passive:true});on();}
