@@ -6,8 +6,8 @@ the issue (live funding feeds -> Claude -> scored accounts) and writes
 the feed + sample.html + sample.csv to the repo root. The workflow then commits
 them; GitHub Pages serves them. The full-issue feed uses a tokenized filename
 (FEED_FILENAME) so the standard /feed.xml path never exposes the paid content;
-delivery to subscribers is a manual Monday publish on beehiiv (RSS-to-Send
-needs the Max plan) - see MONDAY-RUNBOOK.md.
+delivery to subscribers is a manual Monday send from our own mailbox to the
+active Stripe customers - there is no newsletter platform. See DELIVERY.md.
 
 Needs only the ANTHROPIC_API_KEY env var (a GitHub Actions secret).
 Deps: anthropic, feedparser, tenacity  (see requirements-ci.txt).

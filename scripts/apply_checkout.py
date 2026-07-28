@@ -18,13 +18,17 @@ stili o testo: e' un'operazione di trenta caratteri, ed e' idempotente.
 Funziona su un bottone e su un link dentro un paragrafo allo stesso modo.
 
 ⛔ Niente risoluzione via JavaScript: un bottone di pagamento che dipende da JS
-   smette di funzionare in silenzio, e le issue-*.html finiscono incollate
-   dentro beehiiv, dove il JS viene rimosso.
+   smette di funzionare in silenzio, e il corpo di una issue viene spesso
+   incollato dentro un client di posta, dove il JS viene rimosso.
 
 USO
   python scripts/apply_checkout.py --check          verifica, non scrive (exit 0/1)
   python scripts/apply_checkout.py --apply          propaga il rail attivo
-  python scripts/apply_checkout.py --rail beehiiv --apply    rollback
+  python scripts/apply_checkout.py --rail X --apply forza un rail diverso
+
+⚠️ Dal 28/07/2026 esiste UNA SOLA rotaia viva (stripe) piu' quella di collaudo:
+   la rotaia del vecchio fornitore di newsletter e' stata rimossa per decisione
+   di Federico, quindi non c'e' piu' un rollback in un comando.
 
 Solo stdlib: gira sia in GitHub Actions sia col python portatile.
 """

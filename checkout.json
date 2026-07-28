@@ -3,18 +3,10 @@
   "_perche_sta_in_un_repo_pubblico": "Un link di pagamento non e' un segreto: e' un URL stampato su una pagina pubblica, fatto apposta per essere cliccato da sconosciuti. Nasconderlo in una cartella privata aggiungerebbe uno step di build, un accoppiamento fra due cartelle, e la possibilita' di pubblicare un placeholder non risolto. La regola 'niente segreti nel repo pubblico' resta intatta perche' qui non c'e' nessun segreto.",
   "aggiornato_il": "2026-07-26",
   "rail_attivo": "stripe",
-  "_rail_attivo": "Cambiare questo valore e rilanciare --apply e' TUTTA la migrazione lato sito. E' anche il rollback: si rimette 'beehiiv' e si rilancia.",
+  "_rail_attivo": "Cambiare questo valore e rilanciare --apply e' TUTTA la migrazione lato sito.",
+  "_rollback_rimosso_il": "2026-07-28",
+  "__rollback_rimosso_il": "La rotaia di rollback verso il checkout del vecchio fornitore e' stata ELIMINATA su decisione di Federico del 28/07: fuori dal business, del tutto. Da qui in poi non esiste una via di ritorno in un comando - se Stripe dovesse fallire, si ricostruisce una cassa da zero. E' un costo accettato consapevolmente: la rotaia Stripe e' verificata alla fonte e non ci sono clienti da proteggere (0 paganti al 28/07). Il frammento vietato qui sotto e' cio' che impedisce al nome di rientrare di soppiatto in un file qualsiasi.",
   "rails": {
-    "beehiiv": {
-      "stato": "rollback",
-      "_nota": "ROLLBACK VIVO, verificato HTTP 200 il 26/07 prima del cambio rotaia. apply_checkout.py --rail beehiiv --apply rimette tutto com era, in un comando. NON archiviare le offerte beehiiv: sono la via di ritorno. Si archiviano 30 giorni dopo il downgrade.",
-      "links": {
-        "pro_mensile": "https://roundsignal.beehiiv.com/upgrade?offer_id=1cf13c53-9b75-4a64-8cfc-996256a49f9b",
-        "pro_annuale": "https://roundsignal.beehiiv.com/upgrade?offer_id=1cf13c53-9b75-4a64-8cfc-996256a49f9b",
-        "agency_mensile": "https://roundsignal.beehiiv.com/upgrade?offer_id=1ae4c048-32bd-4460-bf75-db160f0a56b2",
-        "agency_annuale": "https://roundsignal.beehiiv.com/upgrade?offer_id=1ae4c048-32bd-4460-bf75-db160f0a56b2"
-      }
-    },
     "stripe": {
       "stato": "attivo",
       "_nota": "Quattro Payment Link LIVE, uno per prezzo, creati e verificati alla fonte il 26/07: importi 4900/49000/9900/99000 cent USD, prova di 7 giorni su tutti e quattro, URL distinti. Prodotti classificati txcd_10303002 (periodico digitale) invece che come software, perche' in UE i periodici digitali hanno spesso un'aliquota ridotta. La stessa ricetta e stata provata end-to-end in sandbox PRIMA della produzione, con un pagamento vero e il payload catturato.",
@@ -73,8 +65,8 @@
   ],
   "__generati": "Questi file li riscrive weekly_feed.py ogni lunedi'. --apply li aggiorna comunque, cosi' il repo resta coerente in ogni istante; ma la fonte vera per loro e' il generatore, che legge questo stesso file. I due percorsi convergono sullo stesso valore invece di divergere.",
   "_residui_vietati": {
-    "beehiiv": [
-      "beehiiv.com/upgrade"
+    "fornitore_newsletter_dismesso": [
+      "beehiiv"
     ],
     "stripe": [
       "buy.stripe.com"
