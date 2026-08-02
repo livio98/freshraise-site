@@ -38,6 +38,12 @@ MODEL = os.getenv("CLAUDE_MODEL", "claude-opus-4-8")
 SITE_BASE_URL = os.getenv("SITE_BASE_URL", "https://getroundsignal.com").rstrip("/")
 USER_AGENT = "RoundSignal/1.0 (signals@getroundsignal.com)"
 INK, ACCENT = "#0B1F3A", "#1FB6A6"
+# Registro cumulativo pubblico delle societa' gia' uscite in un'edizione.
+# Perche' esiste: fino a oggi ogni lunedi' i fatti finivano dentro una pagina datata e non si
+# accumulavano da nessuna parte. Un dato che non si accumula non diventa mai un asset: ogni
+# settimana ripartiva da zero. Qui invece cresce, ed e' cio' che rende possibile una pagina
+# indicizzabile che migliora da sola ogni settimana invece di essere sostituita.
+FUNDED_STORE = "funded.json"
 # Full-issue RSS: tokenized name — /feed.xml is the first path scrapers probe.
 FEED_FILENAME = "feed-7d27d289dd65.xml"
 
@@ -571,7 +577,124 @@ def render_archive_index(labels):
   <ul style="list-style:none;padding:0;margin:0">
   {body}
   </ul>
-  <p style="margin:28px 0 0"><a href="{SITE_BASE_URL}/#score-demo" style="color:#0f766e;font-weight:700;text-decoration:none">See how it scores for your offer &rarr;</a></p>
+  <p style="margin:28px 0 10px"><a href="{SITE_BASE_URL}/funded.html" style="color:#0f766e;font-weight:700;text-decoration:none">The full running list of funded companies &rarr;</a></p>
+  <p style="margin:0"><a href="{SITE_BASE_URL}/#score-demo" style="color:#0f766e;font-weight:700;text-decoration:none">See how it scores for your offer &rarr;</a></p>
+  <p style="color:#64748b;font-size:12px;margin-top:26px">&copy; RoundSignal. Signals sourced from public news; verify before outreach.</p>
+</main>
+</body></html>"""
+
+
+def _carica_funded():
+    """Il registro cumulativo, o una lista vuota se non esiste ancora / e' illeggibile.
+
+    Non solleva mai: se il registro si corrompe, il run del lunedi' deve comunque uscire.
+    Perdere una settimana di storico e' un danno; perdere l'edizione e' il business."""
+    try:
+        with open(FUNDED_STORE, encoding="utf-8") as f:
+            dati = json.load(f)
+        return dati if isinstance(dati, list) else []
+    except Exception:
+        return []
+
+
+def _aggiorna_funded(accounts, issue_label, oggi):
+    """Aggiunge al registro le societa' di questa edizione. Ritorna (registro, quante nuove).
+
+    Dedup per nome normalizzato: la stessa societa' puo' ricomparire in un'edizione successiva
+    (round diverso, notizia ripresa) e non deve creare una riga doppia.
+    Nel registro finiscono SOLO i fatti pubblici - societa', round, sito, fonte. Punteggio,
+    why-now, ruolo e angolo restano il prodotto a pagamento e non escono da qui."""
+    registro = _carica_funded()
+    visti = {str(r.get("company", "")).strip().lower() for r in registro}
+    nuove = 0
+    for a in accounts:
+        chiave = a.company.strip().lower()
+        if not chiave or chiave in visti:
+            continue
+        visti.add(chiave)
+        registro.append({
+            "company": a.company,
+            "trigger": a.trigger,
+            "website": a.website or "",
+            "source_url": a.source_url or "",
+            "issue": issue_label,
+            "date": oggi,
+        })
+        nuove += 1
+    registro.sort(key=lambda r: (str(r.get("date", "")), str(r.get("company", ""))), reverse=True)
+    with open(FUNDED_STORE, "w", encoding="utf-8") as f:
+        json.dump(registro, f, ensure_ascii=False, indent=1)
+    return registro, nuove
+
+
+def render_funded_index(registro):
+    """La pagina pubblica che cresce ogni lunedi' invece di essere sostituita.
+
+    Non e' una pagina per societa': quelle sarebbero decine di pagine da 60 parole l'una, cioe'
+    esattamente il contenuto sottile che Google tratta come doorway. Qui la stessa informazione
+    sta su UNA pagina che si allunga, e ogni edizione nuova la rende piu' forte invece di
+    diluirla."""
+    righe = []
+    for r in registro:
+        nome = html.escape(str(r.get("company", "")))
+        trigger = html.escape(str(r.get("trigger", "")))
+        sito = str(r.get("website", "") or "")
+        fonte = str(r.get("source_url", "") or "")
+        lb = html.escape(str(r.get("issue", "")))
+        link_nome = (f'<a href="{html.escape(sito)}" rel="nofollow noopener" '
+                     f'style="color:{INK};font-weight:700;text-decoration:none">{nome}</a>'
+                     if sito.startswith("http") else f'<strong style="color:{INK}">{nome}</strong>')
+        link_fonte = (f' &middot; <a href="{html.escape(fonte)}" rel="nofollow noopener" '
+                      f'style="color:#0f766e">source</a>' if fonte.startswith("http") else "")
+        righe.append(
+            f'<li style="margin:0 0 14px;line-height:1.55">{link_nome}'
+            f'<span style="color:#475569;font-size:15px"> &mdash; {trigger}</span>'
+            f'<span style="color:#64748b;font-size:13px"><br>Issue '
+            f'<a href="{SITE_BASE_URL}/issue-{lb}.html" style="color:#64748b">{lb}</a>'
+            f'{link_fonte}</span></li>'
+        )
+    corpo = "\n  ".join(righe) if righe else (
+        '<li style="color:#64748b">The first edition publishes Monday.</li>')
+    n = len(registro)
+    schema = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "Recently funded European startups — RoundSignal",
+        "description": (f"An open, weekly-updated list of {n} European startups that announced "
+                        f"funding, with the round and the original source for each."),
+        "url": f"{SITE_BASE_URL}/funded.html",
+        "isAccessibleForFree": True,
+        "creator": {"@type": "Organization", "name": "RoundSignal",
+                    "url": f"{SITE_BASE_URL}/"},
+    }, ensure_ascii=False)
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="{SITE_BASE_URL}/funded.html">
+<title>Recently funded European startups &mdash; updated weekly | RoundSignal</title>
+<meta name="description" content="An open list of {n} European startups that recently announced funding, with the round and the original source. Updated every Monday.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Recently funded European startups &mdash; updated weekly">
+<meta property="og:description" content="An open, weekly-updated list of European startups that just raised, with the round and the source for each.">
+<meta property="og:url" content="{SITE_BASE_URL}/funded.html">
+<meta property="og:image" content="{SITE_BASE_URL}/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{SITE_BASE_URL}/og-image.png">
+<link rel="alternate" type="application/rss+xml" title="RoundSignal" href="{SITE_BASE_URL}/feed.xml">
+<script type="application/ld+json">{schema}</script>
+<script data-goatcounter="https://roundsignal.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+<main style="max-width:760px;margin:0 auto;padding:28px 18px">
+  <header style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
+    <a href="{SITE_BASE_URL}/" style="display:flex;align-items:center;gap:9px;font-weight:800;font-size:22px;color:{INK};text-decoration:none"><img src="{SITE_BASE_URL}/logo.svg" alt="" width="26" height="26" style="border-radius:6px;display:block">Round<span style="color:{ACCENT}">Signal</span></a>
+  </header>
+  <h1 style="color:{INK};font-size:24px;font-weight:800;margin:0 0 6px">Recently funded European startups</h1>
+  <p style="color:#475569;font-size:15px;margin:0 0 8px;line-height:1.55">Every Monday we read 50+ public funding sources and publish the European startups that just raised. This page is the running list &mdash; <strong>{n}</strong> companies so far &mdash; and it grows every week.</p>
+  <p style="color:#64748b;font-size:14px;margin:0 0 22px;line-height:1.55">The companies, their rounds and the original sources are public and free, here. What subscribers get on top is the part that takes the work: a sales-fit <strong>score</strong>, why the window is open <strong>now</strong>, <strong>who to contact</strong>, and the <strong>opening angle</strong>. <a href="{SITE_BASE_URL}/#pricing" style="color:#0f766e;font-weight:600">See plans &rarr;</a></p>
+  <ul style="list-style:none;padding:0;margin:0">
+  {corpo}
+  </ul>
+  <p style="margin:28px 0 0;font-size:15px"><a href="{SITE_BASE_URL}/archive.html" style="color:#0f766e;font-weight:700;text-decoration:none">Browse the weekly editions &rarr;</a></p>
   <p style="color:#64748b;font-size:12px;margin-top:26px">&copy; RoundSignal. Signals sourced from public news; verify before outreach.</p>
 </main>
 </body></html>"""
@@ -632,6 +755,10 @@ def main():
     # PUBLIC csv = teaser columns only (paid columns withheld).
     with open("sample.csv", "w", encoding="utf-8") as f:
         f.write(digest_to_csv(accounts, public=True))
+    # Registro cumulativo + la pagina pubblica che ci cresce sopra.
+    registro, nuove_nel_registro = _aggiorna_funded(accounts, label, now.date().isoformat())
+    with open("funded.html", "w", encoding="utf-8") as f:
+        f.write(render_funded_index(registro))
     # Sitemap.
     #
     # sample.html is deliberately ABSENT: it is now noindex (a rotating copy of the dated
@@ -664,8 +791,10 @@ def main():
     body = _sitemap_url(f"{SITE_BASE_URL}/", "weekly", "1.0", _last_commit_date("index.html"))
     for name, freq, pri in static_pages:
         body += _sitemap_url(f"{SITE_BASE_URL}/{name}", freq, pri, _last_commit_date(name))
-    # archive.html and this week's issue are written by this run, so today is the truth.
+    # archive.html, funded.html e l'edizione di questa settimana li scrive questo run: today e' vero.
     body += _sitemap_url(f"{SITE_BASE_URL}/archive.html", "weekly", "0.6", today)
+    # funded.html a priorita' alta: e' l'unica pagina che migliora da sola ogni settimana.
+    body += _sitemap_url(f"{SITE_BASE_URL}/funded.html", "weekly", "0.8", today)
     for lb in issue_labels:
         lm = today if lb == label else _last_commit_date(f"issue-{lb}.html")
         body += _sitemap_url(f"{SITE_BASE_URL}/issue-{lb}.html", "yearly", "0.5", lm)
@@ -676,7 +805,9 @@ def main():
             + body
             + '</urlset>\n'
         )
-    print(f"OK: {len(accounts)} accounts, issue {label} -> {FEED_FILENAME} + sample.html (gated) + sample.csv (teaser) + sitemap.xml")
+    print(f"OK: {len(accounts)} accounts, issue {label} -> {FEED_FILENAME} + sample.html (gated) "
+          f"+ sample.csv (teaser) + sitemap.xml + funded.html "
+          f"({len(registro)} societa' nel registro, {nuove_nel_registro} nuove questa settimana)")
 
 
 if __name__ == "__main__":

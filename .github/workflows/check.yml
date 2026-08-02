@@ -63,10 +63,35 @@ jobs:
               if u in html:
                   errori.append("il CTA contiene un link di un rail NON attivo: %s" % u)
 
+          # Il registro cumulativo e la pagina che ci cresce sopra girano SOLO nel run del
+          # lunedi': senza questo pezzo sarebbero codice non collaudato che parte da solo alle
+          # 06:00 UTC. Si esegue in una cartella temporanea per non toccare il funded.json vero.
+          import os, tempfile
+          os.chdir(tempfile.mkdtemp())
+
+          registro, nuove = wf._aggiorna_funded(finti, "2026-W99", "2026-01-01")
+          if nuove != 3:
+              errori.append("registro: attese 3 societa' nuove, trovate %d" % nuove)
+          registro2, nuove2 = wf._aggiorna_funded(finti, "2026-W99", "2026-01-01")
+          if nuove2 != 0 or len(registro2) != 3:
+              errori.append("registro: la seconda passata doveva essere un no-op, "
+                            "invece nuove=%d totale=%d (dedup rotto)" % (nuove2, len(registro2)))
+
+          pagina = wf.render_funded_index(registro2)
+          for atteso in ("Test 0", "rel=\"canonical\"", "application/ld+json", "</html>"):
+              if atteso not in pagina:
+                  errori.append("funded.html: manca %r" % atteso)
+          if "why_now" in pagina or "budget just landed" in pagina:
+              errori.append("funded.html: espone il contenuto A PAGAMENTO (why-now)")
+          if "congratulate and offer help" in pagina or "CTO" in pagina:
+              errori.append("funded.html: espone angolo o ruolo, che sono a pagamento")
+          if not wf.render_funded_index([]):
+              errori.append("funded.html: registro vuoto non deve rompere il primo run")
+
           if errori:
               print("BLOCCA:")
               for e in errori:
                   print("  - " + e)
               sys.exit(1)
-          print("passa - il generatore emette il link di checkout.json")
+          print("passa - checkout, registro cumulativo e funded.html")
           PY
