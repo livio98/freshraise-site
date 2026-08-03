@@ -16,10 +16,34 @@
   "date": "2026-08-03"
  },
  {
+  "company": "Sowilo",
+  "trigger": "Pre-seed round (amount undisclosed), Tech.eu, as of 21 Jul 2026",
+  "website": "",
+  "source_url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQYVhuZkRzRnBVVEtpb3FMVVBMSTR5RWpfeml6V3RIbjYzMDFac01mUjFNbmdRVWJIVnAzeTRvNTZTZEI3WG84TmZoUjVnd1BaUHc2a1BSTVh5THZrTzdwbkRIZmZHdVlPdUtJWjBVWVdNNWswc282TWx3b1VDbzAwd2lEOHdTM0NDaXBqc1lLM01MSk9yejNDU0NJMWV2NG81TEY1NkFlRk1vek9YY2NlWndOY1BiQUx6OGc?oc=5",
+  "issue": "2026-W32",
+  "date": "2026-08-03"
+ },
+ {
   "company": "Sigvi",
   "trigger": "€1.2M pre-seed led by Superhero Capital - Tech.eu & EU-Startups, as of 29 Jul 2026",
   "website": "",
   "source_url": "https://tech.eu/2026/07/29/sigvi-raises-eur12m-to-expand-automated-car-rental-operations/",
+  "issue": "2026-W32",
+  "date": "2026-08-03"
+ },
+ {
+  "company": "Qureight",
+  "trigger": "$20M Series B, Tech.eu, as of 29 Jul 2026",
+  "website": "https://www.qureight.com",
+  "source_url": "https://tech.eu/2026/07/29/qureight-secures-20m-series-b-to-expand-ai-powered-imaging-platform-for-clinical-trials/",
+  "issue": "2026-W32",
+  "date": "2026-08-03"
+ },
+ {
+  "company": "Keiron Printing Technologies",
+  "trigger": "€20.7M Series A co-led by Invest-NL, DeepTechXL, Waves Capital, EU-Startups, as of 31 Jul 2026",
+  "website": "https://www.keiron.tech",
+  "source_url": "https://www.eu-startups.com/2026/07/eindhoven-based-keiron-raises-e20-7-million-to-tackle-one-of-electronics-manufacturings-most-expensive-problems/",
   "issue": "2026-W32",
   "date": "2026-08-03"
  },
@@ -44,6 +68,14 @@
   "trigger": "$75M Series B to automate Fortune 500 supply chain spend - Crunchbase News, as of 29 Jul 2026",
   "website": "",
   "source_url": "https://news.crunchbase.com/transportation/freehand-pando-enterprise-supply-chain-spend-management-startup/",
+  "issue": "2026-W32",
+  "date": "2026-08-03"
+ },
+ {
+  "company": "Centralize (Ryan Williams / private credit AI)",
+  "trigger": "$10M seed for AI startup for private credit managers, TechCrunch, as of 31 Jul 2026",
+  "website": "",
+  "source_url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQS1BjOVgzYzlQM1JZODQ5WXZaektJNDJmd1kydW9fWm5FZGRycGN0TWYtdVdUWjM4MGtvRWE0MnFBNlF4bGZ1dWhGSi01bktaWUF5NE9mUE95TmtobzFya0ZqNW9TT08wMl9aU2lTcHF5OU45dkNlU2FVM3ZJTllDYkU1ZFJUblBPRTVTaDRrRktTaUpNUXpzZW00bkpNNjhRTHd6WDdaT3drMlU3SUcyN1Ztdnc1dHhoS29icUlicGVSSkU?oc=5",
   "issue": "2026-W32",
   "date": "2026-08-03"
  },
