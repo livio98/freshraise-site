@@ -6,133 +6,145 @@
   <atom:link href="https://getroundsignal.com/feed-7d27d289dd65.xml" rel="self" type="application/rss+xml"/>
   <description>Each week: freshly-funded startups, the role to contact, and a ready-to-send angle.</description>
   <language>en</language>
-  <lastBuildDate>Mon, 27 Jul 2026 15:57:10 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 03 Aug 2026 07:47:31 +0000</lastBuildDate>
   <item>
-    <title>RoundSignal 2026-W31: 9 freshly-funded accounts to sell to this week</title>
+    <title>RoundSignal 2026-W32: 10 freshly-funded accounts to sell to this week</title>
     <link>https://getroundsignal.com/sample.html</link>
-    <guid isPermaLink="false">roundsignal-2026-W31-20260727</guid>
-    <pubDate>Mon, 27 Jul 2026 15:57:10 +0000</pubDate>
+    <guid isPermaLink="false">roundsignal-2026-W32-20260803</guid>
+    <pubDate>Mon, 03 Aug 2026 07:47:31 +0000</pubDate>
     <description><![CDATA[<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex"><title>RoundSignal 2026-W31 &mdash; freshly-funded startups worth selling to</title>
-<meta name="description" content="Freshly-funded B2B SaaS &amp; tech startups (pre-seed -&gt; Series B) &mdash; 9 freshly-funded accounts, scored, with the role to contact. Week 2026-W31."></head>
+<meta name="robots" content="noindex"><title>RoundSignal 2026-W32 &mdash; freshly-funded startups worth selling to</title>
+<meta name="description" content="Freshly-funded B2B SaaS &amp; tech startups (pre-seed -&gt; Series B) &mdash; 10 freshly-funded accounts, scored, with the role to contact. Week 2026-W32."></head>
 <body style="margin:0;background:#f1f5f9;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
 <main style="max-width:720px;margin:0 auto;padding:28px 18px">
   <header style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
     <a href="https://getroundsignal.com/" style="display:flex;align-items:center;gap:9px;font-weight:800;font-size:22px;color:#0B1F3A;text-decoration:none"><img src="https://getroundsignal.com/logo.svg" alt="" width="26" height="26" style="border-radius:6px;display:block">Round<span style="color:#1FB6A6">Signal</span></a>
-    <span style="margin-left:auto;color:#64748b;font-size:13px">Issue 2026-W31</span>
+    <span style="margin-left:auto;color:#64748b;font-size:13px">Issue 2026-W32</span>
   </header>
   <h1 style="color:#0B1F3A;font-size:22px;font-weight:800;margin:0 0 4px">Freshly-funded B2B SaaS &amp; tech startups (pre-seed -&gt; Series B)</h1>
-  <p style="color:#64748b;font-size:13px;margin:0 0 14px">9 trigger-ready accounts, scored and contextualized. </p>
+  <p style="color:#64748b;font-size:13px;margin:0 0 14px">10 trigger-ready accounts, scored and contextualized. </p>
   
   
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h2 style="margin:0;font-size:18px;color:#0B1F3A"><a href="https://www.telli.com" target="_blank" rel="noopener" style="color:#0B1F3A;text-decoration:none">telli</a></h2>
+            <h2 style="margin:0;font-size:18px;color:#0B1F3A">inforcer</h2>
+            <span style="font-weight:700;color:#15803d;font-size:14px">heat 90</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $50M Series C led by Insight Partners (Meritech, Dawn Capital participating) - Tech.eu, as of 30 Jul 2026</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> UK B2B SaaS scaling an AI security platform for MSPs just raised a large Series C; they will be hiring and building out GTM, security, and partner programs fast - ideal window for RevOps, growth, and recruiting services.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> VP Marketing / Head of Revenue Operations</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congrats on the Insight-led Series C - most MSP-focused platforms hit a channel-scaling wall right after; I&#x27;ve helped B2B security vendors stand up partner-led RevOps in under 60 days, happy to share a quick playbook.</p>
+          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 31 &mdash; the signal decays within weeks.</p>
+          <a href="https://tech.eu/2026/07/30/inforcer-raises-50m-series-c-to-scale-ai-security-platform-for-msps/" style="font-size:12px;color:#64748b">source</a>
+        </div>
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h2 style="margin:0;font-size:18px;color:#0B1F3A">Intropy</h2>
             <span style="font-weight:700;color:#15803d;font-size:14px">heat 88</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $15M Seed led by redalpine (Tech.eu / PYMNTS, as of 24 Jul 2026)</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Berlin-based AI startup automating customer-facing operations just closed a $15M seed and is explicitly expanding its platform and team - fresh budget for growth, RevOps and go-to-market help.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> CEO / Head of Growth &middot; <a href="mailto:info@telli.com" style="color:#0f766e">info@telli.com</a></p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Reference their plan to scale AI for customer-facing ops post-seed and offer to stand up the RevOps/onboarding funnel that turns new AI-agent demand into booked revenue.</p>
-          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 24 &mdash; the signal decays within weeks.</p>
-          <a href="https://tech.eu/2026/07/23/telli-secures-15m-seed-to-automate-customer-facing-operations/" style="font-size:12px;color:#64748b">source</a>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €9.5M / $11M Seed led by Felix Capital (Quiet Capital, General Catalyst, firstminute) - EU-Startups &amp; Tech.eu, as of 30 Jul 2026</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> London AI-native platform for the spare parts industry just closed a sizable seed and is explicitly targeting US expansion; corroborated across two outlets, so demand for growth, brand, and US-market services is imminent.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Co-founder &amp; CEO (Franziska Kirschner) / Head of Growth</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Saw Felix Capital backed your spare-parts OS and that US expansion is next - I help European seed-stage SaaS localize positioning and demand-gen for the US launch; want a teardown of your current messaging?</p>
+          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 31 &mdash; the signal decays within weeks.</p>
+          <a href="https://www.eu-startups.com/2026/07/london-based-intropy-raises-e9-5-million-to-build-the-ai-native-operating-system-for-the-spare-parts-industry/" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h2 style="margin:0;font-size:18px;color:#0B1F3A">Scape</h2>
-            <span style="font-weight:700;color:#15803d;font-size:14px">heat 84</span>
+            <h2 style="margin:0;font-size:18px;color:#0B1F3A">Centralize</h2>
+            <span style="font-weight:700;color:#15803d;font-size:14px">heat 85</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $3.2M, emerged from stealth (Tech.eu, as of 24 Jul 2026); Y Combinator-backed</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Two-founder Swedish YC startup reinventing email just launched from stealth with $3.2M - tiny team, new capital, and an immediate need for design, growth and dev capacity to launch.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Co-founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congratulate them on the stealth launch and pitch a fast product-marketing/launch sprint to convert the YC/email-reinvention buzz into signups.</p>
-          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 24 &mdash; the signal decays within weeks.</p>
-          <a href="https://tech.eu/2026/07/24/y-combinator-startup-scape-emerges-from-stealth-with-32m/" style="font-size:12px;color:#64748b">source</a>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $15M Series A (emerging from stealth), founded by former Meta and Slack engineers - Crunchbase News, as of 29 Jul 2026</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Just out of stealth with a Series A for an enterprise sales &#x27;Deal GPS&#x27; platform; post-launch they need brand, content, demand-gen, and RevOps talent immediately - a hot 48h window.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Co-founder / CEO or Head of Marketing</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congrats on decloaking with the $15M round - launching a GTM tool means your own GTM has to be flawless; I&#x27;ve run launch demand-gen for enterprise sales startups and can share a 30-day plan.</p>
+          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 31 &mdash; the signal decays within weeks.</p>
+          <a href="https://news.crunchbase.com/sales-marketing/centralize-enterprise-sales-gtm-startup-funding-slack-meta-alums/" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h2 style="margin:0;font-size:18px;color:#0B1F3A"><a href="https://beelzebub.com" target="_blank" rel="noopener" style="color:#0B1F3A;text-decoration:none">Beelzebub</a></h2>
-            <span style="font-weight:700;color:#15803d;font-size:14px">heat 83</span>
+            <h2 style="margin:0;font-size:18px;color:#0B1F3A">Atomic One</h2>
+            <span style="font-weight:700;color:#b45309;font-size:14px">heat 78</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €3M Seed led by United Ventures (EU-Startups &amp; Tech.eu, as of 27 Jul 2026)</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Milan cybersecurity startup raised €3M and is explicitly funding research-team expansion and opening a new Rome commercial office - clear hiring, PR and go-to-market spend ahead.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> CEO / Founder &middot; <a href="mailto:info@beelzebub.com" style="color:#0f766e">info@beelzebub.com</a></p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Tie into their Rome office launch and offer recruiting or B2B demand-gen support to staff and fill the new commercial team quickly.</p>
-          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 24 &mdash; the signal decays within weeks.</p>
-          <a href="https://www.eu-startups.com/2026/07/milans-beelzebub-raises-e3-million-to-fight-ai-driven-cyberattacks-with-ai-powered-hacker-traps/" style="font-size:12px;color:#64748b">source</a>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €5.6M two-tranche round (Arcano Partners / Impacto Andalucía) - EU-Startups, as of 31 Jul 2026</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Málaga-based AI operating system for e-commerce brands just closed multi-million funding; freshly-funded and scaling means openings for growth, design, and RevOps service providers.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> CEO / Head of Growth</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congrats on the €5.6M raise - AI-for-ecommerce companies usually need to prove ROI fast to their first cohort of brands; I help early SaaS build case-study-driven growth engines, worth a chat?</p>
+          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 31 &mdash; the signal decays within weeks.</p>
+          <a href="https://www.eu-startups.com/2026/07/malaga-based-atomic-one-raises-e5-6-million-to-automate-e-commerce-operations-with-ai-agents/" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h2 style="margin:0;font-size:18px;color:#0B1F3A">PageMind</h2>
-            <span style="font-weight:700;color:#15803d;font-size:14px">heat 80</span>
+            <h2 style="margin:0;font-size:18px;color:#0B1F3A">Freehand</h2>
+            <span style="font-weight:700;color:#b45309;font-size:14px">heat 77</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €1.2M funding round (Tech.eu, as of 23 Jul 2026)</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Spanish AI e-commerce discovery startup raised €1.2M to expand its team and support US/international growth - early-stage with an explicit expansion mandate and small headcount.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $75M Series B to automate Fortune 500 supply chain spend - Crunchbase News, as of 29 Jul 2026</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Large Series B for an enterprise AI agent platform; they&#x27;ll be aggressively hiring and expanding enterprise GTM - strong fit for recruiting, RevOps, and fractional CFO/CMO services.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> VP Revenue / Head of Talent</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> A $75M Series B means a hiring and GTM sprint - I place fractional RevOps/CMO talent that helps enterprise-AI startups avoid scaling mistakes; open to a quick intro?</p>
+          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 31 &mdash; the signal decays within weeks.</p>
+          <a href="https://news.crunchbase.com/transportation/freehand-pando-enterprise-supply-chain-spend-management-startup/" style="font-size:12px;color:#64748b">source</a>
+        </div>
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h2 style="margin:0;font-size:18px;color:#0B1F3A">5U AI</h2>
+            <span style="font-weight:700;color:#b45309;font-size:14px">heat 74</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $3.2M pre-seed led by Emerge Capital - Tech.eu, as of 28 Jul 2026</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Munich logistics-AI startup building a digital workforce platform for freight forwarding just raised pre-seed; early-stage B2B SaaS in exactly the target band, needing first marketing/dev/design hires.</p>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer a US market-entry growth/localization package built for their stated international expansion off this seed round.</p>
-          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 24 &mdash; the signal decays within weeks.</p>
-          <a href="https://tech.eu/2026/07/23/pagemind-raises-eur12m-to-scale-ai-for-e-commerce-product-discovery/" style="font-size:12px;color:#64748b">source</a>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congrats on the Emerge-led pre-seed - freight-forwarding buyers are notoriously skeptical of AI; I help logistics SaaS craft proof-led messaging for their first design partners, want to compare notes?</p>
+          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 31 &mdash; the signal decays within weeks.</p>
+          <a href="https://tech.eu/2026/07/28/5u-ai-lands-32m-pre-seed-for-ai-freight-workforce-platform/" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h2 style="margin:0;font-size:18px;color:#0B1F3A">kausable</h2>
-            <span style="font-weight:700;color:#b45309;font-size:14px">heat 76</span>
-          </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €12M Seed round (Tech.eu, as of 23 Jul 2026)</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> European AI startup building reasoning-first frontier AI just raised a sizeable €12M seed - fresh capital typically drives engineering hiring and brand/PR buildout in the weeks after.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / Head of Engineering</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Reach out on the back of their €12M seed with a technical-recruiting or fractional infra-hiring offer to scale their reasoning-AI team fast.</p>
-          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 24 &mdash; the signal decays within weeks.</p>
-          <a href="https://tech.eu/2026/07/23/kausable-raises-eur12m-to-rethink-how-ai-learns/" style="font-size:12px;color:#64748b">source</a>
-        </div>
-        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h2 style="margin:0;font-size:18px;color:#0B1F3A">Ossprey</h2>
-            <span style="font-weight:700;color:#b45309;font-size:14px">heat 75</span>
-          </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $2.65M oversubscribed pre-seed (Tech.eu, as of 22 Jul 2026)</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> UK software supply-chain security startup raised $2.65M explicitly to accelerate product development and expand engineering and commercial teams - textbook early-stage services buyer.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Cite their stated plan to expand commercial and engineering teams and offer recruiting or go-to-market help to build their first sales motion.</p>
-          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 24 &mdash; the signal decays within weeks.</p>
-          <a href="https://tech.eu/2026/07/22/ossprey-secures-265m-to-stop-software-supply-chain-attacks/" style="font-size:12px;color:#64748b">source</a>
-        </div>
-        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
-          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h2 style="margin:0;font-size:18px;color:#0B1F3A">Sowilo</h2>
+            <h2 style="margin:0;font-size:18px;color:#0B1F3A">Terminal</h2>
             <span style="font-weight:700;color:#b45309;font-size:14px">heat 72</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> Pre-seed round for Catecut fashion product-intelligence platform (Tech.eu, as of 21 Jul 2026)</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Iceland-based AI startup raised pre-seed to expand Catecut and launch its Shopify app globally - very early, resource-light, and about to go to market.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer a Shopify app-launch growth/marketing sprint timed to their global rollout off the pre-seed.</p>
-          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 24 &mdash; the signal decays within weeks.</p>
-          <a href="https://tech.eu/2026/07/21/icelands-sowilo-raises-pre-seed-to-expand-ai-powered-fashion-product-intelligence-platform/" style="font-size:12px;color:#64748b">source</a>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $20M round to become the &#x27;Switzerland&#x27; of telematics trade - The Globe and Mail, as of 29 Jul 2026</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Toronto B2B telematics-data platform just raised $20M and is positioning as a neutral marketplace; scaling stage with clear needs for growth, brand, and partner-marketing services.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Head of Marketing / VP Growth</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Positioning as the neutral &#x27;Switzerland&#x27; of telematics is a sharp story - I help data-marketplace startups turn a positioning line into a repeatable demand engine; can I send a short teardown?</p>
+          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 31 &mdash; the signal decays within weeks.</p>
+          <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNZ2xWZE5LaFdFdW1GRW1mTXBJUE5ZX2dWN3BTSWJ2WjU1S1dHQ0E5MGhRNDRFZlZ4dzVOYW4zMGhDMU8xd2VaRVlzY0hTN3JJd3BOX3kyeTkyWHFDNlpEMXdZR1pTWThqVXp2Wi1ZZlpXLTdtM0xxRGFRZG04WHl0ZEpuNG80T01JaFZxRTZZNEpQZ1RsSDRUamxpRmtGdjdWS2pGeGhzbFhXWlQwUnc?oc=5" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h2 style="margin:0;font-size:18px;color:#0B1F3A">Arrakis</h2>
-            <span style="font-weight:700;color:#b45309;font-size:14px">heat 71</span>
+            <h2 style="margin:0;font-size:18px;color:#0B1F3A">Harmony</h2>
+            <span style="font-weight:700;color:#b45309;font-size:14px">heat 70</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> ~$40M raised in just over three months, emerged from stealth; backed by OpenAI and Datadog leaders (Tech.eu, as of 22 Jul 2026)</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> London AI deployment startup came out of stealth with heavyweight backers and ~$40M - fresh, well-funded and building out team and brand right now.</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO (ex-Accel Rafael Quintanilla)</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congratulate on the stealth exit with OpenAI/Datadog backing and offer senior engineering recruiting or launch-PR support during their scale-up.</p>
-          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 24 &mdash; the signal decays within weeks.</p>
-          <a href="https://tech.eu/2026/07/22/openai-and-datadog-leaders-back-ai-deployment-startup-arrakis/" style="font-size:12px;color:#64748b">source</a>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $34M raise; founders previously sold Epsagon to Cisco for $500M - Business Insider / Calcalist, as of 28 Jul 2026</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Repeat-founder AI enterprise startup (&#x27;kill IT tickets&#x27;) just raised $34M with two-source corroboration; proven founders scaling fast means immediate GTM, brand, and recruiting demand.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Co-founder / CEO</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Second act after the Cisco/Epsagon exit is always about speed - I help proven founders spin up enterprise demand-gen before the product is fully GA; happy to share what worked for similar teams.</p>
+          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 31 &mdash; the signal decays within weeks.</p>
+          <a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE1PT0ZWRXVJaF91Y0lhZUg0VTdadmJBdFN5WU9ZeHRjbDlrVUZYUGwwZzMzWDZsbzVrZlg3eE9oLVE2eEcxc3VzVEJBcC1WTV9nNUZxS24xN1IxSFdrcWpGdlFRREhWWThl?oc=5" style="font-size:12px;color:#64748b">source</a>
         </div>
         <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-            <h2 style="margin:0;font-size:18px;color:#0B1F3A">Fincart</h2>
-            <span style="font-weight:700;color:#b45309;font-size:14px">heat 63</span>
+            <h2 style="margin:0;font-size:18px;color:#0B1F3A">Sigvi</h2>
+            <span style="font-weight:700;color:#b45309;font-size:14px">heat 68</span>
           </div>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $2.8M raise to expand AI e-commerce platform (CairoScene, as of 27 Jul 2026)</p>
-          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> (unverified) Cairo AI e-commerce startup raised $2.8M to expand its platform - single thin source, but an on-vertical early-stage raise with a clear expansion mandate.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> €1.2M pre-seed led by Superhero Capital - Tech.eu &amp; EU-Startups, as of 29 Jul 2026</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> Vilnius AI-powered revenue platform for car rental just raised pre-seed and is targeting international/European expansion; corroborated by two sources, early-stage B2B SaaS in target band.</p>
           <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
-          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Offer growth/dev capacity to accelerate the platform expansion they&#x27;ve earmarked this round for.</p>
-          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 24 &mdash; the signal decays within weeks.</p>
-          <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOVUViakVHeGRQWlJua296MFlWbDVzZE1fME1ZR3pDT3dTVHJBTWJtQ2ZrZENib093bXBSUjNObDhRdnhFTGVfbFA4X1NaenVQRXRHeFloMDFHOEkzcVFXbjFUZXdzeEtzMTlZclJGZTA5SWplQktydHV0UWRGc2tFMnd4SmRTMV9jUDFHWWpIbFdadmJHUHB2MGx6Zm9oNjJC?oc=5" style="font-size:12px;color:#64748b">source</a>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congrats on the Superhero-led pre-seed - going pan-European early means your messaging has to survive multiple markets; I help vertical SaaS localize GTM without diluting the pitch, worth 20 minutes?</p>
+          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 31 &mdash; the signal decays within weeks.</p>
+          <a href="https://tech.eu/2026/07/29/sigvi-raises-eur12m-to-expand-automated-car-rental-operations/" style="font-size:12px;color:#64748b">source</a>
+        </div>
+        <div style="border:1px solid #e2e8f0;border-radius:14px;padding:18px 20px;margin:14px 0;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+            <h2 style="margin:0;font-size:18px;color:#0B1F3A">Cascade</h2>
+            <span style="font-weight:700;color:#64748b;font-size:14px">heat 58</span>
+          </div>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Trigger:</strong> $3.5M seed to help construction firms find and win projects - TechCrunch, as of 22 Jul 2026</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Why now:</strong> (unverified) Early-stage B2B SaaS for construction lead-gen closed a seed round; single thin source and slightly older, but a genuine target-band trigger needing first growth/marketing hires.</p>
+          <p style="margin:6px 0;color:#334155;font-size:14px"><strong>Who to contact:</strong> Founder / CEO</p>
+          <p style="margin:6px 0;color:#0f766e;font-size:14px"><strong>Angle:</strong> Congrats on the seed - construction buyers respond to referrals and proof, not generic ads; I help vertical SaaS build outbound that lands with contractors, open to a quick call?</p>
+          <p style="margin:6px 0;color:#b45309;font-size:13px"><strong>Best-touch window:</strong> reach out before ~Aug 31 &mdash; the signal decays within weeks.</p>
+          <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxORlAtakJYQVl2TUNQTklPT2t0dTNZNEpsd0Q1M2FUYnN0TzlrRW54OGhkME5lWm1aM2ZJczBHNnFuVmQ1OVZrSHRoTHItUGpHMjg0VjREMWttUjZjRlJGMVlUdGhPdFgxaDc0eUw1SHdDU0w2bnFBR3Z3SURPQktUUURvRTZrRktZNlpwLW5xdGFiWUxka3ZPUm91LThLVnpYc3F6aTNR?oc=5" style="font-size:12px;color:#64748b">source</a>
         </div>
   
   
